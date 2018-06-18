@@ -1,11 +1,7 @@
 import $ from 'jquery';
+import { authEndpoint, addEndpoint } from './constants';
 
-let config = {
-    dataType: 'script',
-    data: {
-        jsonp: 'window.lino.loadUrl',
-    },
-};
+let config;
 
 function generateArticles(title, url, start, end) {
     const articles = [];
@@ -20,12 +16,12 @@ function generateArticles(title, url, start, end) {
 
 
 function loadUrl(articles, response) {
-    if (response && (response.status !== 200 || response.status !== 201)) {
+    if (articles.length === 0 ||
+        !response || !(response.status === 200 || response.status === 201)) {
         return;
     }
-    // const addArticleUrl = 'https://www.instapaper.com/api/add';
     const article = articles.pop();
-    // config.url = addArticleUrl;
+    config.url = addEndpoint;
     config.data.title = article.title;
     config.data.url = article.url;
     $.ajax(config);
@@ -33,21 +29,15 @@ function loadUrl(articles, response) {
 
 function addArticles(values, username, password) {
     const articles = generateArticles(...Object.values(values));
-    articles.reverse();
-    window.lino = window.lino || {};
-    const article = articles.pop();
-    window.lino.loadUrl = loadUrl.bind(null, articles);
-    // const authUrl = 'https://www.instapaper.com/api/authenticate';
-    const addArticleUrl = 'https://www.instapaper.com/api/add';
+    articles.reverse(); // so that we can pop() in chronological order
+    window.loadUrl = loadUrl.bind(null, articles);
 
     config = {
-        url: addArticleUrl,
+        url: authEndpoint,
         data: {
             username,
             password,
-            title: article.title,
-            url: article.url,
-            jsonp: 'window.lino.loadUrl',
+            jsonp: 'loadUrl',
         },
         dataType: 'script',
     };
