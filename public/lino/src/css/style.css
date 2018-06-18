@@ -1,0 +1,85 @@
+.instapaper {
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: bold !important;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.background-tint {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: rgba(247, 187, 151, 0.8);
+    background: -webkit-linear-gradient(45deg, rgba(234, 205, 163, 0.6), rgba(247, 187, 151, 0.6));
+    background: -o-linear-gradient(45deg, rgba(234, 205, 163, 0.6), rgba(247, 187, 151, 0.6));
+    background: -moz-linear-gradient(45deg, rgba(234, 205, 163, 0.6), rgba(247, 187, 151, 0.6));
+    background: linear-gradient(45deg, rgba(234, 205, 163, 0.4), rgba(247, 187, 151, 0.4));
+}
+
+.background-image {
+    width: 100%;
+    background: no-repeat center center;
+    background-size: cover;
+    background-image: url('../images/books.jpg') !important;
+}
+
+/* label color */
+.input-field label {
+    color: #6d4c41;
+}
+
+/* label underline color */
+.input-field input {
+    border-bottom: 1px solid #6d4c41 !important;
+    box-shadow: 0 1px 0 0 #6d4c41 !important;
+}
+
+/* label focus color */
+.input-field input:focus + label {
+    color: #000 !important;
+}
+
+/* label underline focus color */
+.input-field input:focus {
+    border-bottom: 1px solid #000 !important;
+    box-shadow: 0 1px 0 0 #000 !important;
+}
+
+.custom-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: solid #6d4c41 2px;
+}
+
+.settings-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+@-moz-document url-prefix() {
+    .custom-card {
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 600px) {
+    .background-tint {
+        padding: 0px;
+    }
+}
+
+.hello {
+    color: red;
+}
