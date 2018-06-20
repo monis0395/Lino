@@ -34,27 +34,34 @@ function publishBooks(booksObject) {
 
 function createBooks(values, mode, args) {
     const books = [];
+    const rangeStart = values.start;
+    const rangeEnd = values.end;
 
     // added 1 so that total includes the start and end
-    const total = (values.end - values.start) + 1;
-    const count = Math.ceil(total / limiter);
+    const total = (rangeEnd - rangeStart) + 1;
+    const bookCount = Math.ceil(total / limiter);
 
-    for (let i = 1, base = values.start; i <= count && base <= values.end; i += 1) {
-        const start = base;
+    let bookStart = rangeStart;
+    let bookEnd;
+
+    for (let i = 1; i <= bookCount; i += 1) {
+        if (bookStart <= rangeEnd) {
+            break;
+        }
         // subtracted 1 because urls generated will be inclusive of end
-        let end = (base + limiter) - 1;
-        end = end < values.end ? end : values.end;
+        bookEnd = (bookStart + limiter) - 1;
+        bookEnd = bookEnd < rangeEnd ? bookEnd : rangeEnd;
 
-        const urls = generateUrls(values.url, start, end);
-        let title = `${values.title} ${start}-${end}`;
-        if (start === end) {
-            title = `${values.title} ${start}`;
+        const urls = generateUrls(values.url, bookStart, bookEnd);
+        let title = `${values.title} ${bookStart}-${bookEnd}`;
+        if (bookStart === bookEnd) {
+            title = `${values.title} ${bookStart}`;
         }
         books.push({
             title,
             urls,
         });
-        base = end + 1;
+        bookStart = bookEnd + 1;
     }
     books.reverse();// reversing array so that we can pop the book object in chronological order
     publishBooks({ mode, args, books });
