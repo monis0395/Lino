@@ -2,7 +2,7 @@ import * as M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import createBooks from './ebook';
 import addArticles from './instapaper';
-import { email } from './constants';
+import { email, username, password } from './constants';
 import '../css/style.css';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,8 +25,6 @@ function getValues() {
 }
 
 function sendToInstapaper() {
-    const username = 'smarty0395@gmail.com';
-    const password = 'pass123';
     const values = getValues();
     addArticles(values, username, password);
 }
