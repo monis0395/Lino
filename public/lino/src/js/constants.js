@@ -1,4 +1,4 @@
-const limiter = 50;
+const limiter = 40;
 const email = 'kindlek0395@kindle.com';
 
 const username = 'anatadare0395@gmail.com';
