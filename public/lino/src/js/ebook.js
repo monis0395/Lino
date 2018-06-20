@@ -45,7 +45,7 @@ function createBooks(values, mode, args) {
     let bookEnd;
 
     for (let i = 1; i <= bookCount; i += 1) {
-        if (bookStart <= rangeEnd) {
+        if (bookStart > rangeEnd) {
             break;
         }
         // subtracted 1 because urls generated will be inclusive of end
