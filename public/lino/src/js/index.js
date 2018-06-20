@@ -1,9 +1,9 @@
 import * as M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
+import '../css/style.css';
 import createBooks from './ebook';
 import addArticles from './instapaper';
 import { email, username, password } from './constants';
-import '../css/style.css';
 
 document.addEventListener('DOMContentLoaded', () => {
     M.AutoInit(document.body);
