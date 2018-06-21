@@ -1,4 +1,5 @@
 import EpubPress from 'epub-press-js';
+import notEmpty from 'util-nonempty';
 import range from 'lodash.range';
 import { limiter } from './constants';
 
@@ -10,23 +11,22 @@ function generateUrls(url, start, end) {
     return urls;
 }
 
-function publishBooks(booksObject) {
+function publishBooks(books) {
     function publishBook() {
-        const book = booksObject.books.pop();
-        if (!book) {
+        const book = books.pop();
+        if (!notEmpty(book)) {
             return;
         }
         const eBook = new EpubPress({
             title: book.title,
             urls: book.urls,
+            filetype: book.fileType,
         });
         eBook.publish().then(() => {
-            if (booksObject.mode === 'download') {
-                return eBook.download(...booksObject.args);
+            if (notEmpty(book.email)) {
+                return eBook.email(book.email);
             }
-            if (booksObject.mode === 'email') {
-                return eBook.email(...booksObject.args);
-            }
+            return eBook.download();
         }).then(publishBook);
     }
 
@@ -54,7 +54,7 @@ function createVolumes(volumeStart, volumeEnd, volumeChaptersCount) {
         });
     }
 
-    if (startIndexOfBooks.length !== 0) {
+    if (notEmpty(startIndexOfBooks)) {
         bookStart = startIndexOfBooks[i];
         bookEnd = volumeEnd;
     }
@@ -66,7 +66,7 @@ function createVolumes(volumeStart, volumeEnd, volumeChaptersCount) {
     return books;
 }
 
-function createBooks(values, mode, args) {
+function createBooks(values, fileType, email) {
     const books = [];
 
     const volumes = createVolumes(values.start, values.end, limiter);
@@ -76,11 +76,13 @@ function createBooks(values, mode, args) {
     volumes.forEach((book) => {
         title = `${values.title} ${book.start}-${book.end}`;
         urls = generateUrls(values.url, book.start, book.end);
-        books.push({ title, urls });
+        books.push({
+            title, urls, fileType, email,
+        });
     });
 
     books.reverse();// reversing array so that we can pop the book object in chronological order
-    publishBooks({ mode, args, books });
+    publishBooks(books);
 }
 
 export default createBooks;

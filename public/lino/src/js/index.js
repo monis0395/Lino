@@ -31,18 +31,14 @@ function sendToInstapaper() {
 
 function sendToKindle() {
     const type = 'mobi';
-    const mode = 'email';
-    const args = [email, type];
     const values = getValues();
-    createBooks(values, mode, args);
+    createBooks(values, type, email);
 }
 
 function downloadEpub() {
     const type = 'epub';
-    const mode = 'download';
-    const args = [type];
     const values = getValues();
-    createBooks(values, mode, args);
+    createBooks(values, type);
 }
 
 document.getElementById('send-to-instapaper').onclick = sendToInstapaper;
