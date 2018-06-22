@@ -1,15 +1,8 @@
 import EpubPress from 'epub-press-js';
 import notEmpty from 'util-nonempty';
 import range from 'lodash.range';
+import { generateUrls } from './util';
 import { limiter } from './constants';
-
-function generateUrls(url, start, end) {
-    const urls = [];
-    for (let i = start; i <= end; i += 1) {
-        urls.push(url + i);
-    }
-    return urls;
-}
 
 function publishBooks(books) {
     function publishBook() {
