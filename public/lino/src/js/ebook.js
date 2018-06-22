@@ -30,45 +30,44 @@ function publishBooks(books) {
         }).then(publishBook);
     }
 
+    books.reverse();// reversing array so that we can pop the book object in chronological order
     publishBook();
 }
 
-function createVolumes(volumeStart, volumeEnd, volumeChaptersCount) {
-    if (volumeStart > volumeEnd) {
+function createVolumes(chapterStart, chapterEnd, volumeMaxChapters) {
+    if (chapterStart > chapterEnd) {
         return [];
     }
 
-    const startIndexOfBooks = range(volumeStart, volumeEnd, volumeChaptersCount);
-    const books = [];
+    const volumesStartIndices = range(chapterStart, chapterEnd, volumeMaxChapters);
+    const volumes = [];
     let i;
+    let volumeStart;
+    let volumeEnd;
 
-    // will be used if start and end are equal only one chpater will be present
-    let bookStart = volumeStart;
-    let bookEnd = volumeEnd;
-    for (i = 0; i < startIndexOfBooks.length - 1; i += 1) {
-        bookStart = startIndexOfBooks[i];
-        bookEnd = startIndexOfBooks[i + 1] - 1;
-        books.push({
-            start: bookStart,
-            end: bookEnd,
+    for (i = 0; i < volumesStartIndices.length - 1; i += 1) {
+        volumeStart = volumesStartIndices[i];
+        volumeEnd = volumesStartIndices[i + 1] - 1;
+        volumes.push({
+            start: volumeStart,
+            end: volumeEnd,
         });
     }
 
-    if (notEmpty(startIndexOfBooks)) {
-        bookStart = startIndexOfBooks[i];
-        bookEnd = volumeEnd;
+    if (notEmpty(volumesStartIndices)) {
+        volumeStart = volumesStartIndices[i];
+        volumeEnd = chapterEnd;
     }
-    books.push({
-        start: bookStart,
-        end: bookEnd,
+    volumes.push({
+        start: volumeStart || chapterStart,
+        end: volumeEnd || chapterEnd,
     });
 
-    return books;
+    return volumes;
 }
 
-function createBooks(values, fileType, email) {
-    const books = [];
-
+function createEBooks(values, fileType, email) {
+    const eBooks = [];
     const volumes = createVolumes(values.start, values.end, limiter);
     let urls;
     let title;
@@ -76,13 +75,12 @@ function createBooks(values, fileType, email) {
     volumes.forEach((book) => {
         title = `${values.title} ${book.start}-${book.end}`;
         urls = generateUrls(values.url, book.start, book.end);
-        books.push({
+        eBooks.push({
             title, urls, fileType, email,
         });
     });
 
-    books.reverse();// reversing array so that we can pop the book object in chronological order
-    publishBooks(books);
+    return eBooks;
 }
 
-export default createBooks;
+export { createEBooks, publishBooks };
