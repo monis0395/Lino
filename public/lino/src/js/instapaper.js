@@ -4,7 +4,7 @@ import { authEndpoint, addEndpoint } from './constants';
 
 let config;
 
-function loadUrl(urls, response) {
+function addUrls(urls, response) {
     if (urls.length === 0 ||
         !response || !(response.status === 200 || response.status === 201)) {
         return;
@@ -14,21 +14,21 @@ function loadUrl(urls, response) {
     $.ajax(config);
 }
 
-function addArticles(values, username, password) {
+function authAndAddUrls(values, username, password) {
     const urls = generateUrls(values.url, values.start, values.end);
     urls.reverse(); // so that we can pop() in chronological order
-    window.loadUrl = loadUrl.bind(null, urls);
+    window.addUrls = addUrls.bind(null, urls);
 
     config = {
         url: authEndpoint,
         data: {
             username,
             password,
-            jsonp: 'loadUrl',
+            jsonp: 'addUrls',
         },
         dataType: 'script',
     };
     $.ajax(config);
 }
 
-export default addArticles;
+export default authAndAddUrls;
