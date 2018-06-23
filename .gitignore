@@ -1,5 +1,4 @@
 dist/
 node_modules/
-images/
 *.log
 auth.js

@@ -32,7 +32,7 @@ html, body {
     width: 100%;
     background: no-repeat center center;
     background-size: cover;
-    background-image: url('../images/books.jpg') !important;
+    background-image: url('../images/books_low_res.jpg') !important;
 }
 
 /* label color */
