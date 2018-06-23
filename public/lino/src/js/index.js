@@ -5,10 +5,6 @@ import { createEBooks, publishBooks } from './ebook';
 import addArticles from './instapaper';
 import { email, username, password } from './auth';
 
-document.addEventListener('DOMContentLoaded', () => {
-    M.AutoInit(document.body);
-});
-
 function getValues() {
     const title = document.getElementById('title').value || 'Untitled';
     const url = document.getElementById('url').value;

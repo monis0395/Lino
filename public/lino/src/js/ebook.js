@@ -1,5 +1,4 @@
 import EpubPress from 'epub-press-js';
-import notEmpty from 'util-nonempty';
 import range from 'lodash.range';
 import { generateUrls } from './util';
 import { limiter } from './constants';
@@ -7,7 +6,7 @@ import { limiter } from './constants';
 function publishBooks(books) {
     function publishBook() {
         const book = books.pop();
-        if (!notEmpty(book)) {
+        if (!book) {
             return;
         }
         const eBook = new EpubPress({
@@ -16,7 +15,7 @@ function publishBooks(books) {
             filetype: book.fileType,
         });
         eBook.publish().then(() => {
-            if (notEmpty(book.email)) {
+            if (book.email) {
                 return eBook.email(book.email);
             }
             return eBook.download();
