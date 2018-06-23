@@ -6,10 +6,16 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
+    "redirects": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/lino",
+        "destination": "/lino/dist/",
+        "type": 301
+      },
+      {
+        "source": "/es6",
+        "destination": "/ES6modules/",
+        "type": 301
       }
     ]
   }
