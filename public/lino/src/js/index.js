@@ -11,10 +11,7 @@ function getValues() {
     start = parseInt(start, 10);
     end = parseInt(end, 10);
     return {
-        title,
-        url,
-        start,
-        end,
+        title, url, start, end,
     };
 }
 
