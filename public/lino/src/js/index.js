@@ -3,7 +3,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import '../css/style.css';
 import { createEBooks, publishBooks } from './ebook';
 import addArticles from './instapaper';
-import { email, username, password } from './constants';
+import { email, username, password } from './auth';
 
 document.addEventListener('DOMContentLoaded', () => {
     M.AutoInit(document.body);
@@ -43,6 +43,12 @@ function downloadEpub() {
     publishBooks(books);
 }
 
-document.getElementById('send-to-instapaper').onclick = sendToInstapaper;
-document.getElementById('send-to-kindle').onclick = sendToKindle;
-document.getElementById('download-epub').onclick = downloadEpub;
+function documentOnload() {
+    M.AutoInit(document.body);
+
+    document.getElementById('send-to-instapaper').onclick = sendToInstapaper;
+    document.getElementById('send-to-kindle').onclick = sendToKindle;
+    document.getElementById('download-epub').onclick = downloadEpub;
+}
+
+document.addEventListener('DOMContentLoaded', documentOnload);

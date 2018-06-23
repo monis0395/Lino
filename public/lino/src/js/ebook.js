@@ -28,34 +28,19 @@ function publishBooks(books) {
 }
 
 function createVolumes(chapterStart, chapterEnd, volumeMaxChapters) {
-    if (chapterStart > chapterEnd) {
-        return [];
-    }
-
     const volumesStartIndices = range(chapterStart, chapterEnd, volumeMaxChapters);
     const volumes = [];
-    let i;
     let volumeStart;
     let volumeEnd;
 
-    for (i = 0; i < volumesStartIndices.length - 1; i += 1) {
+    for (let i = 0; i < volumesStartIndices.length; i += 1) {
         volumeStart = volumesStartIndices[i];
-        volumeEnd = volumesStartIndices[i + 1] - 1;
+        volumeEnd = volumesStartIndices[i + 1] - 1 || chapterEnd;
         volumes.push({
             start: volumeStart,
             end: volumeEnd,
         });
     }
-
-    if (notEmpty(volumesStartIndices)) {
-        volumeStart = volumesStartIndices[i];
-        volumeEnd = chapterEnd;
-    }
-    volumes.push({
-        start: volumeStart || chapterStart,
-        end: volumeEnd || chapterEnd,
-    });
-
     return volumes;
 }
 
