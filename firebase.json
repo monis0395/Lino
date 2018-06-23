@@ -9,7 +9,12 @@
     "redirects": [
       {
         "source": "/lino",
-        "destination": "/lino/dist/",
+        "destination": "/Lino/dist/",
+        "type": 301
+      },
+      {
+        "source": "/noin",
+        "destination": "/Noin/",
         "type": 301
       },
       {
