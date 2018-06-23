@@ -1,5 +1,3 @@
-import * as M from 'materialize-css';
-import 'materialize-css/dist/css/materialize.min.css';
 import '../css/style.css';
 import { createEBooks, publishBooks } from './ebook';
 import addArticles from './instapaper';
