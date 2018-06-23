@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import ajax from 'jquery/src/ajax';
 import { generateUrls } from './util';
 import { authEndpoint, addEndpoint } from './constants';
 
@@ -11,7 +11,7 @@ function addUrls(urls, response) {
     }
     config.url = addEndpoint;
     config.data.url = urls.pop();
-    $.ajax(config);
+    ajax(config);
 }
 
 function authAndAddUrls(values, username, password) {
@@ -28,7 +28,7 @@ function authAndAddUrls(values, username, password) {
         },
         dataType: 'script',
     };
-    $.ajax(config);
+    ajax(config);
 }
 
 export default authAndAddUrls;
