@@ -1,7 +1,8 @@
 import EpubPress from 'epub-press-js';
 import range from 'lodash.range';
-import { generateUrls } from './util';
-import { limiter } from './constants';
+import {generateUrls} from './util';
+import {addMessageBox, updateProgress} from "./message-box";
+import {limiter} from './constants';
 
 function publishBooks(books) {
     function publishBook() {
@@ -14,6 +15,12 @@ function publishBooks(books) {
             urls: book.urls,
             filetype: book.fileType,
         });
+
+        const messageBoxId = addMessageBox(book.title);
+        eBook.on('statusUpdate', (status) => {
+            updateProgress(messageBoxId, status.progress, status.message);
+        });
+
         eBook.publish().then(() => {
             if (book.email) {
                 return eBook.email(book.email);
@@ -60,4 +67,4 @@ function createEBooks(values, fileType, email) {
     return eBooks;
 }
 
-export { createEBooks, publishBooks };
+export {createEBooks, publishBooks};

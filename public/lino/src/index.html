@@ -11,70 +11,73 @@
 </head>
 <body>
 <div class="background-image ">
-    <div class="background-tint">
+    <div class="background-tint" id="main-container">
         <!-- Modal Trigger -->
         <a class="waves-effect waves-light btn-flat modal-trigger right settings-modal" href="#modal1">
             <i class="fas fa-user-cog"></i>
         </a>
 
-        <div class="row brown-text text-darken-4">
-            <div class="col offset-l3 s12 l6 ">
-                <div class="card-panel custom-card z-depth-2 hoverable">
-                    <h5 class=" ">Lino</h5>
-                    <ul class="browser-default left">
-                        <li>Send multiple urls to your Instapaper account</li>
-                        <li>Create & Send Epubs to your Kindle account or Download them</li>
-                    </ul>
-                    <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12 l3">
-                                    <input id="title" type="text" class="validate">
-                                    <label class="active" for="title">Title</label>
+        <div class="container">
+            <div class="row brown-text text-darken-4">
+                <div class="col offset-l3 s12 l6 ">
+                    <div class="card-panel custom-card z-depth-2 hoverable">
+                        <h5 class=" ">Lino</h5>
+                        <ul class="browser-default left">
+                            <li>Send multiple urls to your Instapaper account</li>
+                            <li>Create & Send Epubs to your Kindle account or Download them</li>
+                        </ul>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12 l3">
+                                        <input id="title" type="text" class="validate">
+                                        <label class="active" for="title">Title</label>
+                                    </div>
+                                    <div class="input-field col s12 l9">
+                                        <input id="url" type="text" class="validate">
+                                        <label class="active" for="url">URL</label>
+                                    </div>
+                                    <div class="input-field col s6 l3">
+                                        <input id="start-index" type="number" class="validate">
+                                        <label class="active" for="start-index">Start Index</label>
+                                    </div>
+                                    <div class="input-field col s6 l3">
+                                        <input id="end-index" type="number" class="validate">
+                                        <label class="active" for="end-index">End Index</label>
+                                    </div>
+                                    <div class="input-field col s12 l2">
+                                        <a class="waves-effect waves-grey btn-flat btn-large tooltipped transparent"
+                                           data-position="bottom" data-tooltip="Send to Instapaper"
+                                           id="send-to-instapaper"
+                                        >
+                                            <i class="instapaper left brown-text text-darken-4">I</i>
+                                            <span class="hide-on-med-and-up">Send to Instapaper</span>
+                                        </a>
+                                    </div>
+                                    <div class="input-field col s12 l2">
+                                        <a class="waves-effect waves-grey btn-flat btn-large tooltipped transparent"
+                                           data-position="bottom" data-tooltip="Send Epub to Kindle"
+                                           id="send-to-kindle">
+                                            <i class="fas fa-tablet-alt left brown-text text-darken-4"></i>
+                                            <span class="hide-on-med-and-up">Send Epub to Kindle</span>
+                                        </a>
+                                    </div>
+                                    <div class="input-field col s12 l2">
+                                        <a class="waves-effect waves-grey btn-flat btn-large tooltipped transparent"
+                                           data-position="bottom" data-tooltip="Download Epub"
+                                           id="download-epub">
+                                            <i class="fas fa-download left brown-text text-darken-4"></i>
+                                            <span class="hide-on-med-and-up">Download Epub</span>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="input-field col s12 l9">
-                                    <input id="url" type="text" class="validate">
-                                    <label class="active" for="url">URL</label>
-                                </div>
-                                <div class="input-field col s6 l3">
-                                    <input id="start-index" type="number" class="validate">
-                                    <label class="active" for="start-index">Start Index</label>
-                                </div>
-                                <div class="input-field col s6 l3">
-                                    <input id="end-index" type="number" class="validate">
-                                    <label class="active" for="end-index">End Index</label>
-                                </div>
-                                <div class="input-field col s12 l2">
-                                    <a class="waves-effect waves-grey btn-flat btn-large tooltipped transparent"
-                                       data-position="bottom" data-tooltip="Send to Instapaper"
-                                       id="send-to-instapaper"
-                                    >
-                                        <i class="instapaper left brown-text text-darken-4">I</i>
-                                        <span class="hide-on-med-and-up">Send to Instapaper</span>
-                                    </a>
-                                </div>
-                                <div class="input-field col s12 l2">
-                                    <a class="waves-effect waves-grey btn-flat btn-large tooltipped transparent"
-                                       data-position="bottom" data-tooltip="Send Epub to Kindle"
-                                       id="send-to-kindle">
-                                        <i class="fas fa-tablet-alt left brown-text text-darken-4"></i>
-                                        <span class="hide-on-med-and-up">Send Epub to Kindle</span>
-                                    </a>
-                                </div>
-                                <div class="input-field col s12 l2">
-                                    <a class="waves-effect waves-grey btn-flat btn-large tooltipped transparent"
-                                       data-position="bottom" data-tooltip="Download Epub"
-                                       id="download-epub">
-                                        <i class="fas fa-download left brown-text text-darken-4"></i>
-                                        <span class="hide-on-med-and-up">Download Epub</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
