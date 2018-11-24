@@ -1,14 +1,18 @@
 /* eslint-disable */
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     entry: './src/js/index.js',
-    devServer: { contentBase: './dist' },
+    devServer: {contentBase: './dist'},
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
-    node: { fs: 'empty' },
+    plugins: [
+        new CopyWebpackPlugin([{from: './src/*.html', flatten: true}])
+    ],
+    node: {fs: 'empty'},
     module: {
         rules: [
             {
