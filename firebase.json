@@ -13,6 +13,11 @@
         "type": 301
       },
       {
+        "source": "/",
+        "destination": "/lino/dist/",
+        "type": 301
+      },
+      {
         "source": "/noin",
         "destination": "/noin/",
         "type": 301
