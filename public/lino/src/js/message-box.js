@@ -13,20 +13,27 @@ const template = `
 
 let messageBoxIdCounter = 0;
 
-function addMessageBox(title) {
+function addMessageBox(title, indeterminate = false) {
     const container = document.createElement('div');
     container.classList.add('container');
-    container.innerHTML = template.replace(/{{number}}/g, messageBoxIdCounter.toString()).replace(/{{title}}/, title);
+    let messageTemplate = template.replace(/{{number}}/g, messageBoxIdCounter.toString()).replace(/{{title}}/, title)
+    if (indeterminate) {
+        messageTemplate = messageTemplate.replace(/determinate/, 'indeterminate');
+    }
+    container.innerHTML = messageTemplate;
 
     const mainContainer = document.getElementById('main-container');
     mainContainer.appendChild(container);
     return messageBoxIdCounter++;
 }
 
-function updateProgress(messageBoxId, percentage, message) {
+function updateProgress(messageBoxId, message, percentage) {
     const progressBar = document.getElementById(`progress-${messageBoxId}`);
     const messageElement = document.getElementById(`message-${messageBoxId}`);
-    progressBar.style.width = percentage + "%";
+
+    if (progressBar.classList.contains('determinate')) {
+        progressBar.style.width = percentage + "%";
+    }
     messageElement.innerHTML = message;
 }
 

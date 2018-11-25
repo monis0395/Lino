@@ -18,7 +18,7 @@ function publishBooks(books) {
 
         const messageBoxId = addMessageBox(book.title);
         eBook.on('statusUpdate', (status) => {
-            updateProgress(messageBoxId, status.progress, status.message);
+            updateProgress(messageBoxId, status.message, status.progress);
         });
 
         eBook.publish().then(() => {
