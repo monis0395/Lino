@@ -34,6 +34,11 @@ function updateProgress(messageBoxId, message, percentage) {
     if (progressBar.classList.contains('determinate')) {
         progressBar.style.width = percentage + "%";
     }
+    if (message.includes('Done') && !progressBar.classList.contains('determinate')) {
+        progressBar.classList.remove('indeterminate');
+        progressBar.classList.add('determinate');
+        progressBar.style.width = 100 + "%";
+    }
     messageElement.innerHTML = message;
 }
 
