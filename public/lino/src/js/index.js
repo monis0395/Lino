@@ -2,7 +2,6 @@ import '../css/style.css';
 import { createEBooks, publishBooks } from './ebook';
 import addArticles from './instapaper';
 import {attachTemplatesToDom, clearCredentials} from './credentials-manager';
-import { email, username, password } from './auth';
 
 const callbacks = {
     sendToInstapaper,
@@ -28,6 +27,7 @@ function getCredentials() {
     const username = document.getElementById('username');
     const password = document.getElementById('password');
     const email = document.getElementById('email');
+
     return {
         username: username && username.value,
         password: password && password.value,
