@@ -10,13 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<div class="background-image ">
+<div class="background-image">
     <div class="background-tint" id="main-container">
-        <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn-flat modal-trigger right settings-modal" href="#modal1">
-            <i class="fas fa-user-cog"></i>
-        </a>
-
         <div class="container">
             <div class="row brown-text text-darken-4">
                 <div class="col offset-l3 s12 l6 ">
@@ -70,6 +65,14 @@
                                             <span class="hide-on-med-and-up">Download Epub</span>
                                         </a>
                                     </div>
+                                    <button
+                                            class="btn waves-effect waves-light brown darken-1 col s6 offset-s3 hide"
+                                            type="submit"
+                                            id="submit"
+                                            name="action">
+                                        Submit
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -81,16 +84,6 @@
     </div>
 </div>
 
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 <script src="./bundle.js"></script>
 </body>
