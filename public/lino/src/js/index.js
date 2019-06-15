@@ -1,7 +1,7 @@
 import '../css/style.css';
 import { createEBooks, publishBooks } from './ebook';
 import addArticles from './instapaper';
-import attachTemplatesToDom from './credentials-manager';
+import {attachTemplatesToDom, clearCredentials} from './credentials-manager';
 import { email, username, password } from './auth';
 
 const callbacks = {
@@ -25,11 +25,13 @@ function getValues() {
 }
 
 function getCredentials() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const email = document.getElementById('email').value;
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const email = document.getElementById('email');
     return {
-        username, password, email,
+        username: username && username.value,
+        password: password && password.value,
+        email: email && email.value,
     }
 }
 
@@ -54,9 +56,13 @@ function downloadEpub() {
     publishBooks(books);
 }
 
-function onSubmit() {
+function onSubmit(e) {
+    e.preventDefault();
     if (selected !== 'none') {
-        callbacks[selected]()
+        callbacks[selected]();
+        // once submitted clear the flag
+        selected = 'none';
+        clearCredentials();
     }
 }
 
@@ -66,8 +72,6 @@ function clickedSendToInstapaper() {
     }
     selected = 'sendToInstapaper';
     attachTemplatesToDom(['username', 'password']);
-    const submitButton = document.getElementById('submit');
-    submitButton.classList.remove('hide');
 }
 
 function clickedSendToKindle() {
@@ -76,8 +80,6 @@ function clickedSendToKindle() {
     }
     selected = 'sendToKindle';
     attachTemplatesToDom(['email']);
-    const submitButton = document.getElementById('submit');
-    submitButton.classList.remove('hide');
 }
 
 function clickedDownloadEpub() {
@@ -85,8 +87,7 @@ function clickedDownloadEpub() {
         return
     }
     selected = 'downloadEpub';
-    const submitButton = document.getElementById('submit');
-    submitButton.classList.remove('hide');
+    attachTemplatesToDom();
 }
 
 function documentOnload() {
