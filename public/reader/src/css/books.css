@@ -1,0 +1,64 @@
+#add-link-btn {
+    color: var(--default-text-color);
+    font-weight: var(--weight-thin);
+    right: 10px;
+    cursor: pointer;
+}
+
+#add-link-modal-title {
+    color: black;
+    line-height: 1.4em;
+    font-size: 1.4em;
+    width: 80%;
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+#add-link-modal-input {
+    padding: 1em;
+    width: 100%;
+
+    margin-bottom: 1em;
+    border-width: 0 0 1px 0;
+    border-color: black;
+}
+
+#add-link-modal-submit {
+    width: 100%;
+    padding: 1em;
+    color: white;
+    background-color: #222;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.page > .book {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.book {
+    box-sizing: border-box;
+    padding: 1em;
+    width: 100%;
+    border-bottom: 0.1em solid var(--border);
+}
+
+.book a {
+    text-decoration: none;
+}
+
+.book-title {
+    padding-bottom: 0.5em;
+    display: block;
+    font-size: 1.5em;
+    font-weight: var(--weight-light);
+    color: var(--reading-title)
+}
+
+.book-author {
+    font-weight: var(--weight-regular);
+    color: var(--reading-author)
+}
