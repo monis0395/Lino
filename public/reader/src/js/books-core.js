@@ -1,5 +1,5 @@
 import { getBooks } from "./books-store.js";
-import { addLinkInit } from "./add-link.js";
+import { addBookInit } from "./add-book.js";
 
 const bookTemplateBlock = `
     <div class='book'>
@@ -26,7 +26,7 @@ function loadBooks() {
 }
 
 function init() {
-    addLinkInit();
+    addBookInit();
     loadBooks();
 }
 
