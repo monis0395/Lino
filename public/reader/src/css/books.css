@@ -5,7 +5,7 @@
     cursor: pointer;
 }
 
-#add-link-modal-title {
+#add-book-modal-title {
     color: black;
     line-height: 1.4em;
     font-size: 1.4em;
@@ -14,7 +14,7 @@
     margin-bottom: 0.5em;
 }
 
-#add-link-modal-input {
+#add-book-modal-input {
     padding: 1em;
     width: 100%;
 
@@ -23,7 +23,7 @@
     border-color: black;
 }
 
-#add-link-modal-submit {
+#add-book-modal-submit {
     width: 100%;
     padding: 1em;
     color: white;
