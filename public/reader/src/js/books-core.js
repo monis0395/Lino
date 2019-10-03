@@ -1,5 +1,5 @@
-import { loadModal } from "./modal.js";
 import { getBooks } from "./books-store.js";
+import { addLinkInit } from "./add-link.js";
 
 const bookTemplateBlock = `
     <div class='book'>
@@ -26,7 +26,7 @@ function loadBooks() {
 }
 
 function init() {
-    loadModal();
+    addLinkInit();
     loadBooks();
 }
 

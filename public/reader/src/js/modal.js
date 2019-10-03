@@ -1,16 +1,10 @@
-export function loadModal() {
-    loadAddLinkModal();
+export function loadAnyModal(modal, modalTrigger) {
+    attachModalTrigger(modal,modalTrigger);
+    attachModalClose(modal)
 }
 
-function loadAddLinkModal() {
-    const modal = document.getElementById("add-link-modal");
-    attachModalTrigger(modal);
-    attachModalClose(modal);
-}
-
-function attachModalTrigger(modal) {
-    const addLink = document.getElementById("add-link-btn");
-    addLink.onclick = () => {
+function attachModalTrigger(modal, modalTrigger) {
+    modalTrigger.onclick = () => {
         modal.style.display = "block";
     };
 }
