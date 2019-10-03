@@ -1,16 +1,15 @@
-import { loadAnyModal } from "./modal.js";
+import { hideModal, loadAnyModal } from "./modal.js";
 import { storeBook } from "./books-store.js";
 import { addBookToPage } from "./books-rendering.js";
+import { hideLoader, showLoader } from "./loader.js";
+import { isValidURL } from "./url-util.js";
+
+const modal = document.getElementById("add-book-modal");
+const addBookBtn = document.getElementById("add-book-modal-btn");
 
 export function addBookInit() {
-    loadAddBookModal();
+    loadAnyModal(modal, addBookBtn);
     attachOnClickOnSubmit();
-}
-
-function loadAddBookModal() {
-    const modal = document.getElementById("add-book-modal");
-    const addBookBtn = document.getElementById("add-book-modal-btn");
-    loadAnyModal(modal, addBookBtn)
 }
 
 function attachOnClickOnSubmit() {
@@ -22,20 +21,34 @@ function onSubmit(event) {
     event.preventDefault();
     const linkElement = document.getElementById("add-book-modal-input");
     const link = linkElement.value;
-    getBook(link).then((book) => {
-        storeBook(book.title, book);
-        addBookToPage(book);
-        console.log("book", book);
-    });
-    console.log("link submitted", link);
+    showLoader();
+    hideModal(modal);
+    getBook(link)
+        .finally(hideLoader)
+        .catch(console.error)
+        .then((book) => {
+            if (book && book) {
+                storeBook(book.title, book);
+                addBookToPage(book);
+            }
+        });
 }
 
 function getBook(link) {
-    const api = "https://monis0395.api.stdlib.com/getBook@dev?url";
+    const api = "https://monis0395.api.stdlib.com/getBook@dev?url=";
     return new Promise(function (resolve, reject) {
+        if (!isValidURL(link)) {
+            reject("invalid link");
+            return
+        }
         fetch(api + encodeURIComponent(link))
-            .then(response => response.json())
-            .then(data => resolve(data))
+            .then(response => response.json().then(data => {
+                if (response.ok) {
+                    resolve(data)
+                } else {
+                    reject(data)
+                }
+            }))
             .catch(error => reject(error))
     });
 }

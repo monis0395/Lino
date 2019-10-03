@@ -9,14 +9,16 @@ function attachModalTrigger(modal, modalBtn) {
     };
 }
 
+export function hideModal(modal) {
+    modal.style.display = "none";
+}
+
 function attachModalClose(modal) {
     const close = modal.getElementsByClassName("close")[0];
-    close.onclick = () => {
-        modal.style.display = "none";
-    };
+    close.onclick = () => hideModal(modal);
     window.onclick = function (event) {
         if (event.target === modal) {
-            modal.style.display = "none";
+            hideModal(modal);
         }
     };
 }

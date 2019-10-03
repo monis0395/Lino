@@ -7,6 +7,9 @@ const bookTemplateBlock = `
     </div>`;
 
 export function addBookToPage(book) {
+    if (!book.title) {
+        return
+    }
     const page = document.getElementsByClassName('page')[0];
     const dummyDiv = document.createElement('div');
     const hostname = new URL(book.url).hostname;
