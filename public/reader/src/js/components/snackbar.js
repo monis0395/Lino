@@ -3,12 +3,10 @@ export function showSnackbar(message) {
         return
     }
     const snackbar = document.createElement("div");
-    snackbar.id = "snackbar";
-    snackbar.classList.add("show");
+    snackbar.classList.add("show", "snackbar");
     snackbar.innerText = message;
     document.body.appendChild(snackbar);
     setTimeout(function () {
-        // snackbar.classList.remove("show");
         document.body.removeChild(snackbar)
     }, 3000);
 }
