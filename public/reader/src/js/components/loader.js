@@ -1,6 +1,6 @@
-import { hideElement } from "../util/dom-util.js";
+import { hideElement, showElement } from "../util/dom-util.js";
 
-const loaderTemplate = `<img src="../../images/flip-book-loader.svg" class="center" id="loader" alt="">`;
+const loaderTemplate = `<img src="../images/flip-book-loader.svg" class="center" id="loader" alt="">`;
 
 function addLoaderToBody() {
     const div = document.createElement('div');
@@ -11,7 +11,7 @@ function addLoaderToBody() {
 export function showLoader() {
     const loader = document.getElementById("loader");
     if (loader) {
-        hideElement(loader);
+        showElement(loader);
     } else {
         addLoaderToBody();
     }

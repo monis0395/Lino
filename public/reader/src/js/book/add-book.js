@@ -4,6 +4,7 @@ import { addBookToPage } from "./books-rendering.js";
 import { hideLoader, showLoader } from "../components/loader.js";
 import { isValidURL } from "../util/url-util.js";
 import { hideElement } from "../util/dom-util.js";
+import { showSnackbar } from "../components/snackbar.js";
 
 const modal = document.getElementById("add-book-modal");
 const addBookBtn = document.getElementById("add-book-modal-btn");
@@ -26,11 +27,18 @@ function onSubmit(event) {
     hideElement(modal);
     getBook(link)
         .finally(hideLoader)
-        .catch(console.error)
         .then((book) => {
-            if (book && book) {
+            if (book && book.title) {
                 storeBook(book.title, book);
                 addBookToPage(book);
+                showSnackbar(`Added book: ${book.title}`)
+            }
+        })
+        .catch((error) => {
+            if (error && error.error) {
+                showSnackbar(`Error: ` + error.error.name)
+            } else {
+                showSnackbar(`Error: ` + error)
             }
         });
 }
