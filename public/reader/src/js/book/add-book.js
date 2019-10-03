@@ -36,7 +36,7 @@ function onSubmit(event) {
         })
         .catch((error) => {
             if (error && error.error) {
-                showSnackbar(`Error: ` + error.error.name)
+                showSnackbar(`Error: ` + error.error.message)
             } else {
                 showSnackbar(`Error: ` + error)
             }
