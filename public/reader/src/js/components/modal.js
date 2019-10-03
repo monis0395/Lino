@@ -1,24 +1,20 @@
+import { hideElement, showElement } from "../util/dom-util.js";
+
 export function loadAnyModal(modal, modalBtn) {
-    attachModalTrigger(modal,modalBtn);
+    attachModalTrigger(modal, modalBtn);
     attachModalClose(modal)
 }
 
 function attachModalTrigger(modal, modalBtn) {
-    modalBtn.onclick = () => {
-        modal.style.display = "block";
-    };
-}
-
-export function hideModal(modal) {
-    modal.style.display = "none";
+    modalBtn.onclick = () => showElement(modal);
 }
 
 function attachModalClose(modal) {
     const close = modal.getElementsByClassName("close")[0];
-    close.onclick = () => hideModal(modal);
+    close.onclick = () => hideElement(modal);
     window.onclick = function (event) {
         if (event.target === modal) {
-            hideModal(modal);
+            hideElement(modal);
         }
     };
 }

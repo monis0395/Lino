@@ -1,8 +1,9 @@
-import { hideModal, loadAnyModal } from "./modal.js";
+import { loadAnyModal } from "../components/modal.js";
 import { storeBook } from "./books-store.js";
 import { addBookToPage } from "./books-rendering.js";
-import { hideLoader, showLoader } from "./loader.js";
-import { isValidURL } from "./url-util.js";
+import { hideLoader, showLoader } from "../components/loader.js";
+import { isValidURL } from "../util/url-util.js";
+import { hideElement } from "../util/dom-util.js";
 
 const modal = document.getElementById("add-book-modal");
 const addBookBtn = document.getElementById("add-book-modal-btn");
@@ -22,7 +23,7 @@ function onSubmit(event) {
     const linkElement = document.getElementById("add-book-modal-input");
     const link = linkElement.value;
     showLoader();
-    hideModal(modal);
+    hideElement(modal);
     getBook(link)
         .finally(hideLoader)
         .catch(console.error)

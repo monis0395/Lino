@@ -1,6 +1,4 @@
-const booksDB = localforage.createInstance({
-    name: "books"
-});
+const booksDB = localforage.createInstance({name: "books"});
 
 export async function getBooks() {
     const books = [];

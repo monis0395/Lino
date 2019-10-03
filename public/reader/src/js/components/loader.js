@@ -1,4 +1,6 @@
-const loaderTemplate = `<img src="../images/flip-book-loader.svg" class="center" id="loader" alt="">`;
+import { hideElement } from "../util/dom-util.js";
+
+const loaderTemplate = `<img src="../../images/flip-book-loader.svg" class="center" id="loader" alt="">`;
 
 function addLoaderToBody() {
     const div = document.createElement('div');
@@ -9,7 +11,7 @@ function addLoaderToBody() {
 export function showLoader() {
     const loader = document.getElementById("loader");
     if (loader) {
-        loader.classList.remove("hidden");
+        hideElement(loader);
     } else {
         addLoaderToBody();
     }
@@ -17,7 +19,5 @@ export function showLoader() {
 
 export function hideLoader() {
     const loader = document.getElementById("loader");
-    if (loader) {
-        loader.classList.add("hidden");
-    }
+    hideElement(loader);
 }
