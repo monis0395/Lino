@@ -14,10 +14,6 @@ function loadBooks() {
     const page = document.getElementsByClassName('page')[0];
     getBooks().then((books) => {
         books.forEach((book) => {
-            if (!book) {
-                return
-            }
-            console.log(book);
             const dummyDiv = document.createElement('div');
             const hostname = new URL(book.url).hostname;
             dummyDiv.innerHTML = bookTemplateBlock

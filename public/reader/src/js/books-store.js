@@ -6,7 +6,7 @@ export function getBooks() {
     const books = [];
     return new Promise((resolve, reject) => {
         booksDB
-            .iterate((value) => {
+            .iterate(function (value) {
                 books.push(value)
             })
             .then(() => resolve(books))
