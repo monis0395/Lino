@@ -1,4 +1,5 @@
 import { loadModal } from "./modal.js";
+import { getBooks } from "./books-store.js";
 
 const bookTemplateBlock = `
     <div class='book'>
@@ -8,30 +9,24 @@ const bookTemplateBlock = `
         </a>
     </div>`;
 
-function getBooks() {
-    const books = [];
-    for (let i = 0; i < 4; i++) {
-        books.push({
-            title: "Book Title",
-            author: 'Author Name',
-            link: "books.html"
-        })
-    }
-    return books
-}
 
 function loadBooks() {
-    const books = getBooks();
     const page = document.getElementsByClassName('page')[0];
-    books.forEach((book) => {
-        const dummyDiv = document.createElement('div');
-        const bookElement = bookTemplateBlock
-            .replace('$book_title$', book.title)
-            .replace('$book_author$', book.author)
-            .replace('$book_link$', book.link);
-        dummyDiv.innerHTML = bookElement;
-        page.appendChild(dummyDiv);
-    })
+    getBooks().then((books) => {
+        books.forEach((book) => {
+            if (!book) {
+                return
+            }
+            console.log(book);
+            const dummyDiv = document.createElement('div');
+            const hostname = new URL(book.url).hostname;
+            dummyDiv.innerHTML = bookTemplateBlock
+                .replace('$book_title$', book.title)
+                .replace('$book_author$', hostname)
+                .replace('$book_link$', book.link);
+            page.appendChild(dummyDiv);
+        })
+    });
 }
 
 function init() {
