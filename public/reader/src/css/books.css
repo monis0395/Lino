@@ -1,3 +1,35 @@
+.page > .book {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.book {
+    box-sizing: border-box;
+    padding: 1em;
+    width: 100%;
+    border-bottom: 0.1em solid var(--border);
+}
+
+.book a {
+    text-decoration: none;
+}
+
+.book-title {
+    padding-bottom: 0.5em;
+    display: block;
+    font-size: 1.5em;
+    font-weight: var(--weight-light);
+    color: var(--reading-title)
+}
+
+.book-domain {
+    font-weight: var(--weight-regular);
+    color: var(--reading-author)
+}
+
+/* add book modal */
 #add-book-modal-btn {
     color: var(--default-text-color);
     font-weight: var(--weight-thin);
@@ -30,35 +62,4 @@
     background-color: #222;
     border: 1px solid white;
     border-radius: 5px;
-}
-
-.page > .book {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.book {
-    box-sizing: border-box;
-    padding: 1em;
-    width: 100%;
-    border-bottom: 0.1em solid var(--border);
-}
-
-.book a {
-    text-decoration: none;
-}
-
-.book-title {
-    padding-bottom: 0.5em;
-    display: block;
-    font-size: 1.5em;
-    font-weight: var(--weight-light);
-    color: var(--reading-title)
-}
-
-.book-author {
-    font-weight: var(--weight-regular);
-    color: var(--reading-author)
 }

@@ -5,7 +5,7 @@ const bookTemplateBlock = `
     <div class='book'>
         <a href="$book_link$">
             <span class="book-title">$book_title$</span>
-            <span class="book-author">$book_author$</span>
+            <span class="book-domain">$book_domain$</span>
         </a>
     </div>`;
 
@@ -18,7 +18,7 @@ function loadBooks() {
             const hostname = new URL(book.url).hostname;
             dummyDiv.innerHTML = bookTemplateBlock
                 .replace('$book_title$', book.title)
-                .replace('$book_author$', hostname)
+                .replace('$book_domain$', hostname)
                 .replace('$book_link$', book.link);
             page.appendChild(dummyDiv);
         })
