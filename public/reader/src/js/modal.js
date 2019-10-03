@@ -1,10 +1,10 @@
-export function loadAnyModal(modal, modalTrigger) {
-    attachModalTrigger(modal,modalTrigger);
+export function loadAnyModal(modal, modalBtn) {
+    attachModalTrigger(modal,modalBtn);
     attachModalClose(modal)
 }
 
-function attachModalTrigger(modal, modalTrigger) {
-    modalTrigger.onclick = () => {
+function attachModalTrigger(modal, modalBtn) {
+    modalBtn.onclick = () => {
         modal.style.display = "block";
     };
 }

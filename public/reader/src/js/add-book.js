@@ -2,8 +2,8 @@ import { loadAnyModal } from "./modal.js";
 
 function loadAddBookModal() {
     const modal = document.getElementById("add-link-modal");
-    const addLink = document.getElementById("add-link-btn");
-    loadAnyModal(modal, addLink)
+    const addBookBtn = document.getElementById("add-book-modal-btn");
+    loadAnyModal(modal, addBookBtn)
 }
 
 function handleSubmitBtn() {
