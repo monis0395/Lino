@@ -33,6 +33,11 @@ body {
     width: 70%;
 }
 
+.menu-text a {
+    color: var(--bright-color);
+    text-decoration: none;
+}
+
 .center {
     position: absolute; /*it can be fixed too*/
     left: 0;

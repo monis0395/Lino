@@ -10,9 +10,9 @@ const bookTemplateBlock = `
     </div>`;
 
 function getChapterLink(book) {
-    const baseURL = "/chapter.html?";
+    const baseURL = "./chapter.html?";
     const queryString = new URLSearchParams();
-    queryString.append("title", book.title);
+    queryString.append("book", book.title);
     queryString.append("chapter", book.lastRead || 0);
     return baseURL + queryString.toString();
 }

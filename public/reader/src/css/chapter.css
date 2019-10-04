@@ -1,0 +1,37 @@
+.page > .chapter {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.chapter {
+    width: 100%;
+    padding: var(--padding-min);
+    border-bottom: 1px solid var(--dull-color);
+    box-sizing: border-box;
+}
+
+.chapter-title {
+    padding-bottom: var(--padding-min-half);
+    display: block;
+    font-size: 1.5em;
+    font-weight: var(--weight-light);
+    color: var(--bright-color)
+}
+
+.chapter-domain {
+    font-weight: var(--weight-regular);
+    color: var(--dull-color)
+}
+
+.chapter-content {
+    color: var(--bright-color);
+    font-size: 1.2em;
+    line-height: 1.4em;
+}
+
+.chapter-content p {
+    padding-top: var(--padding-min);
+    padding-bottom: var(--padding-min);
+}

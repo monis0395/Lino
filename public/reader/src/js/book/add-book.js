@@ -3,12 +3,12 @@ import { storeBook } from "./books-store.js";
 import { hideLoader, showLoader } from "../components/loader.js";
 import { hideElement } from "../util/dom-util.js";
 import { showSnackbar } from "../components/snackbar.js";
-import { requestBook } from "./request-book.js";
+import { requestFor } from "../components/request-for.js";
 import { reloadBooks } from "./books-rendering.js";
 
 const modal = document.getElementById("add-book-modal");
 const addBookBtn = document.getElementById("add-book-modal-btn");
-
+const getBook = "https://monis0395.api.stdlib.com/getBook@dev?url=";
 export function addBookInit() {
     loadAnyModal(modal, addBookBtn);
     attachOnClickOnSubmit();
@@ -25,7 +25,7 @@ function onSubmit(event) {
     const link = linkElement.value;
     hideElement(modal);
     showLoader();
-    requestBook(link)
+    requestFor(getBook, link)
         .then(getBookResolved)
         .catch(getBookRejected)
         .finally(hideLoader);
