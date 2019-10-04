@@ -9,6 +9,14 @@ const bookTemplateBlock = `
         </a>
     </div>`;
 
+function getChapterLink(book) {
+    const baseURL = "/chapter.html?";
+    const queryString = new URLSearchParams();
+    queryString.append("title", book.title);
+    queryString.append("chapter", book.lastRead || 0);
+    return baseURL + queryString.toString();
+}
+
 export function addBookToPage(book) {
     if (!book.title) {
         return
@@ -19,7 +27,7 @@ export function addBookToPage(book) {
     dummyDiv.innerHTML = bookTemplateBlock
         .replace('$book_title$', book.title)
         .replace('$book_domain$', hostname)
-        .replace('$book_link$', book.link);
+        .replace('$book_link$', getChapterLink(book));
     page.appendChild(dummyDiv);
 }
 

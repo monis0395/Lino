@@ -9,5 +9,8 @@ export async function getBooks() {
 }
 
 export function storeBook(name, book) {
+    if (book.lastRead < 0) {
+        book.lastRead = 0
+    }
     booksDB.setItem(name, book)
 }
