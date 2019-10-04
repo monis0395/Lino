@@ -13,6 +13,11 @@
         "type": 301
       },
       {
+        "source": "/reader",
+        "destination": "/reader/src/",
+        "type": 301
+      },
+      {
         "source": "/",
         "destination": "/lino/dist/",
         "type": 301
