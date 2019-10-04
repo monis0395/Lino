@@ -8,8 +8,8 @@
     padding: 16px;
     position: fixed;
     z-index: 1;
-    left: 5%;
-    bottom: 30px;
+    left: var(--padding-min);
+    bottom: var(--padding-min);
     font-size: 17px;
     overflow: hidden;
 }

@@ -1,4 +1,4 @@
-import { getBooks } from "./books-store";
+import { getBooks } from "./books-store.js";
 import { removeChild } from "../util/dom-util.js";
 
 const bookTemplateBlock = `
