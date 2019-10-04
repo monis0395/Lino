@@ -8,15 +8,19 @@
     --progress-foreground: #69b2c3;
     --progress-background: #565567;
 
+    --bright-color: #ffffff;
+    --dark-color: #000000;
+
     --heading-text: #ffffff;
     --default-text-color: #ffffff;
+    --inverted-default-text-color: #000000;
     --book-title: #848190;
     --reading-title: #fefcff;
     --reading-author: #d0d0d5;
-
-    --button-bac: #2a2b44;
     --border: #565567;
+
     --padding-min: 1em;
+    --padding-min-half: 0.5em;
 
     --weight-thin: 200;
     --weight-light: 300;
