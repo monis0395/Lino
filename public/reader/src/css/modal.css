@@ -23,7 +23,7 @@
 
 /* The Close Button */
 .close {
-    color: var(--default-text-color-dull);
+    color: var(--dull-color);
     float: right;
     font-size: 28px;
     font-weight: bold;

@@ -7,11 +7,7 @@
 
     --bright-color: #ffffff;
     --dark-color: #000000;
-
-    --heading-text: #ffffff;
-    --default-text-color: #ffffff;
-    --default-text-color-dull: #aaaaaa;
-    --inverted-default-text-color: #000000;
+    --dull-color: #aaaaaa;
 
     --padding-min: 1em;
     --padding-min-half: 0.5em;

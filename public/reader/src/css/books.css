@@ -9,7 +9,7 @@
     box-sizing: border-box;
     padding: var(--padding-min);
     width: 100%;
-    border-bottom: 1px solid var(--default-text-color-dull);
+    border-bottom: 1px solid var(--dull-color);
 }
 
 .book a {
@@ -21,23 +21,23 @@
     display: block;
     font-size: 1.5em;
     font-weight: var(--weight-light);
-    color: var(--default-text-color)
+    color: var(--bright-color)
 }
 
 .book-domain {
     font-weight: var(--weight-regular);
-    color: var(--default-text-color-dull)
+    color: var(--dull-color)
 }
 
 /* add book modal */
 #add-book-modal-btn {
     cursor: pointer;
-    color: var(--default-text-color);
+    color: var(--bright-color);
     font-weight: var(--weight-thin);
 }
 
 #add-book-modal-title {
-    color: var(--inverted-default-text-color);
+    color: var(--dark-color);
     line-height: 1.4em;
     font-size: 1.4em;
     width: 80%;
@@ -57,7 +57,7 @@
 #add-book-modal-submit {
     width: 100%;
     padding: 1em;
-    color: var(--default-text-color);
+    color: var(--bright-color);
     background-color: #222;
     border: 1px solid var(--bright-color);
     border-radius: 5px;
