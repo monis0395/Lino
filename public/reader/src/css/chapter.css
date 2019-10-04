@@ -34,4 +34,5 @@
 .chapter-content p {
     padding-top: var(--padding-min);
     padding-bottom: var(--padding-min);
+    line-height: 2.2em;
 }
