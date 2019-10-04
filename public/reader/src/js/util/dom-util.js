@@ -17,3 +17,10 @@ export function showElement(element) {
     } catch (_) {
     }
 }
+
+export function removeChild(element) {
+    try {
+        element.parentElement.removeChild(element);
+    } catch (_) {
+    }
+}
