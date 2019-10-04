@@ -7,8 +7,8 @@ function loadFirstBook() {
     if (done) {
         return;
     }
-    const tcf = "https://www.wuxiaworld.com/novel/trash-of-the-counts-family";
-    getBook(tcf);
+    const THE_NOVELS_EXTRA = "https://www.wuxiaworld.com/novel/the-novels-extra";
+    getBook(THE_NOVELS_EXTRA);
     localStorage.setItem("first", "done");
 }
 
