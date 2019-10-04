@@ -19,7 +19,7 @@
       },
       {
         "source": "/",
-        "destination": "/lino/dist/",
+        "destination": "/reader/src/html/books.html",
         "type": 301
       },
       {
