@@ -33,8 +33,7 @@ function onSubmit(event) {
 
 function getBookResolved(book) {
     if (book && book.title) {
-        storeBook(book.title, book);
-        reloadBooks();
+        storeBook(book.title, book).then(reloadBooks);
         showSnackbar(`Added book: ${book.title}`);
     }
 }

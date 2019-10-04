@@ -16,6 +16,7 @@
 .modal-content {
     background-color: #fefefe;
     width: 80%;
+    max-width: 500px;
     height: fit-content;
     margin: 15% auto 0 auto; /* 15% from the top and centered */
     padding: 1em;

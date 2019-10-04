@@ -10,7 +10,7 @@ export async function getChapter(chapterUrl) {
         return chapter;
     }
     const response = await requestFor(apiGetChapter, chapterUrl);
-    storeChapter(chapterUrl, response);
+    const _ = storeChapter(chapterUrl, response);
     return {
         ...response,
         url: chapterUrl,

@@ -14,7 +14,7 @@
       },
       {
         "source": "/reader",
-        "destination": "/reader/src/",
+        "destination": "/reader/src/html/books.html",
         "type": 301
       },
       {
@@ -24,7 +24,7 @@
       },
       {
         "source": "/noin",
-        "destination": "/noin/",
+        "destination": "/Noin/",
         "type": 301
       },
       {

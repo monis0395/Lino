@@ -12,9 +12,9 @@ export async function fetchBook(title) {
     return booksDB.getItem(title);
 }
 
-export function storeBook(title, book) {
+export async function storeBook(title, book) {
     if (book.lastRead < 0) {
         book.lastRead = 0
     }
-    booksDB.setItem(title, book)
+    return booksDB.setItem(title, book)
 }
