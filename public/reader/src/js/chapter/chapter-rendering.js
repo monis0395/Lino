@@ -6,7 +6,9 @@ const chapterTemplateBlock = `
         <span class="chapter-domain">$chapter_domain$</span>
         <br><br><br>
         <div class="chapter-content">$chapter_content$</div>
-    </div>`;
+    </div>
+    <br><br><br>
+`;
 
 export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     if (!chapter.title) {
