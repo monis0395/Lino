@@ -15,26 +15,29 @@ function getChapterNumber() {
 }
 
 function getAndRenderChapter(bookTitle, chapterNumber) {
-    showLoader();
-    fetchBook(bookTitle)
-        .then((book) => {
-            const {link, title} = book.chapters[chapterNumber];
-            getChapter(link)
-                .then((chapter) => {
-                    addChapterToPage(chapter, chapterNumber, title);
-                    hideLoader();
-                })
-        })
-        .catch((error) =>{
+    return fetchBook(bookTitle)
+        .then(({chapters}) => getChapter(chapters[chapterNumber].link))
+        .then((chapter) => addChapterToPage(chapter, chapterNumber))
+        .catch((error) => {
             hideLoader();
+            console.error(error);
             showSnackbar("Error: " + error.message);
         });
 }
 
-function init() {
+function loadChapter() {
     const bookTitle = getBookTitle();
-    const chapterNumber = getChapterNumber();
-    getAndRenderChapter(bookTitle, chapterNumber);
+    const chapterNumber = parseInt(getChapterNumber(), 10);
+    showLoader();
+    const loadChapterPromise = getAndRenderChapter(bookTitle, chapterNumber, true);
+    loadChapterPromise.finally(() => {
+        hideLoader();
+        getAndRenderChapter(bookTitle, chapterNumber + 1, false);
+    });
+}
+
+function init() {
+    loadChapter()
 }
 
 init();
