@@ -13,7 +13,7 @@ export async function fetchBook(title) {
 }
 
 export async function storeBook(title, book) {
-    if (book.lastRead < 0) {
+    if (!book.hasOwnProperty("lastRead")) {
         book.lastRead = 0
     }
     return booksDB.setItem(title, book)
