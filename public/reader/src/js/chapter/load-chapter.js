@@ -13,19 +13,13 @@ export function getAndRenderChapter(bookTitle, chapterNumber) {
 export function loadChapter(bookTitle, lazyLoad) {
     fetchBook(bookTitle)
         .then(({lastRead}) => {
-            if (!lazyLoad) {
-                showLoader();
-            }
+            showLoader();
             const loadChapterPromise = getAndRenderChapter(bookTitle, lastRead, true);
             loadChapterPromise
                 .catch((error) => {
                     console.error(error);
                     showSnackbar("Error: " + error.message);
                 })
-                .finally(() => {
-                    if (!lazyLoad) {
-                        hideLoader();
-                    }
-                });
+                .finally(hideLoader);
         })
 }
