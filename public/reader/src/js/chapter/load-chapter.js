@@ -1,7 +1,7 @@
-import { fetchBook } from "../book/books-store";
-import { getChapter } from "./get-chapter";
-import { addChapterToPage } from "./chapter-rendering";
-import { hideLoader, showLoader } from "../components/loader";
+import { fetchBook } from "../book/books-store.js";
+import { getChapter } from "./get-chapter.js";
+import { addChapterToPage } from "./chapter-rendering.js";
+import { hideLoader, showLoader } from "../components/loader.js";
 import { showSnackbar } from "../components/snackbar.js";
 
 export function getAndRenderChapter(bookTitle, chapterNumber) {

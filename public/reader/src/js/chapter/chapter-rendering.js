@@ -1,11 +1,12 @@
 import { removeChild } from "../util/dom-util.js";
+import { attachObserversFor } from "./chapter-listener.js";
 
 const chapterTemplateBlock = `
-    <div class='chapter' data-chapter-number="$chapter_number$">
-        <span class="chapter-title">$chapter_title$</span>
-        <span class="chapter-domain">$chapter_domain$</span>
+    <div class='chapter chapter-__chapter_number__' data-chapterNumber="__chapter_number__">
+        <span class="chapter-title">__chapter_title__</span>
+        <span class="chapter-domain">__chapter_domain__</span>
         <br><br><br>
-        <div class="chapter-content">$chapter_content$</div>
+        <div class="chapter-content">__chapter_content__</div>
     </div>
     <br><br><br>
 `;
@@ -18,11 +19,12 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;
     dummyDiv.innerHTML = chapterTemplateBlock
-        .replace('$chapter_number$', chapterNumber)
-        .replace('$chapter_title$', chapter.title || chapterTitle)
-        .replace('$chapter_domain$', hostname)
-        .replace('$chapter_content$', filterContent(chapter));
+        .replace(/__chapter_number__/g, chapterNumber)
+        .replace(/__chapter_title__/g, chapter.title || chapterTitle)
+        .replace(/__chapter_domain__/g, hostname)
+        .replace(/__chapter_content__/g, filterContent(chapter));
     page.appendChild(dummyDiv);
+    attachObserversFor(document.getElementsByClassName("chapter-" + chapterNumber)[0])
 }
 
 function filterContent(chapter) {
@@ -31,11 +33,11 @@ function filterContent(chapter) {
     content.innerHTML = chapter.content;
     Array.from(content.getElementsByTagName('a'))
         .forEach((anchorTag) => {
-        if (isSourceWebsiteUrl(anchorTag, hostname) ||
-            isIncorrectRelativeUrlFromSource(anchorTag)) {
-            removeChild(anchorTag);
-        }
-    });
+            if (isSourceWebsiteUrl(anchorTag, hostname) ||
+                isIncorrectRelativeUrlFromSource(anchorTag)) {
+                removeChild(anchorTag);
+            }
+        });
     return content.innerHTML;
 }
 
@@ -46,4 +48,3 @@ function isSourceWebsiteUrl(anchorTag, hostname) {
 function isIncorrectRelativeUrlFromSource(anchorTag) {
     return anchorTag.hash === "" && anchorTag.hostname === window.location.hostname;
 }
-
