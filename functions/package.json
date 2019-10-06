@@ -12,7 +12,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "firebase-admin": "~5.8.1",
-    "firebase-functions": "^0.8.2",
+    "firebase-functions": "^3.2.0",
     "node-readability": "^3.0.0"
   },
   "devDependencies": {
