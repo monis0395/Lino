@@ -9,19 +9,19 @@ const apiGetBook = "https://monis0395.api.stdlib.com/getBook@dev?url=";
 export function getBook(link) {
     showLoader();
     requestFor(apiGetBook, link)
-        .then(getBookResolved)
-        .catch(getBookRejected)
+        .then(storeBookAndShowSuccessMessage)
+        .catch(showErrorMessage)
         .finally(hideLoader);
 }
 
-function getBookResolved(book) {
+function storeBookAndShowSuccessMessage(book) {
     if (book && book.title) {
         storeBook(book.title, book).then(reloadBooks);
         showSnackbar(`Added book: ${book.title}`);
     }
 }
 
-function getBookRejected(error) {
+function showErrorMessage(error) {
     if (error && error.error) {
         showSnackbar(`Error: ` + error.error.message);
     } else {

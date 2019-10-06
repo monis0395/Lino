@@ -26,7 +26,7 @@ function updateLastRead(entries) {
     entries.forEach(entry => {
         const {intersectionRatio, target} = entry;
         const chapterNumber = parseInt(target.dataset.chapternumber, 10);
-        if (!chapterNumber) {
+        if (isNaN(chapterNumber)) {
             return;
         }
         const visibility = Math.floor(intersectionRatio * 100);
@@ -41,6 +41,7 @@ function updateLastRead(entries) {
         fetchBook(bookTitle)
             .then((book) => {
                 console.log("updated last read to", chapterNumber);
+                updateUrlChapter(chapterNumber);
                 storeBook(bookTitle, {
                     ...book,
                     lastRead: chapterNumber,
@@ -49,11 +50,21 @@ function updateLastRead(entries) {
     });
 }
 
+function updateUrlChapter(chapterNumber) {
+    if (window.history.pushState) {
+        const newURL = new URL(window.location.href);
+        const searchParams = newURL.searchParams;
+        searchParams.set("chapter", String(chapterNumber));
+        newURL.search = searchParams.toString();
+        window.history.pushState({path: newURL.href}, '', newURL.href);
+    }
+}
+
 function loadNextChapter(entries) {
     entries.forEach(entry => {
         const {intersectionRatio, target} = entry;
         const chapterNumber = parseInt(target.dataset.chapternumber, 10);
-        if (!chapterNumber) {
+        if (isNaN(chapterNumber)) {
             return;
         }
         let visiblePercentage = Math.floor(intersectionRatio * 100);

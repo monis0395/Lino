@@ -1,6 +1,6 @@
-import { hideLoader, showLoader } from "../components/loader";
-import { getAndRenderChapter } from "./load-chapter";
-import { showSnackbar } from "../components/snackbar";
+import { hideLoader, showLoader } from "../components/loader.js";
+import { getAndRenderChapter } from "./load-chapter.js";
+import { showSnackbar } from "../components/snackbar.js";
 
 function getBookTitle() {
     const search = new URLSearchParams(window.location.search);
