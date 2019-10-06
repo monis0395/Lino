@@ -17,10 +17,11 @@ function autoHideNavBar() {
     let prevScrollPosition = window.pageYOffset;
     window.onscroll = throttle(function() {
         const currentScrollPosition = window.pageYOffset;
-        if (prevScrollPosition > currentScrollPosition) {
-            document.getElementById("navbar").style.bottom = "0";
+        const scrollingUp = prevScrollPosition > currentScrollPosition;
+        if (scrollingUp) {
+            document.getElementById("bottom-nav-bar").style.bottom = "0";
         } else {
-            document.getElementById("navbar").style.bottom = "-50px";
+            document.getElementById("bottom-nav-bar").style.bottom = "-50px";
         }
         prevScrollPosition = currentScrollPosition;
     }, 100);
