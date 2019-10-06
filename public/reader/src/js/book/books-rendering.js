@@ -37,10 +37,10 @@ function deleteAllBooks() {
 }
 
 export function loadBooks() {
-    getBooks().then((books) => books.forEach(addBookToPage));
+    return getBooks().then((books) => books.forEach(addBookToPage));
 }
 
 export function reloadBooks() {
     deleteAllBooks();
-    loadBooks();
+    return loadBooks();
 }

@@ -1,6 +1,7 @@
 import { addBookInit } from "./add-book.js";
 import { loadBooks } from "./books-rendering.js";
 import { getBook } from "./get-book.js";
+import { CheckForUpdates } from "./update-books.js";
 
 function loadFirstBook() {
     const done = localStorage.getItem("first");
@@ -12,10 +13,18 @@ function loadFirstBook() {
     localStorage.setItem("first", "done");
 }
 
+function pullToRefresh() {
+    window.PullToRefresh.init({
+        mainElement: 'body',
+        onRefresh: CheckForUpdates,
+    });
+}
+
 function init() {
     addBookInit();
     loadBooks();
     loadFirstBook();
+    pullToRefresh()
 }
 
 init();
