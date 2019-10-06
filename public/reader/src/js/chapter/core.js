@@ -15,6 +15,7 @@ function getChapterNumber() {
 function init() {
     const bookTitle = getBookTitle();
     window.bookReader = {bookTitle};
+    document.title = bookTitle;
     showLoader();
     getAndRenderChapter(bookTitle, getChapterNumber())
         .catch((error) => {
