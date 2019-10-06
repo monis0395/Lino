@@ -41,7 +41,7 @@ function updateLastRead(entries) {
         fetchBook(bookTitle)
             .then((book) => {
                 console.log("updated last read to", chapterNumber);
-                updateUrlChapter(bookTitle, chapterNumber);
+                updateUrlChapter(chapterNumber);
                 storeBook(bookTitle, {
                     ...book,
                     lastRead: chapterNumber,
@@ -50,13 +50,13 @@ function updateLastRead(entries) {
     });
 }
 
-function updateUrlChapter(bookTitle, chapterNumber) {
+function updateUrlChapter(chapterNumber) {
     if (window.history.pushState) {
         const newURL = new URL(window.location.href);
         const searchParams = newURL.searchParams;
         searchParams.set("chapter", String(chapterNumber));
         newURL.search = searchParams.toString();
-        window.history.pushState({path: newURL.href}, bookTitle, newURL.href);
+        window.history.pushState({path: newURL.href}, '', newURL.href);
     }
 }
 
