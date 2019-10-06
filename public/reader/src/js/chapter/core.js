@@ -1,4 +1,6 @@
-import { loadChapter } from "./load-chapter.js";
+import { hideLoader, showLoader } from "../components/loader";
+import { getAndRenderChapter } from "./load-chapter";
+import { showSnackbar } from "../components/snackbar";
 
 function getBookTitle() {
     const search = new URLSearchParams(window.location.search);
@@ -13,7 +15,13 @@ function getChapterNumber() {
 function init() {
     const bookTitle = getBookTitle();
     window.bookReader = {bookTitle};
-    loadChapter(bookTitle, getChapterNumber())
+    showLoader();
+    getAndRenderChapter(bookTitle, getChapterNumber())
+        .catch((error) => {
+            console.error(error);
+            showSnackbar("Error: " + error.message);
+        })
+        .finally(hideLoader);
 }
 
 init();

@@ -14,37 +14,33 @@ let halfReadObserver = new IntersectionObserver(loadNextChapter, {
     threshold: thresholdSet,
 });
 
-const chapterList = {};
 
 export function attachObserversFor(element) {
-    const chapterNumber = parseInt(element.dataset.chapternumber, 10);
-    chapterList[chapterNumber] = true;
-
-    // lastReadChapterObserver.observe(element);
-    // halfReadObserver.observe(element);
+    lastReadChapterObserver.observe(element);
+    halfReadObserver.observe(element);
 }
 
-function updateLastRead(entries, observer) {
+const visiblePercentageMap = {};
+
+function updateLastRead(entries) {
     entries.forEach(entry => {
-        if (!entry) {
-            return;
-        }
-        let visiblePct = (Math.floor(entry.intersectionRatio * 100));
-        if (visiblePct > 10 || !entry.isVisible) {
-            return;
-        }
-        const target = entry.target;
-        lastReadChapterObserver.unobserve(target);
+        const {intersectionRatio, target} = entry;
         const chapterNumber = parseInt(target.dataset.chapternumber, 10);
         if (!chapterNumber) {
             return;
         }
-        if (chapterNumber > 5) {
+        const visibility = Math.floor(intersectionRatio * 100);
+        const previousVisibility = visiblePercentageMap[chapterNumber];
+        const visibilityIncreased = previousVisibility < visibility;
+        if (!visibilityIncreased || !visibility) {
+            visiblePercentageMap[chapterNumber] = visibility;
             return;
         }
+        lastReadChapterObserver.unobserve(target);
         const bookTitle = window.bookReader.bookTitle;
         fetchBook(bookTitle)
             .then((book) => {
+                console.log("updated last read to", chapterNumber);
                 storeBook(bookTitle, {
                     ...book,
                     lastRead: chapterNumber,
@@ -53,32 +49,21 @@ function updateLastRead(entries, observer) {
     });
 }
 
-
-function loadNextChapter(entries, observer) {
+function loadNextChapter(entries) {
     entries.forEach(entry => {
-        if (!entry) {
-            return;
-        }
-        let visiblePct = (Math.floor(entry.intersectionRatio * 100));
-        console.log("loadNextChapter visiblePct", visiblePct, entry.intersectionRatio, entry.isVisible);
-        if (visiblePct <= 50) {
-            return;
-        }
-        console.log("visiblePct", visiblePct);
-        const target = entry.target;
-        halfReadObserver.unobserve(target);
+        const {intersectionRatio, target} = entry;
         const chapterNumber = parseInt(target.dataset.chapternumber, 10);
-        console.log("chapter number", chapterNumber);
+        if (!chapterNumber) {
+            return;
+        }
+        let visiblePercentage = Math.floor(intersectionRatio * 100);
+        if (visiblePercentage === 0) {
+            return;
+        }
+        halfReadObserver.unobserve(target);
         const nextChapterNumber = chapterNumber + 1;
         const bookTitle = window.bookReader.bookTitle;
-        const nextChapterLoaded = chapterList[nextChapterNumber];
-        if (nextChapterLoaded) {
-            return;
-        }
-        if (nextChapterNumber > 5) {
-            return;
-        }
-        chapterList[nextChapterNumber] = true;
+        console.log("loading next chapter", nextChapterNumber);
         fetchBook(bookTitle)
             .then((book) => {
                 const totalChapters = book.chapters.length;
