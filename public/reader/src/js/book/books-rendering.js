@@ -3,9 +3,11 @@ import { removeChild } from "../util/dom-util.js";
 
 const bookTemplateBlock = `
     <div class='book'>
-        <a href="$book_link$">
-            <span class="book-title">$book_title$</span>
-            <span class="book-domain">$book_domain$</span>
+        <a href="__book_link__">
+            <span class="book-title">__book_title__</span>
+            <span class="book-domain">__book_domain__
+                <span style="float: right">__last_read__ of __total_chapter__ read</span>
+            </span>
         </a>
     </div>`;
 
@@ -25,9 +27,11 @@ export function addBookToPage(book) {
     const dummyDiv = document.createElement('div');
     const hostname = new URL(book.url).hostname;
     dummyDiv.innerHTML = bookTemplateBlock
-        .replace('$book_title$', book.title)
-        .replace('$book_domain$', hostname)
-        .replace('$book_link$', getChapterLink(book));
+        .replace(/__book_title__/g, book.title)
+        .replace(/__book_domain__/g, hostname)
+        .replace(/__last_read__/g, book.lastRead)
+        .replace(/__total_chapter__/g, book.chapters.length)
+        .replace(/__book_link__/g, getChapterLink(book));
     page.appendChild(dummyDiv);
 }
 

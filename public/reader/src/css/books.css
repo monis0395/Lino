@@ -25,6 +25,7 @@
 }
 
 .book-domain {
+    display: block;
     font-weight: var(--weight-regular);
     color: var(--dull-color)
 }
