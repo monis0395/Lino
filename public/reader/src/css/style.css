@@ -28,10 +28,16 @@ body {
     align-items: center;
 }
 
-.menu-text {
+.logo {
     font-weight: var(--weight-thin);
     letter-spacing: 2px;
     width: 70%;
+}
+
+.menu-text {
+    font-weight: var(--weight-thin);
+    padding-left: var(--padding-min-half);
+    padding-right: var(--padding-min-half);
 }
 
 .menu-text a {
@@ -66,6 +72,10 @@ body {
 
 #loader {
     margin: auto;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 /* Tablet Styles */

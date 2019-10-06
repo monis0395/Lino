@@ -24,3 +24,15 @@ export function removeChild(element) {
     } catch (_) {
     }
 }
+
+export function throttle(callback, wait = 100) {
+    let timer = null;
+    return function(...args) {
+        if (timer === null) {
+            timer = setTimeout(() => {
+                callback.apply(this, args);
+                timer = null;
+            }, wait);
+        }
+    };
+}

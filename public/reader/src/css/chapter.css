@@ -47,3 +47,10 @@
 
     color: var(--bright-color);
 }
+
+#navbar {
+    position: fixed; /* Make it stick/fixed */
+    bottom: 0; /* Stay on top */
+    width: 100%; /* Full width */
+    transition: bottom 0.3s; /* Transition effect when sliding down (and up) */
+}
