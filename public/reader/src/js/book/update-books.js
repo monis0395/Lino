@@ -20,22 +20,32 @@ function requestAndUpdateAllBooks(books) {
     return Promise.all(books.map((book) => requestAndUpdateBook(book)))
 }
 
-export function CheckForUpdates() {
+function checkForUpdates() {
+    const update = Date.now();
+    console.log("checking for updates", update);
     getBooks()
         .then(requestAndUpdateAllBooks)
+        .catch((error) => console.error("check for update error:", error, update))
+        .finally(() => console.log("finished checking for update", update));
+}
+
+export function checkAndReloadBooks() {
+    checkForUpdates()
         .then(() => {
             showLoader();
             reloadBooks()
-                .finally(hideLoader);
+                .finally(hideLoader)
+                .finally(() => showSnackbar(`Updated books!`));
         })
         .catch((error) => {
-            console.error("check for update error:", error);
             if (error && error.error) {
                 showSnackbar(`Update Error: ` + error.error.message);
             } else {
                 showSnackbar(`Update Error: ` + error);
             }
         })
-        .finally(() => showSnackbar(`Updated books!`));
 }
 
+const updateInterval = 15 * 1000; // 15 seconds
+checkForUpdates();
+setInterval(checkForUpdates, updateInterval);

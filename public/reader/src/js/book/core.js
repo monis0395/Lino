@@ -1,7 +1,7 @@
 import { addBookInit } from "./add-book.js";
 import { loadBooks } from "./books-rendering.js";
 import { getBook } from "./get-book.js";
-import { CheckForUpdates } from "./update-books.js";
+import { checkAndReloadBooks } from "./update-books.js";
 
 function loadFirstBook() {
     const done = localStorage.getItem("first");
@@ -16,7 +16,7 @@ function loadFirstBook() {
 function pullToRefresh() {
     window.PullToRefresh.init({
         mainElement: 'body',
-        onRefresh: CheckForUpdates,
+        onRefresh: checkAndReloadBooks,
     });
 }
 
