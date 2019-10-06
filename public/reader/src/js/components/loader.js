@@ -1,6 +1,9 @@
 import { hideElement, showElement } from "../util/dom-util.js";
 
-const loaderTemplate = `<img src="../images/flip-book-loader.svg" class="center" id="loader" alt="">`;
+const loaderTemplate = `
+<div class="loader-container">
+    <img src="../images/flip-book-loader.svg" id="loader" alt="">
+</div>`;
 
 function addLoaderToBody() {
     const div = document.createElement('div');
