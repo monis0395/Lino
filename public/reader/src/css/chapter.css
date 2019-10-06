@@ -36,3 +36,14 @@
     padding-bottom: var(--padding-min);
     line-height: 2.2em;
 }
+
+#fin {
+    padding: 12.5vh 0;
+    text-align: center;
+
+    font-family: Times, "Times New Roman", "serif";
+    font-size: 1.2em;
+    font-style: italic;
+
+    color: var(--bright-color);
+}

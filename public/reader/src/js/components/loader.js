@@ -1,7 +1,7 @@
 import { hideElement, showElement } from "../util/dom-util.js";
 
 const loaderTemplate = `
-<div class="loader-container">
+<div id="loader-container">
     <img src="../images/flip-book-loader.svg" id="loader" alt="">
 </div>`;
 
@@ -12,7 +12,7 @@ function addLoaderToBody() {
 }
 
 export function showLoader() {
-    const loader = document.getElementById("loader");
+    const loader = document.getElementById("loader-container");
     if (loader) {
         showElement(loader);
     } else {
@@ -21,6 +21,6 @@ export function showLoader() {
 }
 
 export function hideLoader() {
-    const loader = document.getElementById("loader");
+    const loader = document.getElementById("loader-container");
     hideElement(loader);
 }

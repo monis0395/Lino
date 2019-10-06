@@ -53,10 +53,12 @@ body {
 }
 
 .hidden {
-    display: none;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
 }
 
-.loader-container {
+#loader-container {
     display: flex;
     height: 50vh;
 }

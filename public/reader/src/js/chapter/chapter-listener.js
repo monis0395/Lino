@@ -70,7 +70,7 @@ function loadNextChapter(entries) {
         fetchBook(bookTitle)
             .then((book) => {
                 const totalChapters = book.chapters.length;
-                if (nextChapterNumber < totalChapters) {
+                if (nextChapterNumber < totalChapters && false) {
                     getAndRenderChapter(bookTitle, nextChapterNumber)
                         .catch((error) => {
                             console.error(error);
