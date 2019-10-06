@@ -1,5 +1,6 @@
 import { getBooks } from "./books-store.js";
 import { removeChild } from "../util/dom-util.js";
+import { getChapterLink } from "../components/chapter-url.js";
 
 const bookTemplateBlock = `
     <div class='book'>
@@ -11,14 +12,6 @@ const bookTemplateBlock = `
         </a>
     </div>`;
 
-function getChapterLink(book) {
-    const baseURL = "./chapter.html?";
-    const queryString = new URLSearchParams();
-    queryString.append("book", book.title);
-    queryString.append("chapter", book.lastRead || 0);
-    return baseURL + queryString.toString();
-}
-
 export function addBookToPage(book) {
     if (!book.title) {
         return
@@ -29,9 +22,9 @@ export function addBookToPage(book) {
     dummyDiv.innerHTML = bookTemplateBlock
         .replace(/__book_title__/g, book.title)
         .replace(/__book_domain__/g, hostname)
-        .replace(/__last_read__/g, book.lastRead)
+        .replace(/__last_read__/g, book.lastRead + 1)
         .replace(/__total_chapter__/g, book.chapters.length)
-        .replace(/__book_link__/g, getChapterLink(book));
+        .replace(/__book_link__/g, getChapterLink(book.title, book.lastRead));
     page.appendChild(dummyDiv);
 }
 

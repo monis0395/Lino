@@ -9,9 +9,12 @@ const apiGetBook = "https://monis0395.api.stdlib.com/getBook@dev?url=";
 function requestAndUpdateBook(book) {
     const oldTotalChapters = book.chapters.length;
     return requestFor(apiGetBook, book.url).then((updatedBook) => {
-        const newTotalChapters = book.chapters.length;
+        const newTotalChapters = updatedBook.chapters.length;
         if (updatedBook && updatedBook.title && newTotalChapters !== oldTotalChapters) {
-            storeBook(updatedBook.title, updatedBook)
+            storeBook(updatedBook.title, {
+                ...book,
+                ...updatedBook,
+            })
         }
     });
 }

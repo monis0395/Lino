@@ -19,7 +19,6 @@ body {
 
 .menu {
     width: 100%;
-    height: 5em;
     display: flex;
     color: var(--bright-color);
     background-color: var(--nav-background);
@@ -28,21 +27,28 @@ body {
     align-items: center;
 }
 
+.menu-text {
+    font-weight: var(--weight-thin);
+    padding: var(--padding-min) var(--padding-min-half);
+}
+
+.menu-text:hover {
+    background-color: var(--nav-unfocused);
+}
+
+.menu-text a {
+    color: var(--bright-color);
+    text-decoration: none;
+}
+
 .logo {
     font-weight: var(--weight-thin);
     letter-spacing: 2px;
     width: 70%;
 }
 
-.menu-text {
-    font-weight: var(--weight-thin);
-    padding-left: var(--padding-min-half);
-    padding-right: var(--padding-min-half);
-}
-
-.menu-text a {
-    color: var(--bright-color);
-    text-decoration: none;
+.logo:hover {
+    background-color: initial;
 }
 
 .center {

@@ -2,6 +2,8 @@ import { hideLoader, showLoader } from "../components/loader.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { showSnackbar } from "../components/snackbar.js";
 import { throttle } from "../util/dom-util.js";
+import { fetchBook } from "../book/books-store.js";
+import { getChapterLink } from "../components/chapter-url.js";
 
 function getBookTitle() {
     const search = new URLSearchParams(window.location.search);
@@ -27,6 +29,21 @@ function autoHideNavBar() {
     }, 100);
 }
 
+function loadChapterList() {
+    const chaptersList = document.getElementById("chapters-list");
+    const bookTitle = window.bookReader.bookTitle;
+    fetchBook(bookTitle)
+        .then(({chapters}) => {
+            chapters.forEach((chapter, index) => {
+                const chapterLink = getChapterLink(bookTitle, index);
+                const chapterAnchorTag = document.createElement("a");
+                chapterAnchorTag.href = chapterLink;
+                chapterAnchorTag.innerText = chapter.title;
+                chaptersList.appendChild(chapterAnchorTag);
+            })
+        })
+}
+
 function init() {
     hideLoader();
     autoHideNavBar();
@@ -34,6 +51,7 @@ function init() {
     window.bookReader = {bookTitle};
     document.title = bookTitle;
     showLoader();
+    loadChapterList();
     getAndRenderChapter(bookTitle, getChapterNumber())
         .catch((error) => {
             console.error(error);
