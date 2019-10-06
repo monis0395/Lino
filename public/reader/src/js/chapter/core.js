@@ -28,6 +28,7 @@ function autoHideNavBar() {
 }
 
 function init() {
+    hideLoader();
     autoHideNavBar();
     const bookTitle = getBookTitle();
     window.bookReader = {bookTitle};

@@ -5,7 +5,6 @@ import { getBook } from "./get-book.js";
 const modal = document.getElementById("add-book-modal");
 const addBookBtn = document.getElementById("add-book-modal-btn");
 
-
 export function addBookInit() {
     loadAnyModal(modal, addBookBtn);
     attachOnClickOnSubmit();

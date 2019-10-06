@@ -3,6 +3,7 @@ import { loadBooks } from "./books-rendering.js";
 import { getBook } from "./get-book.js";
 import { checkAndReloadBooks } from "./update-books.js";
 import { isTabletOrMobile } from "../util/browser-util.js";
+import { hideLoader } from "../components/loader.js";
 
 function loadFirstBook() {
     const done = localStorage.getItem("first");
@@ -27,6 +28,7 @@ function pullToRefresh() {
 }
 
 function init() {
+    hideLoader();
     window.bookReader = window.bookReader || {};
     addBookInit();
     loadBooks();
