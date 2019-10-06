@@ -2,6 +2,7 @@ import { fetchBook, storeBook } from "../book/books-store.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { hideLoader, showLoader } from "../components/loader.js";
 import { showSnackbar } from "../components/snackbar.js";
+import { addFinToPage } from "./chapter-rendering.js";
 
 const thresholdSet = [];
 for (let i = 0; i <= 1.0; i += 0.01) {
@@ -70,7 +71,7 @@ function loadNextChapter(entries) {
         fetchBook(bookTitle)
             .then((book) => {
                 const totalChapters = book.chapters.length;
-                if (nextChapterNumber < totalChapters && false) {
+                if (nextChapterNumber < totalChapters) {
                     getAndRenderChapter(bookTitle, nextChapterNumber)
                         .catch((error) => {
                             console.error(error);
@@ -78,13 +79,9 @@ function loadNextChapter(entries) {
                         })
                         .finally(hideLoader);
                 } else {
-                    // append last chapter notice
+                    addFinToPage();
                     hideLoader();
                 }
             })
     })
 }
-
-
-
-

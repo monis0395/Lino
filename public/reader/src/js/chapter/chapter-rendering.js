@@ -48,3 +48,16 @@ function isSourceWebsiteUrl(anchorTag, hostname) {
 function isIncorrectRelativeUrlFromSource(anchorTag) {
     return anchorTag.hash === "" && anchorTag.hostname === window.location.hostname;
 }
+
+const finBlock = `<div id="fin">Fin<br><br>(You have caught up with the latest chapter)</div>`;
+
+export function addFinToPage() {
+    if (addFinToPage.done) {
+        return;
+    }
+    addFinToPage.done = true;
+    const page = document.getElementsByClassName('page')[0];
+    const dummyDiv = document.createElement('div');
+    dummyDiv.innerHTML = finBlock;
+    page.appendChild(dummyDiv);
+}
