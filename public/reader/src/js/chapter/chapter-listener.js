@@ -1,4 +1,4 @@
-import { fetchBook, storeBook } from "../book/books-store.js";
+import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { hideLoader, showLoader } from "../components/loader.js";
 import { showSnackbar } from "../components/snackbar.js";
@@ -44,8 +44,7 @@ function updateLastRead(entries) {
         fetchBook(bookTitle)
             .then((book) => {
                 console.log("updated last read to", chapterNumber);
-                storeBook(bookTitle, {
-                    ...book,
+                storeOrUpdateBook(bookTitle, {
                     lastRead: chapterNumber,
                 })
             })

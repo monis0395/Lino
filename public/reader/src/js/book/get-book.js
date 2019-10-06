@@ -1,4 +1,4 @@
-import { storeBook } from "./books-store.js";
+import { storeOrUpdateBook } from "./books-store.js";
 import { hideLoader, showLoader } from "../components/loader.js";
 import { showSnackbar } from "../components/snackbar.js";
 import { requestFor } from "../components/request-for.js";
@@ -16,7 +16,7 @@ export function getBook(link) {
 
 function storeBookAndShowSuccessMessage(book) {
     if (book && book.title) {
-        storeBook(book.title, book).then(reloadBooks);
+        storeOrUpdateBook(book.title, book).then(reloadBooks);
         showSnackbar(`Added book: ${book.title}`);
     }
 }

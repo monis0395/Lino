@@ -1,4 +1,4 @@
-import { getBooks, storeBook } from "./books-store.js";
+import { getBooks, storeOrUpdateBook } from "./books-store.js";
 import { requestFor } from "../components/request-for.js";
 import { reloadBooks } from "./books-rendering.js";
 import { showSnackbar } from "../components/snackbar.js";
@@ -11,10 +11,7 @@ function requestAndUpdateBook(book) {
     return requestFor(apiGetBook, book.url).then((updatedBook) => {
         const newTotalChapters = updatedBook.chapters.length;
         if (updatedBook && updatedBook.title && newTotalChapters !== oldTotalChapters) {
-            storeBook(updatedBook.title, {
-                ...book,
-                ...updatedBook,
-            })
+            storeOrUpdateBook(updatedBook.title, updatedBook)
         }
     });
 }
