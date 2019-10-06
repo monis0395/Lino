@@ -46,6 +46,6 @@ export function checkAndReloadBooks() {
         })
 }
 
-const updateInterval = 15 * 1000; // 15 seconds
+const updateInterval = 15 * 1000 * 60; // 15 minutes
 checkForUpdates();
 setInterval(checkForUpdates, updateInterval);
