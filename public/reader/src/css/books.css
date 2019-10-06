@@ -62,3 +62,7 @@
     border: 1px solid var(--bright-color);
     border-radius: 5px;
 }
+
+[class^="ptr--"] {
+    color: var(--bright-color) !important;
+}

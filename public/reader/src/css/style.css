@@ -14,6 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--page-background);
+    min-height: 90vh;
 }
 
 .menu {

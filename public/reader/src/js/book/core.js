@@ -2,6 +2,7 @@ import { addBookInit } from "./add-book.js";
 import { loadBooks } from "./books-rendering.js";
 import { getBook } from "./get-book.js";
 import { checkAndReloadBooks } from "./update-books.js";
+import { isTabletOrMobile } from "../util/browser-util.js";
 
 function loadFirstBook() {
     const done = localStorage.getItem("first");
@@ -14,17 +15,25 @@ function loadFirstBook() {
 }
 
 function pullToRefresh() {
-    window.PullToRefresh.init({
-        mainElement: 'body',
-        onRefresh: checkAndReloadBooks,
-    });
+    const pullToRefreshScript = document.createElement("script");
+    pullToRefreshScript.src = "https://unpkg.com/pulltorefreshjs@latest/dist/index.umd.min.js";
+    pullToRefreshScript.onload = () => {
+        window.PullToRefresh.init({
+            mainElement: 'body',
+            onRefresh: checkAndReloadBooks,
+        });
+    };
+    document.body.appendChild(pullToRefreshScript);
 }
 
 function init() {
+    window.bookReader = window.bookReader || {};
     addBookInit();
     loadBooks();
     loadFirstBook();
-    pullToRefresh()
+    if (isTabletOrMobile()) {
+        pullToRefresh();
+    }
 }
 
 init();

@@ -23,7 +23,7 @@ function requestAndUpdateAllBooks(books) {
 function checkForUpdates() {
     const update = Date.now();
     console.log("checking for updates", update);
-    getBooks()
+    return getBooks()
         .then(requestAndUpdateAllBooks)
         .catch((error) => console.error("check for update error:", error, update))
         .finally(() => console.log("finished checking for update", update));
