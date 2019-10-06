@@ -22,9 +22,12 @@ body {
     display: flex;
     color: var(--bright-color);
     background-color: var(--nav-background);
-    padding-left: var(--padding-min);
     justify-content: flex-start;
     align-items: center;
+}
+
+.menu .menu-text:first-child {
+    padding-left: var(--padding-min);
 }
 
 .menu-text {

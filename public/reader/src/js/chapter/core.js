@@ -17,13 +17,17 @@ function getChapterNumber() {
 
 function autoHideNavBar() {
     let prevScrollPosition = window.pageYOffset;
+    let topNavBar = document.getElementById("top-nav-bar");
+    let bottomNavBar = document.getElementById("bottom-nav-bar");
     window.onscroll = throttle(function() {
         const currentScrollPosition = window.pageYOffset;
         const scrollingUp = prevScrollPosition > currentScrollPosition;
         if (scrollingUp) {
-            document.getElementById("bottom-nav-bar").style.bottom = "0";
+            topNavBar.style.top = "0";
+            bottomNavBar.style.bottom = "0";
         } else {
-            document.getElementById("bottom-nav-bar").style.bottom = "-50px";
+            topNavBar.style.top = "-100px";
+            bottomNavBar.style.bottom = "-50px";
         }
         prevScrollPosition = currentScrollPosition;
     }, 100);
