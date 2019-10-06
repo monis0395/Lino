@@ -20,7 +20,7 @@
     color: var(--bright-color)
 }
 
-.chapter-domain {
+.chapter-domain a {
     font-weight: var(--weight-regular);
     color: var(--dull-color)
 }

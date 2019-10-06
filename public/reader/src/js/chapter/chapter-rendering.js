@@ -4,7 +4,10 @@ import { attachObserversFor } from "./chapter-listener.js";
 const chapterTemplateBlock = `
     <div class='chapter chapter-__chapter_number__' data-chapterNumber="__chapter_number__">
         <span class="chapter-title">__chapter_title__</span>
-        <span class="chapter-domain">__chapter_domain__</span>
+        <span class="chapter-domain">
+        <a href="__chapter_link__" title="Chapter's source">
+        __chapter_domain__
+        </a></span>
         <br><br><br>
         <div class="chapter-content">__chapter_content__</div>
     </div>
@@ -20,6 +23,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     const hostname = new URL(chapter.url).hostname;
     dummyDiv.innerHTML = chapterTemplateBlock
         .replace(/__chapter_number__/g, chapterNumber)
+        .replace(/__chapter_link__/g, chapter.url)
         .replace(/__chapter_title__/g, chapter.title || chapterTitle)
         .replace(/__chapter_domain__/g, hostname)
         .replace(/__chapter_content__/g, filterContent(chapter));
