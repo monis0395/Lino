@@ -8,10 +8,8 @@ const chapterTemplateBlock = `
         <a href="__chapter_link__" title="Chapter's source">
         __chapter_domain__
         </a></span>
-        <br><br><br>
         <div class="chapter-content">__chapter_content__</div>
     </div>
-    <br><br><br>
 `;
 
 export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
@@ -27,7 +25,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
         .replace(/__chapter_title__/g, chapter.title || chapterTitle)
         .replace(/__chapter_domain__/g, hostname)
         .replace(/__chapter_content__/g, filterContent(chapter));
-    page.appendChild(dummyDiv);
+    page.appendChild(dummyDiv.firstElementChild);
     attachObserversFor(document.getElementsByClassName("chapter-" + chapterNumber)[0])
 }
 

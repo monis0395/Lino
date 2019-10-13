@@ -8,7 +8,7 @@ const loaderTemplate = `
 function addLoaderToBody() {
     const div = document.createElement('div');
     div.innerHTML = loaderTemplate;
-    document.body.appendChild(div);
+    document.body.appendChild(div.firstElementChild);
 }
 
 export function showLoader() {

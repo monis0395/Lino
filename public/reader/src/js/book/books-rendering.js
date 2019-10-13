@@ -25,7 +25,7 @@ export function addBookToPage(book) {
         .replace(/__last_read__/g, book.lastRead + 1)
         .replace(/__total_chapter__/g, book.chapters.length)
         .replace(/__book_link__/g, getChapterLink(book.title, book.lastRead));
-    page.appendChild(dummyDiv);
+    page.appendChild(dummyDiv.firstElementChild);
 }
 
 function deleteAllBooks() {

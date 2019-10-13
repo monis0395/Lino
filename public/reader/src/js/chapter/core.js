@@ -26,8 +26,8 @@ function autoHideNavBar() {
             topNavBar.style.top = "0";
             bottomNavBar.style.bottom = "0";
         } else {
-            topNavBar.style.top = "-100px";
-            bottomNavBar.style.bottom = "-50px";
+            topNavBar.style.top = "-80px";
+            bottomNavBar.style.bottom = "-80px";
         }
         prevScrollPosition = currentScrollPosition;
     }, 100);
