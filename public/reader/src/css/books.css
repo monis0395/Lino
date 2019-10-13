@@ -27,7 +27,8 @@
 .book-domain {
     display: block;
     font-weight: var(--weight-regular);
-    color: var(--dull-color)
+    color: var(--dull-color);
+    padding-bottom: var(--padding-min-half);
 }
 
 /* add book modal */
