@@ -11,6 +11,7 @@
     padding-right: var(--padding-min);
     border-bottom: 1px solid var(--dull-color);
     box-sizing: border-box;
+    margin-top: calc(var(--padding-min) * 5);
 }
 
 .chapter-title {
