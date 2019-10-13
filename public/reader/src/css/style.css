@@ -8,13 +8,13 @@
 html,
 body {
     background-color: var(--page-background);
+    min-height: 100vh;
 }
 
 .page {
     display: flex;
     flex-direction: column;
     background-color: var(--page-background);
-    min-height: 90vh;
 }
 
 .menu {
@@ -96,5 +96,9 @@ body {
     .page {
         width: 960px;
         margin: 0 auto;
+    }
+
+    .page .menu {
+        width: 960px;
     }
 }

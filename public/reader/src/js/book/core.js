@@ -20,7 +20,6 @@ function pullToRefresh() {
     pullToRefreshScript.src = "https://unpkg.com/pulltorefreshjs@latest/dist/index.umd.min.js";
     pullToRefreshScript.onload = () => {
         window.PullToRefresh.init({
-            mainElement: 'body',
             onRefresh: checkAndReloadBooks,
         });
     };
