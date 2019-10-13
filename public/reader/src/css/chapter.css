@@ -77,7 +77,6 @@
 }
 
 
-
 /* The container <div> - needed to position the dropup content */
 .dropup {
     position: relative;
@@ -115,4 +114,75 @@
 /* Show the dropup menu on hover */
 .dropup:hover .dropup-content {
     display: block;
+}
+
+#font-settings-modal .modal-content {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 640px;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.font-choices {
+    font-size: 1.2em;
+    border: #aaa 1px solid;
+    border-radius: 5px;
+    background-color: #eee;
+}
+
+.font-choices > div {
+    padding-left: var(--padding-min);
+    line-height: 40px;
+}
+
+.font-control-2-box {
+    display: flex;
+    align-items: baseline;
+    font-size: 1.2em;
+    line-height: 40px;
+    border: #aaa 1px solid;
+    border-radius: 4px;
+}
+
+.font-control-2-box > div {
+    width: 50%;
+    text-align: center;
+}
+
+.font-control-2-box > div:first-child {
+    border-right: #aaa 1px solid;
+}
+
+#decrease-font {
+    font-size: 0.8em;
+}
+
+#increase-font {
+    font-size: 1.2em;
+}
+
+.color-choices {
+    display: flex;
+    justify-content: space-between;
+}
+
+.color-choices > div {
+    width: 20%;
+    line-height: 40px;
+    text-align: center;
+    align-content: center;
+    border: #aaa 1px solid;
+    border-radius: 16px;
+}
+
+#font-settings-reset {
+    text-align: center;
+    font-size: 24px;
+    line-height: 48px;
+    border: #aaa 1px solid;
+    color: var(--bright-color);
+    background-color: var(--dark-color);
+    border-radius: 16px;
 }
