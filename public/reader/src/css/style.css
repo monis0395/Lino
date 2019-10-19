@@ -73,6 +73,8 @@ body {
     visibility: hidden !important;
     height: 0 !important;
     width: 0 !important;
+    opacity: 0;
+    transition: opacity 0.5s;
 }
 
 #loader-container {

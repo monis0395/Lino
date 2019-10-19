@@ -4,6 +4,7 @@ import { showSnackbar } from "../components/snackbar.js";
 import { throttle } from "../util/dom-util.js";
 import { fetchBook } from "../book/books-store.js";
 import { getChapterLink } from "../components/chapter-url.js";
+import { fontSettingsInit } from "./font-settings.js";
 
 function getBookTitle() {
     const search = new URLSearchParams(window.location.search);
@@ -50,6 +51,7 @@ function loadChapterList() {
 
 function init() {
     hideLoader();
+    fontSettingsInit();
     autoHideNavBar();
     const bookTitle = getBookTitle();
     window.bookReader = {bookTitle};

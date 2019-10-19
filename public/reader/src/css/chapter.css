@@ -123,6 +123,7 @@
     max-width: 640px;
     max-height: 50vh;
     overflow-y: scroll;
+    transition: height 2s;
 }
 
 .font-choices {
