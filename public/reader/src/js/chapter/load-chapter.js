@@ -14,5 +14,6 @@ export function getAndRenderChapter(bookTitle, chapterNumber) {
             addChapterToPage(chapter, chapterNumber);
             loadedChaptersMap[chapterNumber] = true;
             console.log("rendered chapter", chapterNumber);
-        });
+        })
+        .catch(console.error);
 }

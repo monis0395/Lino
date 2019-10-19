@@ -124,13 +124,17 @@
     display: block;
     position: fixed;
     left: -90vh;
-    max-width: 90vw;
+    max-width: 80vw;
     max-height: calc(100vh - 50px);
 }
 
 #chapters-list a {
     font-weight: 600;
     border-bottom: 1px var(--dull-color) solid;
+}
+
+#chapters-list a.selected {
+    background-color: var(--dull-color);
 }
 
 /* ============== Font settings ============== */
