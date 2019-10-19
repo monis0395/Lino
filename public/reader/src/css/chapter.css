@@ -116,74 +116,208 @@
     display: block;
 }
 
-#font-settings-modal .modal-content {
+.dropup #font-settings {
     position: fixed;
-    bottom: 0;
     width: 100%;
-    max-width: 640px;
-    max-height: 50vh;
-    overflow-y: scroll;
+    max-width: 360px;
     transition: height 2s;
+    max-height: fit-content;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
 }
 
-.font-choices {
-    font-size: 1.2em;
-    border: #aaa 1px solid;
-    border-radius: 5px;
-    background-color: #eee;
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .dropup #font-settings {
+        left: 0;
+        bottom: 0;
+        max-width: 100%;
+    }
 }
 
-.font-choices > div {
-    padding-left: var(--padding-min);
-    line-height: 40px;
+button {
+    color: var(--dark-color);
+    fill: var(--dull-color);
 }
 
-.font-control-2-box {
+.font-type-buttons,
+.font-size-buttons,
+.color-scheme-buttons,
+.content-width-buttons,
+.line-height-buttons,
+.content-align-buttons {
     display: flex;
-    align-items: baseline;
-    font-size: 1.2em;
-    line-height: 40px;
-    border: #aaa 1px solid;
-    border-radius: 4px;
+    flex-direction: row;
 }
 
-.font-control-2-box > div {
+.font-type-buttons > button,
+.font-size-buttons > button,
+.color-scheme-buttons > button,
+.content-width-buttons > button,
+.line-height-buttons > button,
+.content-align-buttons > button {
+    text-align: center;
+    border: 0;
+}
+
+.font-type-buttons > button,
+.font-size-buttons > button,
+.content-width-buttons > button,
+.line-height-buttons > button,
+.content-align-buttons > button {
     width: 50%;
-    text-align: center;
+    background-color: transparent;
+    border-left: 1px solid var(--dark-color);
+    border-bottom: 1px solid var(--dark-color);
 }
 
-.font-control-2-box > div:first-child {
-    border-right: #aaa 1px solid;
+.font-type-buttons > button:first-child,
+.font-size-buttons > button:first-child,
+.content-width-buttons > button:first-child,
+.line-height-buttons > button:first-child,
+.content-align-buttons > button:first-child {
+    border-left: 0;
 }
 
-#decrease-font {
-    font-size: 0.8em;
+.font-type-buttons > button {
+    display: inline-block;
+    font-size: 62px;
+    height: 100px;
 }
 
-#increase-font {
-    font-size: 1.2em;
+.font-size-buttons > button,
+.color-scheme-buttons > button,
+.content-width-buttons > button,
+.line-height-buttons > button,
+.content-align-buttons > button {
+    height: 60px;
 }
 
-.color-choices {
-    display: flex;
-    justify-content: space-between;
+/* Make the serif button content the same size as the sans-serif button content. */
+.font-type-buttons > button > .description {
+    font-size: 12px;
+    margin-top: -5px;
 }
 
-.color-choices > div {
-    width: 20%;
-    line-height: 40px;
-    text-align: center;
-    align-content: center;
-    border: #aaa 1px solid;
-    border-radius: 16px;
+/* Font sizes are different per-platform, so we need custom CSS to line them up. */
+.font-type-buttons > .sans-serif-button > .name {
+    margin-top: 2px;
 }
 
-#font-settings-reset {
-    text-align: center;
-    font-size: 24px;
-    line-height: 48px;
-    border: #aaa 1px solid;
-    color: var(--bright-color);
-    background-color: var(--dark-color);
-    border-radius: 16px;
+.font-type-buttons > .sans-serif-button > .description {
+    margin-top: -4px;
+}
+
+.font-type-buttons > .serif-button > .name {
+    font-size: 63px;
+}
+
+.button:hover,
+.font-size-buttons > button:hover,
+.font-type-buttons > button:hover,
+.content-width-buttons > button:hover,
+.line-height-buttons > button:hover,
+.content-align-buttons > button:hover {
+    background-color: var(--dull-color);
+}
+
+.minus-button,
+.plus-button,
+.content-width-minus-button,
+.content-width-plus-button,
+.line-height-minus-button,
+.line-height-plus-button,
+.content-left-align-button,
+.content-justify-align-button {
+    background-color: transparent;
+    border: 0;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* font settings icons */
+.minus-button {
+    background-image: url("./../images/minus.svg");
+}
+
+.plus-button {
+    background-image: url("./../images/plus.svg");
+}
+
+.content-width-minus-button {
+    background-size: 42px 16px;
+    background-image: url("./../images/content-width-minus.svg");
+}
+
+.content-width-plus-button {
+    background-size: 44px 16px;
+    background-image: url("./../images/content-width-plus.svg");
+}
+
+.line-height-minus-button {
+    background-size: 34px 14px;
+    background-image: url("./../images/line-height-minus.svg");
+}
+
+.line-height-plus-button {
+    background-size: 34px 24px;
+    background-image: url("./../images/line-height-plus.svg");
+}
+
+.content-left-align-button {
+    background-size: 34px 24px;
+    background-image: url("./../images/content-align-left.svg");
+}
+
+.content-justify-align-button {
+    background-size: 34px 24px;
+    background-image: url("./../images/content-align-justify.svg");
+}
+
+/* font family buttons */
+
+.color-scheme-buttons > button {
+    width: 33.33%;
+    font-size: 14px;
+}
+
+.light-button {
+    color: #333333;
+    background-color: #ffffff;
+}
+
+.dark-button {
+    color: #eeeeee;
+    background-color: #333333;
+}
+
+.sepia-button {
+    color: #5b4636;
+    background-color: #f4ecd8;
+}
+
+.sans-serif-button {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.serif-button {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* color button */
+.light-button {
+    color: #333333;
+    background-color: #ffffff;
+}
+
+.dark-button {
+    color: #eeeeee;
+    background-color: #333333;
+}
+
+.sepia-button {
+    color: #5b4636;
+    background-color: #f4ecd8;
 }

@@ -2,13 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 html,
 body {
     background-color: var(--page-background);
     min-height: 100vh;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 .page {
