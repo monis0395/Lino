@@ -87,16 +87,16 @@
 .dropup-content {
     display: none;
     position: absolute;
-    bottom: 50px;
-    background-color: var(--bright-color);
     width: 100vw;
     max-width: 640px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    color: var(--dark-color);
-    z-index: 1;
     max-height: 300px;
+    z-index: 1;
     overflow-x: hidden;
     overflow-y: scroll;
+    color: var(--dark-color);
+    background-color: var(--bright-color);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease-in-out;
 }
 
 /* Links inside the dropup */
@@ -114,14 +114,35 @@
 /* Show the dropup menu on hover */
 .dropup:hover .dropup-content {
     display: block;
+    left: 0 !important;
+    bottom: 50px !important;
 }
 
-.dropup #font-settings {
+/* ============== Chapters list ============== */
+
+#chapters-list {
+    display: block;
     position: fixed;
-    width: 100%;
+    left: -90vh;
+    max-width: 90vw;
+    max-height: calc(100vh - 50px);
+}
+
+#chapters-list a {
+    font-weight: 600;
+    border-bottom: 1px var(--dull-color) solid;
+}
+
+/* ============== Font settings ============== */
+
+#font-settings {
+    display: block;
+    position: fixed;
+    bottom: -100vh;
+    left: initial !important;
     max-width: 360px;
-    transition: height 2s;
     max-height: fit-content;
+
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -129,9 +150,20 @@
 
 
 @media (min-width: 320px) and (max-width: 767px) {
-    .dropup #font-settings {
-        left: 0;
+    .dropup-content {
         bottom: 0;
+    }
+
+    .dropup:hover .dropup-content {
+        bottom: 0 !important;
+    }
+
+    #chapters-list {
+        max-height: 100vh;
+    }
+
+    #font-settings {
+        left: 0 !important;
         max-width: 100%;
     }
 }

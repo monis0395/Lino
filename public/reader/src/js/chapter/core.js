@@ -27,8 +27,8 @@ function autoHideNavBar() {
             topNavBar.style.top = "0";
             bottomNavBar.style.bottom = "0";
         } else {
-            topNavBar.style.top = "-80px";
-            bottomNavBar.style.bottom = "-80px";
+            topNavBar.style.top = `-${topNavBar.scrollHeight}px`;
+            bottomNavBar.style.bottom = `-${bottomNavBar.scrollHeight}px`;
         }
         prevScrollPosition = currentScrollPosition;
     }, 100);
@@ -43,7 +43,7 @@ function loadChapterList() {
                 const chapterLink = getChapterLink(bookTitle, index);
                 const chapterAnchorTag = document.createElement("a");
                 chapterAnchorTag.href = chapterLink;
-                chapterAnchorTag.innerText = chapter.title;
+                chapterAnchorTag.innerText = `${index +1}. ${chapter.title}`;
                 chaptersList.appendChild(chapterAnchorTag);
             })
         })
