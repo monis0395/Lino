@@ -96,7 +96,7 @@
     color: var(--dark-color);
     background-color: var(--bright-color);
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
 
 /* Links inside the dropup */
@@ -110,22 +110,15 @@
 .dropup-content a:hover {
     background-color: var(--dull-color)
 }
-
-/* Show the dropup menu on hover */
-.dropup:hover .dropup-content {
-    display: block;
-    left: 0 !important;
-    bottom: 50px !important;
-}
-
 /* ============== Chapters list ============== */
 
 #chapters-list {
     display: block;
     position: fixed;
-    left: -90vh;
-    max-width: 80vw;
-    max-height: calc(100vh - 50px);
+    left: -100vw;
+    bottom: 0;
+    max-width: 460px;
+    max-height: 100vh;
 }
 
 #chapters-list a {
@@ -153,6 +146,15 @@
 }
 
 
+/* Tablet Styles */
+@media only screen and (min-width: 767px) and (max-width: 960px) {
+    #chapters-list {
+        bottom: 50px;
+        max-height: calc(100vh - 50px);
+    }
+}
+
+/* Mobile Styles*/
 @media (min-width: 320px) and (max-width: 767px) {
     .dropup-content {
         bottom: 0;
@@ -163,6 +165,7 @@
     }
 
     #chapters-list {
+        max-width: 80vw;
         max-height: 100vh;
     }
 

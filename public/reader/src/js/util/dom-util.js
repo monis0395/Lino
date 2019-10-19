@@ -25,6 +25,17 @@ export function removeChild(element) {
     }
 }
 
+export function isDescendant(parent, child) {
+    let node = child.parentNode;
+    while (node != null) {
+        if (node === parent) {
+            return true;
+        }
+        node = node.parentNode;
+    }
+    return false;
+}
+
 export function throttle(callback, wait = 100) {
     let timer = null;
     return function(...args) {
