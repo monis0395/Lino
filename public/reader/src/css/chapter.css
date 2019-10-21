@@ -30,13 +30,12 @@
 .chapter-content {
     padding-top: var(--padding-min);
     color: var(--bright-color);
-    font-size: 1.2em;
-    line-height: 1.4em;
+    font-size: 1em;
 }
 
 .chapter-content p {
     padding-bottom: var(--padding-min);
-    line-height: 2.2em;
+    line-height: 2em;
 }
 
 #fin {
@@ -138,7 +137,7 @@
     bottom: -100vh;
     left: initial !important;
     max-width: 360px;
-    max-height: fit-content;
+    max-height: 400px;
 
     padding: 0;
     margin: 0;

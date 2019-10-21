@@ -17,7 +17,7 @@ function loadFirstBook() {
 
 function pullToRefresh() {
     const pullToRefreshScript = document.createElement("script");
-    pullToRefreshScript.src = "https://unpkg.com/pulltorefreshjs@latest/dist/index.umd.min.js";
+    pullToRefreshScript.src = "../js/third-party/pulltorefreshjs.js";
     pullToRefreshScript.onload = () => {
         window.PullToRefresh.init({
             onRefresh: checkAndReloadBooks,
