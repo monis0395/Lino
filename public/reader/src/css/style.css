@@ -9,6 +9,7 @@ body {
     background-color: var(--page-background);
     min-height: 100vh;
     font-family: Roboto, Helvetica, Arial, sans-serif;
+    color: var(--bright-color);
 }
 
 .page {
@@ -87,7 +88,7 @@ body {
 
 body {
     font-size: 16px;
-    line-height: 1.8;
+    line-height: 2;
 }
 
 /* Tablet Styles */

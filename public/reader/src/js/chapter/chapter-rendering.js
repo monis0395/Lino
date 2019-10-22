@@ -3,11 +3,14 @@ import { attachObserversFor } from "./chapter-listener.js";
 
 const chapterTemplateBlock = `
     <div class='chapter chapter-__chapter_number__' data-chapterNumber="__chapter_number__">
-        <span class="chapter-title">__chapter_title__</span>
-        <span class="chapter-domain">
-        <a href="__chapter_link__" title="Chapter's source">
-        __chapter_domain__
-        </a></span>
+        <div class="chapter-header">
+            <div class="chapter-title">__chapter_title__</div>
+            <div class="chapter-domain">
+                <a href="__chapter_link__" title="Chapter's source">
+                __chapter_domain__
+                </a>
+            </div>
+        </div>
         <div class="chapter-content">__chapter_content__</div>
     </div>
 `;
