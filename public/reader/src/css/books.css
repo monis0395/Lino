@@ -16,7 +16,7 @@
 
 .book-title {
     display: block;
-    font-size: 1.5rem;
+    font-size: 24px;
     padding: var(--baseline-v) var(--baseline-h);
     padding-bottom: calc(var(--baseline-v) / 2);
     font-weight: var(--weight-light);
@@ -40,7 +40,7 @@
 
 #add-book-modal-title {
     display: inline-block;
-    font-size: 1.5rem;
+    font-size: 24px;
     width: 80%;
     color: var(--dark-color);
     margin-bottom: calc(var(--baseline-v) / 2);
@@ -48,7 +48,7 @@
 
 #add-book-modal-input {
     width: 100%;
-    padding: var(--baseline-v) var(--baseline-h);
+    padding: var(--baseline-v) 0;
     margin-bottom: var(--baseline-v);
     border-width: 0 0 1px 0;
     border-color: var(--dark-color);
@@ -60,7 +60,7 @@
     color: var(--bright-color);
     background-color: #222;
     border: 1px solid var(--bright-color);
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 [class^="ptr--"] {
