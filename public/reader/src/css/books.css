@@ -7,9 +7,7 @@
 
 .book {
     width: 100%;
-    padding: var(--padding-min);
     border-bottom: 1px solid var(--dull-color);
-    box-sizing: border-box;
 }
 
 .book a {
@@ -17,9 +15,10 @@
 }
 
 .book-title {
-    padding-bottom: var(--padding-min-half);
     display: block;
-    font-size: 1.5em;
+    font-size: 1.5rem;
+    padding: var(--baseline-v) var(--baseline-h);
+    padding-bottom: calc(var(--baseline-v) / 2);
     font-weight: var(--weight-light);
     color: var(--bright-color)
 }
@@ -28,7 +27,8 @@
     display: block;
     font-weight: var(--weight-regular);
     color: var(--dull-color);
-    padding-bottom: var(--padding-min-half);
+    padding: 0 var(--baseline-h);
+    padding-bottom: var(--baseline-v);
 }
 
 /* add book modal */
@@ -39,26 +39,24 @@
 }
 
 #add-book-modal-title {
-    color: var(--dark-color);
-    line-height: 1.4em;
-    font-size: 1.4em;
-    width: 80%;
     display: inline-block;
-    margin-bottom: var(--padding-min-half);
+    font-size: 1.5rem;
+    width: 80%;
+    color: var(--dark-color);
+    margin-bottom: calc(var(--baseline-v) / 2);
 }
 
 #add-book-modal-input {
-    padding: var(--padding-min);
     width: 100%;
-
-    margin-bottom: var(--padding-min);
+    padding: var(--baseline-v) var(--baseline-h);
+    margin-bottom: var(--baseline-v);
     border-width: 0 0 1px 0;
     border-color: var(--dark-color);
 }
 
 #add-book-modal-submit {
     width: 100%;
-    padding: 1em;
+    padding: var(--baseline-v) var(--baseline-h);
     color: var(--bright-color);
     background-color: #222;
     border: 1px solid var(--bright-color);

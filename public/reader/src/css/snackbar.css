@@ -2,10 +2,10 @@
     visibility: hidden;
 
     position: fixed;
-    left: var(--padding-min);
-    bottom: var(--padding-min);
-    padding: var(--padding-min);
-    min-width: 150px;
+    left: var(--baseline-h);
+    bottom: var(--baseline-v);
+    padding: var(--baseline-v) var(--baseline-h);
+    min-width: calc(var(--baseline-h) * 6);
     overflow: hidden;
     border-radius: 2px;
 

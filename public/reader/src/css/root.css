@@ -12,6 +12,12 @@
     --padding-min: 1em;
     --padding-min-half: 0.5em;
 
+    --baseline-h: 20px;
+    --baseline-h-half: 10px;
+
+    --baseline-v: 16px;
+    --baseline-v-half: 8px;
+
     --weight-thin: 200;
     --weight-light: 300;
     --weight-regular: 400;
