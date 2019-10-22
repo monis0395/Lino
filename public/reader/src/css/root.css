@@ -9,14 +9,8 @@
     --dark-color: #000000;
     --dull-color: #aaaaaa;
 
-    --padding-min: 1em;
-    --padding-min-half: 0.5em;
-
-    --baseline-h: 20px;
-    --baseline-h-half: 10px;
-
-    --baseline-v: 16px;
-    --baseline-v-half: 8px;
+    --baseline-h: 10px;
+    --baseline-v: 18px;
 
     --weight-thin: 200;
     --weight-light: 300;
@@ -27,3 +21,18 @@
     --weight-extrablack: 900;
 }
 
+@media only screen and (min-width: 767px) and (max-width: 960px) {
+    :root {
+        --baseline-h: 20px;
+        --baseline-v: 16px;
+    }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+    :root {
+        --baseline-h: 20px;
+        --baseline-v: 16px;
+    }
+
+}

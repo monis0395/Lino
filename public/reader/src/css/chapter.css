@@ -17,7 +17,7 @@
 }
 
 .chapter-title {
-    font-size: 24px;
+    font-size: calc(var(--baseline-v) * 1.5);
     font-weight: var(--weight-light);
     color: var(--bright-color)
 }
@@ -28,15 +28,15 @@
 }
 
 p {
-    padding-bottom: calc(var(--baseline-v) * 2);
+    padding-bottom: var(--baseline-v);
 }
 
 #fin {
-    padding: 12.5vh 0;
+    padding: calc(var(--baseline-v) * 5) 0;
     text-align: center;
 
     font-family: Times, "Times New Roman", "serif";
-    font-size: 24px;
+    font-size: calc(var(--baseline-v) * 1.5);
     font-style: italic;
 
     color: var(--bright-color);
@@ -188,7 +188,7 @@ button {
 
 .font-type-buttons > button {
     display: inline-block;
-    font-size: 64px;
+    font-size: calc(var(--baseline-v) * 4);
     height: 100px;
 }
 
@@ -202,21 +202,21 @@ button {
 
 /* Make the serif button content the same size as the sans-serif button content. */
 .font-type-buttons > button > .description {
-    font-size: 12px;
-    margin-top: -4px;
+    font-size: calc(var(--baseline-v) * 0.75);
+    margin-top: calc(var(--baseline-v) / -4);
 }
 
 /* Font sizes are different per-platform, so we need custom CSS to line them up. */
 .font-type-buttons > .sans-serif-button > .name {
-    margin-top: 2px;
+    margin-top: calc(var(--baseline-v) / 8);
 }
 
 .font-type-buttons > .sans-serif-button > .description {
-    margin-top: -4px;
+    margin-top: calc(var(--baseline-v) / -4);
 }
 
 .font-type-buttons > .serif-button > .name {
-    font-size: 64px;
+    font-size: calc(var(--baseline-v) * 4);
 }
 
 .button:hover,

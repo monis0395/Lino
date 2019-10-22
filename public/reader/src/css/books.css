@@ -16,7 +16,7 @@
 
 .book-title {
     display: block;
-    font-size: 24px;
+    font-size: calc(var(--baseline-v) * 1.5);
     padding: var(--baseline-v) var(--baseline-h);
     padding-bottom: calc(var(--baseline-v) / 2);
     font-weight: var(--weight-light);
@@ -40,7 +40,7 @@
 
 #add-book-modal-title {
     display: inline-block;
-    font-size: 24px;
+    font-size: calc(var(--baseline-v) * 1.5);
     width: 80%;
     color: var(--dark-color);
     margin-bottom: calc(var(--baseline-v) / 2);

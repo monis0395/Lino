@@ -26,7 +26,7 @@
 .close {
     color: var(--dull-color);
     float: right;
-    font-size: 24px;
+    font-size: calc(var(--baseline-v) * 1.5);
     font-weight: bold;
 }
 
