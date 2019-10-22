@@ -48,6 +48,7 @@
 
 #add-book-modal-input {
     width: 100%;
+    font-size: 14px; /* breaking the rule here as its not readable */
     padding: var(--baseline-v) 0;
     margin-bottom: var(--baseline-v);
     border-width: 0 0 1px 0;

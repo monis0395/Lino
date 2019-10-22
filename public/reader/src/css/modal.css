@@ -15,7 +15,7 @@
 /* Modal Content */
 .modal-content {
     background-color: #fefefe;
-    width: 80%;
+    width: 90%;
     max-width: calc(var(--baseline-h) * 25);
     height: fit-content;
     margin: 15% auto 0 auto; /* 15% from the top and centered */
