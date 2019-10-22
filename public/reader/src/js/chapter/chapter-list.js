@@ -3,11 +3,19 @@ import { getChapterLink } from "../components/chapter-url.js";
 import { isDescendant } from "../util/dom-util.js";
 
 const chaptersList = document.getElementById("chapters-list");
+const templateBlock = `
+<a id="chapter-index-__chapter_number__" href="__chapter_link__">
+    <div class="item">
+        <span class="index">__chapter_number__</span>
+        <span class="title">__chapter_title__</span>
+    </div>
+</a>
+`;
 
 function updateListSelection(lastReadChapterIndex) {
     const list = document.getElementById("chapters-list"),
         targetLi = document.getElementById(`chapter-index-${lastReadChapterIndex}`);
-    targetLi.classList.add("selected");
+    targetLi.firstElementChild.classList.add("selected");
     list.scrollTop = (targetLi.offsetTop - 50);
 }
 
@@ -31,13 +39,14 @@ export function loadChapterList() {
         .then(({chapters, lastRead}) => {
             chapters.forEach((chapter, index) => {
                 const chapterLink = getChapterLink(bookTitle, index);
-                const chapterAnchorTag = document.createElement("a");
-                chapterAnchorTag.href = chapterLink;
-                chapterAnchorTag.id = `chapter-index-${index}`;
-                chapterAnchorTag.innerText = `${index + 1}. ${chapter.title}`;
-                chaptersList.appendChild(chapterAnchorTag);
+                const dummyDiv = document.createElement("div");
+                dummyDiv.innerHTML = templateBlock
+                    .replace(/__chapter_number__/g, index + 1)
+                    .replace(/__chapter_link__/g, chapterLink)
+                    .replace(/__chapter_title__/g, chapter.title);
+                chaptersList.appendChild(dummyDiv.firstElementChild);
             });
-            updateListSelection(lastRead)
+            updateListSelection(lastRead + 1)
         });
     attachChapterListBtnListener();
 }

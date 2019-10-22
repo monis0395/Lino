@@ -3,6 +3,8 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    --baseline-h: 10px;
+    --baseline-v: 18px;
 }
 
 .chapter {
@@ -91,18 +93,30 @@ p {
     max-height: 100vh;
 }
 
-/* Links inside the dropup */
-#chapters-list a {
-    display: block;
-    padding: var(--baseline-v) var(--baseline-h);
+#chapters-list .item {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#chapters-list .item .index,
+#chapters-list .item .title {
+    padding-left: var(--baseline-h);
+    padding-top: calc(var(--baseline-v) * 1.1);
+    padding-bottom: calc(var(--baseline-v) * 1.1);
     color: var(--dark-color);
-    font-size: 21px; /* breaking the rule here */
+    font-size: calc(var(--baseline-v) * 1.1);
     font-weight: 600;
+    text-align: left;
     text-decoration: none;
 }
 
-#chapters-list a.selected {
+#chapters-list .item.selected .index,
+#chapters-list .item.selected .title {
     color: var(--dull-color);
+}
+
+#chapters-list .item .title {
+    padding-right: var(--baseline-h);
 }
 
 /* ============== Font settings ============== */
