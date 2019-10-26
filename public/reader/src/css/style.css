@@ -9,7 +9,7 @@ body {
     background-color: var(--primary-background);
     min-height: 100vh;
     font-family: 'Open Sans', sans-serif;
-    color: var(--bright-color);
+    color: var(--primary-foreground);
 }
 
 .page {
