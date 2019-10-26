@@ -27,7 +27,7 @@
     color: var(--dull-color);
     float: right;
     font-size: calc(var(--baseline-v) * 1.5);
-    font-weight: bold;
+    font-weight: var(--weight-bold);
 }
 
 .close:hover,
