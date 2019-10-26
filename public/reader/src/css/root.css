@@ -15,13 +15,17 @@
 }
 
 /* dark style*/
-:root {
+.dark-theme {
     --primary-background: #000000;
-    --secondary-background: #090909;
+    --secondary-background: #090c0c;
 
     --primary-foreground: #ffffff;
     --secondary-foreground: #aaaaaa;
     --highlight-color: #C48919;
+}
+
+.pink {
+    --highlight-color: #FF3066;
 }
 
 @media only screen and (min-width: 767px) and (max-width: 960px) {

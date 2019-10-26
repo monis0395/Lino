@@ -84,17 +84,15 @@ p {
     bottom: 0;
     max-width: 460px;
     max-height: 100vh;
-    padding-left: var(--baseline-h);
-    padding-right: var(--baseline-h);
+    padding: var(--baseline-v) var(--baseline-h) 0 var(--baseline-h);
+    font-size: var(--baseline-v);
+    font-weight: var(--weight-thin);
+    line-height: 1.5;
     border-right: 1px var(--highlight-color) solid;
 }
 
 #chapters-list .title {
     padding-bottom: calc(var(--baseline-v) * 2);
-    font-size: var(--baseline-v);
-    line-height: 1.5;
-    text-align: left;
-    text-decoration: none;
 }
 
 #chapters-list .title:hover {
@@ -103,7 +101,6 @@ p {
 
 #chapters-list .title.selected {
     color: var(--highlight-color);
-    font-weight: var(--weight-bold);
 }
 
 /* ============== Font settings ============== */
