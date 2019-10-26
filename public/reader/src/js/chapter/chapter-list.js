@@ -5,10 +5,7 @@ import { isDescendant } from "../util/dom-util.js";
 const chaptersList = document.getElementById("chapters-list");
 const templateBlock = `
 <a id="chapter-index-__chapter_number__" href="__chapter_link__">
-    <div class="item">
-        <span class="index">__chapter_number__</span>
-        <span class="title">__chapter_title__</span>
-    </div>
+    <div class="title">__chapter_title__</div>
 </a>
 `;
 
