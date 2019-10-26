@@ -88,6 +88,7 @@ p {
     font-size: var(--baseline-v);
     font-weight: var(--weight-thin);
     line-height: 1.5;
+    background-color: var(--primary-background);
     border-right: 1px var(--highlight-color) solid;
 }
 
