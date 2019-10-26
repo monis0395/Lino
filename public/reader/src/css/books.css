@@ -19,7 +19,7 @@
     font-size: calc(var(--baseline-v) * 1.5);
     padding: var(--baseline-v) var(--baseline-h);
     padding-bottom: calc(var(--baseline-v) / 2);
-    font-weight: var(--weight-light);
+    font-weight: var(--weight-thin);
     color: var(--highlight-color);
 }
 
