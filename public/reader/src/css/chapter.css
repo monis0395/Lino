@@ -94,10 +94,10 @@ p {
 }
 
 #chapters-list .title {
-    padding-bottom: calc(var(--baseline-v) * 1);
+    padding-bottom: calc(var(--baseline-v) * 1.25);
     color: var(--dark-color);
     font-size: var(--baseline-v);
-    line-height: 1.8;
+    line-height: 1.5;
     text-align: left;
     text-decoration: none;
 }
