@@ -1,9 +1,10 @@
 :root {
-    --page-background: #202137;
+    --primary-background: #202137;
+    --secondary-background: #1a1a2c;
 
-    --nav-background: #1a1a2c;
-    --nav-focused: #eff0f2;
-    --nav-unfocused: #5e5e6c;
+    --primary-foreground: #ffffff;
+    --secondary-foreground: #aaaaaa;
+    --highlight-color: #5e5e6c;
 
     --bright-color: #ffffff;
     --dark-color: #000000;
@@ -16,6 +17,19 @@
     --weight-light: 300;
     --weight-regular: 400;
     --weight-bold: 600;
+}
+
+/* dark style*/
+:root {
+    --primary-background: #000000;
+    --secondary-background: #090909;
+
+    --primary-foreground: #ffffff;
+    --secondary-foreground: #aaaaaa;
+    --highlight-color: #C48919;
+
+    --bright-color: var(--primary-foreground);
+    --dark-color: var(--primary-foreground);
 }
 
 @media only screen and (min-width: 767px) and (max-width: 960px) {

@@ -6,7 +6,7 @@
 
 html,
 body {
-    background-color: var(--page-background);
+    background-color: var(--primary-background);
     min-height: 100vh;
     font-family: 'Open Sans', sans-serif;
     color: var(--bright-color);
@@ -15,14 +15,14 @@ body {
 .page {
     display: flex;
     flex-direction: column;
-    background-color: var(--page-background);
+    background-color: var(--primary-background);
 }
 
 .menu {
     width: 100%;
     display: flex;
     color: var(--bright-color);
-    background-color: var(--nav-background);
+    background-color: var(--secondary-background);
     justify-content: space-between;
     align-items: center;
     z-index: 1;
@@ -38,7 +38,7 @@ body {
 }
 
 .menu a,.menu-text a {
-    color: var(--bright-color);
+    color: var(--primary-foreground);
     text-decoration: none;
 }
 
@@ -95,7 +95,7 @@ body {
 
 @media only screen and (min-width: 767px) and (max-width: 960px) {
     .menu-text:hover {
-        background-color: var(--nav-unfocused);
+        background-color: var(--highlight-color);
     }
 }
 
@@ -111,7 +111,7 @@ body {
     }
 
     .menu-text:hover {
-        background-color: var(--nav-unfocused);
+        background-color: var(--highlight-color);
     }
 
     body {

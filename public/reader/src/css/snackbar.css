@@ -11,8 +11,8 @@
 
     text-align: center;
 
-    color: var(--bright-color);
-    background-color: var(--nav-background);
+    color: var(--primary-foreground);
+    background-color: var(--secondary-background);
 
     z-index: 1;
 }

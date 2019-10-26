@@ -14,7 +14,7 @@
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--secondary-background);
     width: 90%;
     max-width: calc(var(--baseline-h) * 25);
     height: fit-content;
@@ -24,7 +24,7 @@
 
 /* The Close Button */
 .close {
-    color: var(--dull-color);
+    color: var(--primary-foreground);
     float: right;
     font-size: calc(var(--baseline-v) * 1.5);
     font-weight: var(--weight-bold);
@@ -32,7 +32,7 @@
 
 .close:hover,
 .close:focus {
-    color: var(--dark-color);
+    color: var(--highlight-color);
     text-decoration: none;
     cursor: pointer;
 }
