@@ -21,7 +21,6 @@ body {
 .menu {
     width: 100%;
     display: flex;
-    color: var(--bright-color);
     background-color: var(--secondary-background);
     justify-content: space-between;
     align-items: center;

@@ -24,7 +24,6 @@
 
 /* The Close Button */
 .close {
-    color: var(--primary-foreground);
     float: right;
     font-size: calc(var(--baseline-v) * 1.5);
     font-weight: var(--weight-bold);

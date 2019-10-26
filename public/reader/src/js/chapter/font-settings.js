@@ -7,7 +7,7 @@ export function fontSettingsInit() {
     const fontSettingsBtn = document.getElementById("font-settings-btn");
     fontSettingsBtn.onclick = (e) => {
         e.preventDefault();
-        showFontSettings();
+        showFontSettings(fontSettingsBtn);
         window.onclick = function (event) {
             if (event.target !== fontSettingsBtn
                 && !isDescendant(fontSettings, event.target)) {
@@ -17,11 +17,11 @@ export function fontSettingsInit() {
     }
 }
 
-function showFontSettings() {
+function showFontSettings(fontSettingsBtn) {
     if (isMobile()) { // todo: use css to add a class which makes it visible
         fontSettings.style.bottom = "0";
     } else {
-        fontSettings.style.bottom = "50px";
+        fontSettings.style.bottom = `${fontSettingsBtn.scrollHeight}px`;
     }
 }
 

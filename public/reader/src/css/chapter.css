@@ -10,7 +10,7 @@
     width: 100%;
     padding: 0 var(--baseline-h);
     margin-top: calc(var(--baseline-v) * 5);
-    border-bottom: 1px solid var(--dull-color);
+    border-bottom: 1px solid var(--highlight-color);
 }
 
 .chapter-header {
@@ -20,12 +20,12 @@
 .chapter-title {
     font-size: calc(var(--baseline-v) * 1.5);
     font-weight: var(--weight-light);
-    color: var(--bright-color)
+    color: var(--highlight-color)
 }
 
 .chapter-domain a {
     font-weight: var(--weight-regular);
-    color: var(--dull-color)
+    color: var(--secondary-foreground)
 }
 
 p {
@@ -39,8 +39,6 @@ p {
     font-family: Times, "Times New Roman", "serif";
     font-size: calc(var(--baseline-v) * 1.5);
     font-style: italic;
-
-    color: var(--bright-color);
 }
 
 #top-nav-bar {
@@ -70,14 +68,9 @@ p {
     z-index: 1;
     overflow-x: hidden;
     overflow-y: scroll;
-    color: var(--dark-color);
-    background-color: var(--bright-color);
+    background-color: var(--secondary-background);
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     transition: all 0.4s ease-in-out;
-}
-
-.dropup-content a:hover {
-    background-color: var(--dull-color)
 }
 
 /* ============== Chapters list ============== */
@@ -91,19 +84,24 @@ p {
     max-height: 100vh;
     padding-left: var(--baseline-h);
     padding-right: var(--baseline-h);
+    border-right: 1px var(--highlight-color) solid;
 }
 
 #chapters-list .title {
-    padding-bottom: calc(var(--baseline-v) * 1.25);
-    color: var(--dark-color);
+    padding-bottom: calc(var(--baseline-v) * 2);
     font-size: var(--baseline-v);
     line-height: 1.5;
     text-align: left;
     text-decoration: none;
 }
 
+#chapters-list .title:hover {
+    color: var(--highlight-color);
+}
+
 #chapters-list .title.selected {
-    color: var(--dull-color);
+    color: var(--highlight-color);
+    font-weight: var(--weight-bold);
 }
 
 /* ============== Font settings ============== */
@@ -143,8 +141,7 @@ p {
 }
 
 button {
-    color: var(--dark-color);
-    fill: var(--dull-color);
+    fill: var(--secondary-background);
 }
 
 .font-type-buttons,
@@ -155,6 +152,7 @@ button {
 .content-align-buttons {
     display: flex;
     flex-direction: row;
+    border-color: var(--highlight-color);
 }
 
 .font-type-buttons > button,
@@ -174,9 +172,9 @@ button {
 .line-height-buttons > button,
 .content-align-buttons > button {
     width: 50%;
-    background-color: transparent;
-    border-left: 1px solid var(--dark-color);
-    border-bottom: 1px solid var(--dark-color);
+    background-color: var(--secondary-background);
+    border-left: 1px solid var(--highlight-color);
+    border-bottom: 1px solid var(--highlight-color);
 }
 
 .font-type-buttons > button:first-child,
@@ -226,7 +224,7 @@ button {
 .content-width-buttons > button:hover,
 .line-height-buttons > button:hover,
 .content-align-buttons > button:hover {
-    background-color: var(--dull-color);
+    background-color: var(--highlight-color);
 }
 
 .minus-button,
@@ -284,32 +282,16 @@ button {
 }
 
 /* font family buttons */
-
-.color-scheme-buttons > button {
-    width: 33.33%;
-}
-
-.light-button {
-    color: #333333;
-    background-color: #ffffff;
-}
-
-.dark-button {
-    color: #eeeeee;
-    background-color: #333333;
-}
-
-.sepia-button {
-    color: #5b4636;
-    background-color: #f4ecd8;
-}
-
 .sans-serif-button {
     font-family: Helvetica, Arial, sans-serif;
 }
 
 .serif-button {
     font-family: Georgia, "Times New Roman", serif;
+}
+
+.color-scheme-buttons > button {
+    width: 33.33%;
 }
 
 /* color button */

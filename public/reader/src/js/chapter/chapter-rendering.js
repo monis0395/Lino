@@ -54,7 +54,7 @@ function isIncorrectRelativeUrlFromSource(anchorTag) {
     return anchorTag.hash === "" && anchorTag.hostname === window.location.hostname;
 }
 
-const finBlock = `<div id="fin">Fin<br><br>(You have caught up with the latest chapter)</div>`;
+const finBlock = `<div id="fin">Fin<br><br>(That's it folks! You have caught up with the latest chapter!)</div>`;
 
 export function addFinToPage() {
     if (addFinToPage.done) {

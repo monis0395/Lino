@@ -20,7 +20,7 @@
     padding: var(--baseline-v) var(--baseline-h);
     padding-bottom: calc(var(--baseline-v) / 2);
     font-weight: var(--weight-light);
-    color: var(--primary-foreground)
+    color: var(--highlight-color);
 }
 
 .book-domain {
@@ -34,7 +34,6 @@
 /* add book modal */
 #add-book-modal-btn {
     cursor: pointer;
-    color: var(--primary-foreground);
     font-weight: var(--weight-thin);
 }
 
@@ -42,7 +41,6 @@
     display: inline-block;
     font-size: calc(var(--baseline-v) * 1.5);
     width: 80%;
-    color: var(--primary-foreground);
     margin-bottom: calc(var(--baseline-v) / 2);
 }
 
@@ -65,7 +63,7 @@
 #add-book-modal-submit {
     width: 100%;
     padding: var(--baseline-v) var(--baseline-h);
-    color: var(--primary-foreground);
+    color: var(--secondary-background);
     background-color: var(--highlight-color);
     border: 1px solid var(--primary-background);
     border-radius: 4px;

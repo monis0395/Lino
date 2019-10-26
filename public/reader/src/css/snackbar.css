@@ -1,19 +1,14 @@
 .snackbar {
     visibility: hidden;
-
     position: fixed;
     left: var(--baseline-h);
     bottom: var(--baseline-v);
     padding: var(--baseline-v) var(--baseline-h);
     min-width: calc(var(--baseline-h) * 6);
-    overflow: hidden;
-    border-radius: 2px;
-
     text-align: center;
-
-    color: var(--primary-foreground);
+    overflow: hidden;
+    border: 1px var(--highlight-color) solid;
     background-color: var(--secondary-background);
-
     z-index: 1;
 }
 
