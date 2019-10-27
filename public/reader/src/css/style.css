@@ -12,6 +12,11 @@ body {
     color: var(--primary-foreground);
 }
 
+path {
+    fill: var(--primary-background);
+    stroke: var(--highlight-color);
+}
+
 .page {
     display: flex;
     flex-direction: column;
@@ -36,7 +41,7 @@ body {
     padding: var(--baseline-v) var(--baseline-h);
 }
 
-.menu a,.menu-text a {
+.menu a, .menu-text a {
     color: var(--primary-foreground);
     text-decoration: none;
 }
@@ -74,7 +79,8 @@ body {
 
 #loader-container {
     display: flex;
-    height: 50vh;
+    height: 80px;
+    width: 80px;
 }
 
 #loader {

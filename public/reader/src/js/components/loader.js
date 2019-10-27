@@ -1,9 +1,9 @@
 import { hideElement, showElement } from "../util/dom-util.js";
 
-const loaderTemplate = `
-<div id="loader-container">
-    <img src="../images/flip-book-loader.svg" id="loader" alt="">
-</div>`;
+// const loaderTemplate = `
+// <div id="loader-container">
+//     <img src="../images/flip-book-loader.svg" id="loader" alt="">
+// </div>`;
 
 function addLoaderToBody() {
     const div = document.createElement('div');
@@ -16,7 +16,7 @@ export function showLoader() {
     if (loader) {
         showElement(loader);
     } else {
-        addLoaderToBody();
+        // addLoaderToBody();
     }
 }
 
