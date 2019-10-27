@@ -1,10 +1,10 @@
 :root {
-    --primary-background: #202137;
-    --secondary-background: #1a1a2c;
+    --primary-background: #ADCAE2;
+    --secondary-background: #CCDEED;
 
-    --primary-foreground: #ffffff;
-    --secondary-foreground: #aaaaaa;
-    --highlight-color: #5e5e6c;
+    --primary-foreground: #0F2537;
+    --secondary-foreground: #46484A;
+    --highlight-color: #295664;
 
     --baseline-h: 20px;
     --baseline-v: 16px;
