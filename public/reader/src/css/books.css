@@ -44,6 +44,10 @@
     margin-bottom: calc(var(--baseline-v) / 2);
 }
 
+#add-book-modal-input::placeholder {
+    color: var(--secondary-foreground);
+}
+
 #add-book-modal-input {
     width: 100%;
     font-size: 14px; /* breaking the rule here as its not readable */
@@ -55,9 +59,9 @@
 }
 
 #add-book-modal-input:focus {
-    /*todo: remove focus blue color*/
-    /*border-width: 0 0 2px 0;*/
-    /*border-color: var(--highlight-color);*/
+    border-width: 0 0 2px 0;
+    outline: none;
+    border-color: var(--highlight-color);
 }
 
 #add-book-modal-submit {

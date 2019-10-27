@@ -17,10 +17,19 @@
 /* dark style*/
 .dark-theme {
     --primary-background: #000000;
-    --secondary-background: #0c0c0c;
+    --secondary-background: #191919;
 
-    --primary-foreground: #ffffff;
-    --secondary-foreground: #aaaaaa;
+    --primary-foreground: #E5E5E5;
+    --secondary-foreground: #999999;
+    --highlight-color: #B2B2B2;
+}
+
+.dark-gold-theme {
+    --primary-background: #000000;
+    --secondary-background: #191919;
+
+    --primary-foreground: #F9F3E8;
+    --secondary-foreground: #C7C2B9;
     --highlight-color: #C48919;
 }
 

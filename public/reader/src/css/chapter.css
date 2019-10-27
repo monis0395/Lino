@@ -82,6 +82,7 @@ p {
     position: fixed;
     left: -100vw;
     bottom: 0;
+    width: calc(100vw - calc(var(--baseline-h) * 4));
     max-width: 460px;
     max-height: 100vh;
     padding: var(--baseline-v) var(--baseline-h) 0 var(--baseline-h);
@@ -127,11 +128,6 @@ p {
 
     .dropup:hover .dropup-content {
         bottom: 0 !important;
-    }
-
-    #chapters-list {
-        max-width: 80vw;
-        max-height: 100vh;
     }
 
     #font-settings {
