@@ -27,13 +27,13 @@
 
 .gold-theme {
     --primary-foreground: #F9F3E8; /* tint 2 of base from right */
-    --secondary-foreground: #C7C2B9; /* shade 3 of primary from left */
+    --secondary-foreground: #aeaaa2; /* shade 4 of primary from left */
     --highlight-color: #C48919; /* base */
 }
 
 .pink-theme {
     --primary-foreground: #FFEAEf; /* tint 2 of base from right */
-    --secondary-foreground: #CCBBBF; /* shade 3 of primary from left */
+    --secondary-foreground: #b2a3a7; /* shade 4 of primary from left */
     --highlight-color: #FF3066;
 }
 
