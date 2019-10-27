@@ -14,23 +14,21 @@
     --weight-bold: 600;
 }
 
+/* color ref: https://www.color-hex.com/color/000000 */
 /* dark style*/
 .dark-theme {
-    --primary-background: #000000;
-    --secondary-background: #191919;
+    --primary-background: #000000; /* base */
+    --secondary-background: #191919; /* tint 1 of base from left */
 
-    --primary-foreground: #E5E5E5;
-    --secondary-foreground: #898989;
-    --highlight-color: #B2B2B2;
+    --primary-foreground: #E5E5E5; /* tint 2 of base from right */
+    --secondary-foreground: #898989; /* shade 5 of primary from left */
+    --highlight-color: #B7B7B7; /* shade 3 of primary from left */
 }
 
-.dark-gold-theme {
-    --primary-background: #000000;
-    --secondary-background: #191919;
-
-    --primary-foreground: #F9F3E8;
-    --secondary-foreground: #C7C2B9;
-    --highlight-color: #C48919;
+.gold-theme {
+    --primary-foreground: #F9F3E8; /* tint 2 of base from right */
+    --secondary-foreground: #C7C2B9; /* shade 3 of primary from left */
+    --highlight-color: #C48919; /* base */
 }
 
 .pink {
