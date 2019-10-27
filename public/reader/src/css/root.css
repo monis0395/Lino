@@ -1,7 +1,6 @@
 :root {
     --primary-background: #FFFFFF;
     --secondary-background: #E5E5E5;
-
     --primary-foreground: #191919;
     --secondary-foreground: #757575;
     --highlight-color: #2f2f2f;
@@ -17,7 +16,6 @@
 .frozen-elsa-light {
     --primary-background: #CCDEED;
     --secondary-background: #EBF2F8;
-
     --primary-foreground: #0F2537;
     --secondary-foreground: #1F496E;
     --highlight-color: #377385;
@@ -27,7 +25,6 @@
 .frozen-elsa-dark {
     --primary-background: #191d3a;
     --secondary-background: #3b4368;
-
     --primary-foreground: #d9dbee;
     --secondary-foreground: #ADAFBE;
     --highlight-color: #689CC5;
@@ -38,25 +35,41 @@
 .dark-theme {
     --primary-background: #000000; /* base */
     --secondary-background: #191919; /* tint 1 of base from left */
-
     --primary-foreground: #E5E5E5; /* tint 2 of base from right */
     --secondary-foreground: #898989; /* shade 5 of primary from left */
     --highlight-color: #B7B7B7; /* shade 3 of primary from left */
 }
 
 .gold-theme-dark {
-    --primary-background: #000000; /* base */
-    --secondary-background: #191919; /* tint 1 of base from left */
-
+    --primary-background: #000000; /* black base */
+    --secondary-background: #191919; /* black tint 1 of base from left */
     --primary-foreground: #F9F3E8; /* tint 2 of base from right */
     --secondary-foreground: #95918B; /* shade 5 of primary from left */
     --highlight-color: #C48919; /* base */
 }
 
-.pink-theme {
+.gold-theme-light {
+    --primary-background: #FEFDFC;
+    --secondary-background: #e0dad0;
+    --primary-foreground: #191919;
+    --secondary-foreground: #95918B;
+    --highlight-color: #C48919; /* base */
+}
+
+.pink-theme-dark {
+    --primary-background: #000000; /* base */
+    --secondary-background: #191919; /* tint 1 of base from left */
     --primary-foreground: #FFEAEf; /* tint 2 of base from right */
     --secondary-foreground: #998C8F; /* shade 5 of primary from left */
     --highlight-color: #FF3066;
+}
+
+.pink-theme-light {
+    --primary-background: #FFFCFD;
+    --secondary-background: #E5D2D7;
+    --primary-foreground: #332E2F;
+    --secondary-foreground: #998C8F;
+    --highlight-color: #FF3066; /* base */
 }
 
 @media only screen and (min-width: 767px) and (max-width: 960px) {
