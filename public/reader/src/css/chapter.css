@@ -105,6 +105,10 @@ p {
     color: var(--highlight-color);
 }
 
+body:not(.dark-theme) #chapters-list .title.selected {
+    font-weight: var(--weight-bold);
+}
+
 /* ============== Font settings ============== */
 
 #font-settings {

@@ -1,10 +1,10 @@
 :root {
-    --primary-background: #ADCAE2;
-    --secondary-background: #CCDEED;
+    --primary-background: #FFFFFF;
+    --secondary-background: #E5E5E5;
 
-    --primary-foreground: #0F2537;
-    --secondary-foreground: #46484A;
-    --highlight-color: #295664;
+    --primary-foreground: #191919;
+    --secondary-foreground: #757575;
+    --highlight-color: #2f2f2f;
 
     --baseline-h: 20px;
     --baseline-v: 16px;
@@ -12,6 +12,25 @@
     --weight-thin: 200;
     --weight-regular: 400;
     --weight-bold: 600;
+}
+
+.frozen-elsa-light {
+    --primary-background: #CCDEED;
+    --secondary-background: #EBF2F8;
+
+    --primary-foreground: #0F2537;
+    --secondary-foreground: #1F496E;
+    --highlight-color: #377385;
+}
+
+/*ref: https://loading.io/color/feature/Disney-Frozen-Elsa*/
+.frozen-elsa-dark {
+    --primary-background: #191d3a;
+    --secondary-background: #3b4368;
+
+    --primary-foreground: #d9dbee;
+    --secondary-foreground: #ADAFBE;
+    --highlight-color: #689CC5;
 }
 
 /* color ref: https://www.color-hex.com/color/000000 */
@@ -25,7 +44,10 @@
     --highlight-color: #B7B7B7; /* shade 3 of primary from left */
 }
 
-.gold-theme {
+.gold-theme-dark {
+    --primary-background: #000000; /* base */
+    --secondary-background: #191919; /* tint 1 of base from left */
+
     --primary-foreground: #F9F3E8; /* tint 2 of base from right */
     --secondary-foreground: #95918B; /* shade 5 of primary from left */
     --highlight-color: #C48919; /* base */
