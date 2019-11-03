@@ -72,6 +72,7 @@
     --highlight-color: #FF3066; /* base */
 }
 
+/* Tablet Styles */
 @media only screen and (min-width: 767px) and (max-width: 960px) {
     :root {
         --baseline-h: 20px;
