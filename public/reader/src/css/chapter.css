@@ -14,7 +14,7 @@
 }
 
 .chapter-header {
-    padding-bottom: calc(var(--baseline-v) * 1.5);
+    padding-bottom: var(--baseline-v);
 }
 
 .chapter-title {
@@ -31,7 +31,7 @@
 }
 
 p {
-    padding-bottom: calc(var(--baseline-v) * 1.5);
+    padding-bottom: var(--baseline-v);
 }
 
 #fin {
@@ -39,7 +39,7 @@ p {
     text-align: center;
 
     font-family: Times, "Times New Roman", "serif";
-    font-size: calc(var(--baseline-v) * 1.5);
+    font-size: calc(var(--baseline-v) * 2);
     font-style: italic;
 }
 

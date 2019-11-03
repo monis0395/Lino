@@ -25,7 +25,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     dummyDiv.innerHTML = chapterTemplateBlock
         .replace(/__chapter_number__/g, chapterNumber)
         .replace(/__chapter_link__/g, chapter.url)
-        .replace(/__chapter_title__/g, chapter.title || chapterTitle)
+        .replace(/__chapter_title__/g, chapterTitle || chapter.title)
         .replace(/__chapter_domain__/g, hostname)
         .replace(/__chapter_content__/g, filterContent(chapter));
     page.appendChild(dummyDiv.firstElementChild);

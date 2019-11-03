@@ -8,10 +8,15 @@ export function getAndRenderChapter(bookTitle, chapterNumber = 0) {
     if (loadedChaptersMap[chapterNumber]) {
         return Promise.resolve(true);
     }
+    let chapterTitle = "";
     return fetchBook(bookTitle)
-        .then(({chapters}) => getChapter(chapters[chapterNumber].link))
+        .then(({chapters}) => {
+            const chapter = chapters[chapterNumber];
+            chapterTitle = chapter.title;
+            return getChapter(chapter.link)
+        })
         .then((chapter) => {
-            addChapterToPage(chapter, chapterNumber);
+            addChapterToPage(chapter, chapterNumber, chapterTitle);
             loadedChaptersMap[chapterNumber] = true;
             console.log("rendered chapter", chapterNumber);
         })
