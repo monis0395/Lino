@@ -14,7 +14,7 @@
 }
 
 .chapter-header {
-    padding-bottom: calc(var(--baseline-v) * 2);
+    padding-bottom: calc(var(--baseline-v) * 1.5);
 }
 
 .chapter-title {
@@ -31,7 +31,7 @@
 }
 
 p {
-    padding-bottom: var(--baseline-v);
+    padding-bottom: calc(var(--baseline-v) * 1.5);
 }
 
 #fin {
