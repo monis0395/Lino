@@ -1,8 +1,8 @@
 import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
 import { getAndRenderChapter } from "./load-chapter.js";
-import { hideLoader, showLoader } from "../components/loader.js";
 import { showSnackbar } from "../components/snackbar.js";
 import { addFinToPage } from "./chapter-rendering.js";
+import { updateListSelection } from "./chapter-list.js";
 
 const thresholdSet = [];
 for (let i = 0; i <= 1.0; i += 0.01) {
@@ -44,6 +44,7 @@ function updateLastRead(entries) {
         fetchBook(bookTitle)
             .then((book) => {
                 console.log("updated last read to", chapterNumber);
+                updateListSelection(chapterNumber + 1);
                 storeOrUpdateBook(bookTitle, {
                     lastRead: chapterNumber,
                 })

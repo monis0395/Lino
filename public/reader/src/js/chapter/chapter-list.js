@@ -3,17 +3,23 @@ import { getChapterLink } from "../components/chapter-url.js";
 import { isDescendant } from "../util/dom-util.js";
 
 const chaptersList = document.getElementById("chapters-list");
+const selectedClassName = "selected";
 const templateBlock = `
 <a id="chapter-index-__chapter_number__" href="__chapter_link__">
     <div class="title">__chapter_title__</div>
 </a>
 `;
 
-function updateListSelection(lastReadChapterIndex) {
-    const list = document.getElementById("chapters-list"),
-        targetLi = document.getElementById(`chapter-index-${lastReadChapterIndex}`);
-    targetLi.firstElementChild.classList.add("selected");
-    list.scrollTop = (targetLi.offsetTop - 50);
+export function updateListSelection(lastReadChapterIndex) {
+    const selected = document.querySelector('#chapters-list .title.selected');
+    if (selected) {
+        selected.classList.remove(selectedClassName);
+    }
+    const targetLi = document.getElementById(`chapter-index-${lastReadChapterIndex}`);
+    if (targetLi) {
+        targetLi.firstElementChild.classList.add(selectedClassName);
+        chaptersList.scrollTop = (targetLi.offsetTop - 50);
+    }
 }
 
 function attachChapterListBtnListener() {
