@@ -8,7 +8,7 @@ import { loadChapterList } from "./chapter-list.js";
 
 const search = new URLSearchParams(window.location.search);
 const bookTitle = search.get("book");
-const chapterNumber = parseInt(search.get("chapter"), 10);
+const chapterNumber = parseInt(search.get("chapter"), 10) || 0;
 
 function autoHideNavBar() {
     let prevScrollPosition = window.pageYOffset;
