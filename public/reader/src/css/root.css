@@ -5,6 +5,13 @@
     --secondary-foreground: #757575;
     --highlight-color: #2f2f2f;
 
+    /* have made dark as default because in fire fox mobile when we scroll, a white patch is visible*/
+    --primary-background: #000000; /* base */
+    --secondary-background: #191919; /* tint 1 of base from left */
+    --primary-foreground: #E5E5E5; /* tint 2 of base from right */
+    --secondary-foreground: #898989; /* shade 5 of primary from left */
+    --highlight-color: #B7B7B7; /* shade 3 of primary from left */
+
     --baseline-h: 20px;
     --baseline-v: 16px;
 
