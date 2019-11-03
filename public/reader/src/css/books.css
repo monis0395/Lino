@@ -6,8 +6,25 @@
 }
 
 .book {
+    position: relative;
     width: 100%;
     border-bottom: 1px solid var(--highlight-color);
+}
+
+.three-dot {
+    position: absolute;
+    top: var(--baseline-v);
+    right: calc(var(--baseline-h) * 0.5);
+    width: calc(var(--baseline-h) * 2);
+    padding-left: var(--baseline-h);
+    color: var(--secondary-foreground);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.three-dot:hover {
+    -webkit-filter: brightness(150%);
+    filter: brightness(150%);
 }
 
 .book a {
@@ -16,6 +33,7 @@
 
 .book-title {
     display: block;
+    width: calc(100% - var(--baseline-h));
     font-size: calc(var(--baseline-v) * 1.5);
     padding: var(--baseline-v) var(--baseline-h);
     padding-bottom: calc(var(--baseline-v) / 2);

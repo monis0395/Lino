@@ -4,6 +4,7 @@ import { getChapterLink } from "../components/chapter-url.js";
 
 const bookTemplateBlock = `
     <div class='book'>
+        <span class="three-dot">⠇</span>
         <a href="__book_link__">
             <span class="book-title">__book_title__</span>
             <span class="book-domain">__book_domain__
