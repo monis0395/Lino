@@ -1,7 +1,9 @@
 import { getBooks } from "./books-store.js";
 import { removeChild } from "../util/dom-util.js";
 import { getChapterLink } from "../components/chapter-url.js";
+import { getTitle } from "../components/book-title.js";
 
+// three dots https://codepen.io/ryanmorr/pen/vLKvqe
 const bookTemplateBlock = `
     <div class='book'>
         <span class="three-dot">⠇</span>
@@ -21,7 +23,7 @@ export function addBookToPage(book) {
     const dummyDiv = document.createElement('div');
     const hostname = new URL(book.url).hostname;
     dummyDiv.innerHTML = bookTemplateBlock
-        .replace(/__book_title__/g, book.title)
+        .replace(/__book_title__/g, getTitle(book.title, hostname))
         .replace(/__book_domain__/g, hostname)
         .replace(/__last_read__/g, book.lastRead + 1)
         .replace(/__total_chapter__/g, book.chapters.length)

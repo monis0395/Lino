@@ -80,6 +80,7 @@ p {
 #chapters-list {
     display: block;
     position: fixed;
+    top: 0;
     left: -100vw;
     bottom: 0;
     width: calc(100vw - calc(var(--baseline-h) * 4));
@@ -103,11 +104,8 @@ p {
 
 #chapters-list .title.selected {
     color: var(--highlight-color);
+    font-weight: var(--weight-bold);
 }
-
-/*body:not(.dark-theme) #chapters-list .title.selected {*/
-/*    font-weight: var(--weight-bold);*/
-/*}*/
 
 /* ============== Font settings ============== */
 

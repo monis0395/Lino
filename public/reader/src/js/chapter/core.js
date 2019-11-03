@@ -29,7 +29,7 @@ function autoHideNavBar() {
 }
 
 function updateLastRead(bookTitle, chapterNumber) {
-    storeOrUpdateBook(bookTitle, {lastRead: chapterNumber});
+    return storeOrUpdateBook(bookTitle, {lastRead: chapterNumber});
 }
 
 function init() {
@@ -37,13 +37,14 @@ function init() {
     window.bookReader = {bookTitle};
     document.title = bookTitle;
     showLoader();
-    autoHideNavBar();
-    fontSettingsInit();
-    loadChapterList();
-    updateLastRead(bookTitle, chapterNumber);
-    getAndRenderChapter(bookTitle, chapterNumber)
-        .catch((error) => showSnackbar("Error: " + error.message))
-        .finally(hideLoader);
+    updateLastRead(bookTitle, chapterNumber).then(() => {
+        autoHideNavBar();
+        fontSettingsInit();
+        loadChapterList();
+        getAndRenderChapter(bookTitle, chapterNumber)
+            .catch((error) => showSnackbar("Error: " + error.message))
+            .finally(hideLoader);
+    });
 }
 
 init();

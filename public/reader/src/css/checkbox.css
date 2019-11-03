@@ -30,9 +30,12 @@
     background-color: var(--secondary-foreground);
 }
 
-/* On mouse-over, lower opacity*/
-.container:hover input ~ .checkmark {
-    opacity: 0.8;
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+    /* On mouse-over, lower opacity*/
+    .checkmark:hover {
+        opacity: 0.8;
+    }
 }
 
 /* When the checkbox is checked, add a blue background */

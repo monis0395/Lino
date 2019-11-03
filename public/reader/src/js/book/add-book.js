@@ -21,5 +21,8 @@ function onSubmit(event) {
     const chaptersInReverse = document.getElementById("chapter-order-reverse");
     const link = linkElement.value;
     hideElement(modal);
-    getBook(link, chaptersInReverse.checked)
+    getBook(link, chaptersInReverse.checked);
+    // resetting values
+    linkElement.value = "";
+    chaptersInReverse.checked = false;
 }
