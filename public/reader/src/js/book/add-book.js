@@ -18,7 +18,8 @@ function attachOnClickOnSubmit() {
 function onSubmit(event) {
     event.preventDefault();
     const linkElement = document.getElementById("add-book-modal-input");
+    const chaptersInReverse = document.getElementById("chapter-order-reverse");
     const link = linkElement.value;
     hideElement(modal);
-    getBook(link)
+    getBook(link, chaptersInReverse.checked)
 }

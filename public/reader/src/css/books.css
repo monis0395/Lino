@@ -44,22 +44,23 @@
     margin-bottom: calc(var(--baseline-v) / 2);
 }
 
-#add-book-modal-input::placeholder {
-    color: var(--secondary-foreground);
-}
-
 #add-book-modal-input {
     width: 100%;
     font-size: 14px; /* breaking the rule here as its not readable */
     padding: var(--baseline-v) 0;
     margin-bottom: var(--baseline-v);
-    border-width: 0 0 1px 0;
+    border-width: 0 0 2px 0;
     background-color: inherit;
-    border-color: var(--highlight-color);
+    color: var(--primary-foreground);
+    caret-color: var(--primary-foreground);
+    border-color: var(--secondary-foreground);
+}
+
+#add-book-modal-input::placeholder {
+    color: var(--secondary-foreground);
 }
 
 #add-book-modal-input:focus {
-    border-width: 0 0 2px 0;
     outline: none;
     border-color: var(--highlight-color);
 }

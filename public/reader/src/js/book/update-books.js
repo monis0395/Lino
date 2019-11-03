@@ -10,6 +10,9 @@ function requestAndUpdateBook(book) {
     const oldTotalChapters = book.chapters.length;
     return requestFor(apiGetBook, book.url).then((updatedBook) => {
         const newTotalChapters = updatedBook.chapters.length;
+        if (book.chaptersInReverse) {
+            updatedBook.chapters = updatedBook.chapters.reverse()
+        }
         if (updatedBook && updatedBook.title && newTotalChapters !== oldTotalChapters) {
             storeOrUpdateBook(updatedBook.title, updatedBook)
         }

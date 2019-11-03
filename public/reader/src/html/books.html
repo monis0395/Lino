@@ -75,15 +75,15 @@
     </svg>
 </div>
 
-<div id="add-book-modal" class="modal hidden">
+<div id="add-book-modal" class="modal">
     <div class="modal-content">
         <div id="add-book-modal-title">Add Book</div>
         <span class="close pointer">&times;</span>
         <form>
             <input id="add-book-modal-input" type="text" placeholder="www.example.com/book-table-of-contents.html">
             <label class="container">
-                <input type="checkbox">
-                <span class="checkmark"></span>Reverse
+                <input id="chapter-order-reverse" type="checkbox">
+                <span class="checkmark"></span>chapter's order in reverse
             </label>
             <input id="add-book-modal-submit" type="submit" value="Add Book">
         </form>
