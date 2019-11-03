@@ -33,6 +33,7 @@ function checkForUpdates() {
 }
 
 export function checkAndReloadBooks() {
+    showLoader();
     checkForUpdates()
         .then(() => {
             showLoader();
@@ -47,6 +48,7 @@ export function checkAndReloadBooks() {
                 showSnackbar(`Update Error: ` + error);
             }
         })
+        .finally(hideLoader)
 }
 
 const updateInterval = 15 * 1000 * 60; // 15 minutes

@@ -4,7 +4,7 @@ import { addChapterToPage } from "./chapter-rendering.js";
 
 const loadedChaptersMap = {};
 
-export function getAndRenderChapter(bookTitle, chapterNumber) {
+export function getAndRenderChapter(bookTitle, chapterNumber = 0) {
     if (loadedChaptersMap[chapterNumber]) {
         return Promise.resolve(true);
     }

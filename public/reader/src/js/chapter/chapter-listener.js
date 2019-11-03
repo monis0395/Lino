@@ -66,7 +66,7 @@ function loadNextChapter(entries) {
         const nextChapterNumber = chapterNumber + 1;
         const bookTitle = window.bookReader.bookTitle;
         console.log("loading next chapter", nextChapterNumber);
-        showLoader();
+        // showLoader();
         fetchBook(bookTitle)
             .then((book) => {
                 const totalChapters = book.chapters.length;
@@ -76,10 +76,10 @@ function loadNextChapter(entries) {
                             console.error(error);
                             showSnackbar("Error: " + error.message);
                         })
-                        .finally(hideLoader);
+                        // .finally(hideLoader);
                 } else {
                     addFinToPage();
-                    hideLoader();
+                    // hideLoader();
                 }
             })
     })
