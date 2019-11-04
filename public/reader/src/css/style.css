@@ -8,8 +8,13 @@ html,
 body {
     background-color: var(--primary-background);
     min-height: 100vh;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     color: var(--primary-foreground);
+}
+
+body {
+    font-size: var(--baseline-v);
+    line-height: 2;
 }
 
 /* Remove tap highlight on iOS */
@@ -103,11 +108,6 @@ path {
 
 .pointer {
     cursor: pointer;
-}
-
-body {
-    font-size: var(--baseline-v);
-    line-height: 2;
 }
 
 /* Tablet Styles */

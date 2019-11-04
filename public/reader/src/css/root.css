@@ -12,10 +12,10 @@
     --secondary-foreground: #898989; /* shade 5 of primary from left */
     --highlight-color: #B7B7B7; /* shade 3 of primary from left */
 
-    --baseline-h: 20px;
+    --baseline-h: 18px;
     --baseline-v: 16px;
 
-    --weight-thin: 200;
+    --weight-thin: 300;
     --weight-regular: 400;
     --weight-bold: 600;
 }
@@ -48,9 +48,9 @@
 }
 
 .gold-theme-dark {
-    --primary-background: #000000; /* black base */
-    --secondary-background: #191919; /* black tint 1 of base from left */
-    --primary-foreground: #F9F3E8; /* tint 2 of base from right */
+    --primary-background: #191919; /* black base */
+    --secondary-background: #292929; /* black tint 1 of base from left */
+    --primary-foreground: #C7C2B9; /* shade 2 from left of tint 1 from right */
     --secondary-foreground: #95918B; /* shade 5 of primary from left */
     --highlight-color: #C48919; /* base */
 }
