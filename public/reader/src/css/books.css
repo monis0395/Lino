@@ -11,23 +11,6 @@
     border-bottom: 1px solid var(--highlight-color);
 }
 
-.three-dot {
-    position: absolute;
-    top: var(--baseline-v);
-    right: calc(var(--baseline-h) * 0.5);
-    width: calc(var(--baseline-h) * 2);
-    padding-left: var(--baseline-h);
-    color: var(--secondary-foreground);
-    font-size: 24px;
-    cursor: pointer;
-    text-align: right;
-}
-
-.three-dot:hover {
-    -webkit-filter: brightness(150%);
-    filter: brightness(150%);
-}
-
 .book a {
     text-decoration: none;
 }
@@ -48,6 +31,23 @@
     color: var(--secondary-foreground);
     padding: 0 var(--baseline-h);
     padding-bottom: var(--baseline-v);
+}
+
+.three-dot {
+    position: absolute;
+    top: var(--baseline-v);
+    right: calc(var(--baseline-h) * 0.5);
+    width: calc(var(--baseline-h) * 2);
+    padding-left: var(--baseline-h);
+    color: var(--secondary-foreground);
+    font-size: 24px;
+    cursor: pointer;
+    text-align: right;
+}
+
+.three-dot:hover {
+    -webkit-filter: brightness(150%);
+    filter: brightness(150%);
 }
 
 /* add book modal */

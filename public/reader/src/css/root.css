@@ -1,9 +1,9 @@
 :root {
-    --primary-background: #FFFFFF;
-    --secondary-background: #E5E5E5;
-    --primary-foreground: #191919;
-    --secondary-foreground: #757575;
-    --highlight-color: #2f2f2f;
+    /*--primary-background: #FFFFFF;*/
+    /*--secondary-background: #E5E5E5;*/
+    /*--primary-foreground: #191919;*/
+    /*--secondary-foreground: #757575;*/
+    /*--highlight-color: #2f2f2f;*/
 
     /* have made dark as default because in fire fox mobile when we scroll, a white patch is visible*/
     --primary-background: #000000; /* base */

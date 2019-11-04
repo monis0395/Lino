@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    --baseline-v: 18px;
+    /*--baseline-v: 18px;*/
 }
 
 .chapter {
@@ -14,7 +14,7 @@
 }
 
 .chapter-header {
-    padding-bottom: var(--baseline-v);
+    padding-bottom: calc(var(--baseline-v) * 1.5);
 }
 
 .chapter-title {
@@ -31,7 +31,7 @@
 }
 
 p {
-    padding-bottom: var(--baseline-v);
+    padding-bottom: calc(var(--baseline-v) * 1.5);
 }
 
 #fin {
@@ -39,7 +39,7 @@ p {
     text-align: center;
 
     font-family: Times, "Times New Roman", "serif";
-    font-size: calc(var(--baseline-v) * 2);
+    font-size: calc(var(--baseline-v) * 1.5);
     font-style: italic;
 }
 
@@ -80,7 +80,6 @@ p {
 #chapters-list {
     display: block;
     position: fixed;
-    top: 0;
     left: -100vw;
     bottom: 0;
     width: calc(100vw - calc(var(--baseline-h) * 4));

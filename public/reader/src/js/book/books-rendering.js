@@ -6,7 +6,7 @@ import { getTitle } from "../components/book-title.js";
 // three dots https://codepen.io/ryanmorr/pen/vLKvqe
 const bookTemplateBlock = `
     <div class='book'>
-        <span class="three-dot">⠇</span>
+        <span class="three-dot hidden">⠇</span>
         <a href="__book_link__">
             <span class="book-title">__book_title__</span>
             <span class="book-domain">__book_domain__
