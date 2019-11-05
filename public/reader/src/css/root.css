@@ -48,9 +48,9 @@
 }
 
 .gold-theme-dark {
-    --primary-background: #191919; /* black base */
-    --secondary-background: #292929; /* black tint 1 of base from left */
-    --primary-foreground: #C7C2B9; /* shade 2 from left of tint 1 from right */
+    --primary-background: #101010; /* black base */
+    --secondary-background: #191919; /* black tint 1 of base from left */
+    --primary-foreground: #e0dad0; /* shade 2 from left of tint 1 from right */
     --secondary-foreground: #95918B; /* shade 5 of primary from left */
     --highlight-color: #C48919; /* base */
 }
