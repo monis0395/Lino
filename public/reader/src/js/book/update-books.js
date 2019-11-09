@@ -14,7 +14,7 @@ function requestAndUpdateBook(book) {
             updatedBook.chapters = updatedBook.chapters.reverse()
         }
         if (updatedBook && updatedBook.title && newTotalChapters !== oldTotalChapters) {
-            storeOrUpdateBook(updatedBook.title, updatedBook)
+            storeOrUpdateBook(updatedBook.title, {chapters: updatedBook.chapters})
         }
     });
 }

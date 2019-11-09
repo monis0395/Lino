@@ -45,9 +45,7 @@ function updateLastRead(entries) {
             .then((book) => {
                 console.log("updated last read to", chapterNumber);
                 updateListSelection(chapterNumber + 1);
-                storeOrUpdateBook(bookTitle, {
-                    lastRead: chapterNumber,
-                })
+                storeOrUpdateBook(bookTitle, {lastRead: chapterNumber})
             })
     });
 }
@@ -77,10 +75,8 @@ function loadNextChapter(entries) {
                             console.error(error);
                             showSnackbar("Error: " + error.message);
                         })
-                        // .finally(hideLoader);
                 } else {
                     addFinToPage();
-                    // hideLoader();
                 }
             })
     })

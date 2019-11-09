@@ -2,7 +2,7 @@ import { removeChild } from "../util/dom-util.js";
 import { attachObserversFor } from "./chapter-listener.js";
 
 const chapterTemplateBlock = `
-    <div class='chapter chapter-__chapter_number__' data-chapterNumber="__chapter_number__">
+    <div id='chapter-__chapter_number__' class='chapter' data-chapterNumber="__chapter_number__">
         <div class="chapter-header">
             <div class="chapter-title">__chapter_title__</div>
             <div class="chapter-domain">
@@ -11,7 +11,7 @@ const chapterTemplateBlock = `
                 </a>
             </div>
         </div>
-        <div class="chapter-content">__chapter_content__</div>
+        <div class="reader-chapter-content">__chapter_content__</div>
     </div>
 `;
 
@@ -29,7 +29,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
         .replace(/__chapter_domain__/g, hostname)
         .replace(/__chapter_content__/g, filterContent(chapter));
     page.appendChild(dummyDiv.firstElementChild);
-    attachObserversFor(document.getElementsByClassName("chapter-" + chapterNumber)[0])
+    attachObserversFor(document.getElementById("chapter-" + chapterNumber))
 }
 
 function filterContent(chapter) {
@@ -54,7 +54,12 @@ function isIncorrectRelativeUrlFromSource(anchorTag) {
     return anchorTag.hash === "" && anchorTag.hostname === window.location.hostname;
 }
 
-const finBlock = `<div id="fin">Fin<br><br>(That's it folks! You have caught up with the latest chapter!)</div>`;
+const finBlock = `
+<div id="fin-block">
+    <h3>That's it folks!</h3>
+    <br>
+    (You have caught up with the latest chapter!)
+</div>`;
 
 export function addFinToPage() {
     if (addFinToPage.done) {
