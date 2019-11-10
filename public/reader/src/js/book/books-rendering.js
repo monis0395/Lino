@@ -37,7 +37,9 @@ function deleteAllBooks() {
 }
 
 function compare(aBook, bBook) {
-    return bBook.lastReadTimestamp - aBook.lastReadTimestamp;
+    const bTimeStamp = bBook.lastReadTimestamp || 0;
+    const aTimeStamp = aBook.lastReadTimestamp || 0;
+    return bTimeStamp - aTimeStamp;
 }
 
 export function loadBooks() {
