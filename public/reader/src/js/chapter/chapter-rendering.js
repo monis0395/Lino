@@ -15,10 +15,13 @@ const chapterTemplateBlock = `
     </div>
 `;
 
+const chapterAdded = {};
+
 export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
-    if (!chapter.title) {
+    if (!chapter.title || chapterAdded[chapterNumber]) {
         return
     }
+    chapterAdded[chapterNumber] = true;
     const page = document.getElementsByClassName('page')[0];
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;

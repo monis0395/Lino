@@ -8,12 +8,16 @@
 .chapter {
     width: 100%;
     padding: 0 var(--baseline-h);
-    margin-top: calc(var(--baseline-v) * 5);
     border-bottom: 1px solid var(--highlight-color);
 }
 
 .chapter-header {
+    margin-top: calc(var(--baseline-v) * 5);
     padding-bottom: calc(var(--baseline-v) * 1.5);
+}
+
+.reader-chapter-content {
+    margin-bottom: calc(var(--baseline-v) * 5);
 }
 
 .chapter-title {
@@ -27,10 +31,6 @@
 .chapter-domain a {
     font-weight: var(--weight-regular);
     color: var(--secondary-foreground)
-}
-
-.reader-chapter-content {
-    margin-bottom: calc(var(--baseline-v) * 5);
 }
 
 p {

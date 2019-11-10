@@ -4,7 +4,7 @@ import { showSnackbar } from "../components/snackbar.js";
 import { requestFor } from "../components/request-for.js";
 import { reloadBooks } from "./books-rendering.js";
 
-const apiGetBook = "https://monis0395.api.stdlib.com/getBook@dev?url=";
+const apiGetBook = "https://monis0395.api.stdlib.com/getBook@dev/?url=";
 
 export function getBook(link, reverse) {
     showLoader();

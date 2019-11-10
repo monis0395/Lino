@@ -4,7 +4,7 @@ import { reloadBooks } from "./books-rendering.js";
 import { showSnackbar } from "../components/snackbar.js";
 import { hideLoader, showLoader } from "../components/loader.js";
 
-const apiGetBook = "https://monis0395.api.stdlib.com/getBook@dev?url=";
+const apiGetBook = "https://monis0395.api.stdlib.com/getBook@dev/?url=";
 
 function requestAndUpdateBook(book) {
     const oldTotalChapters = book.chapters.length;

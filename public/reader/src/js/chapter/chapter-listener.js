@@ -3,6 +3,7 @@ import { getAndRenderChapter } from "./load-chapter.js";
 import { showSnackbar } from "../components/snackbar.js";
 import { addFinToPage } from "./chapter-rendering.js";
 import { updateListSelection } from "./chapter-list.js";
+import { removeChild } from "../util/dom-util.js";
 
 const thresholdSet = [];
 for (let i = 0; i <= 1.0; i += 0.01) {
@@ -41,6 +42,11 @@ function updateLastRead(entries) {
         }
         lastReadChapterObserver.unobserve(target);
         const bookTitle = window.bookReader.bookTitle;
+        const oldChapter = document.getElementById(`chapter-${chapterNumber - 2}`);
+        if (oldChapter) {
+            removeChild(oldChapter);
+            console.log("removed old chapter", chapterNumber - 2);
+        }
         fetchBook(bookTitle)
             .then((book) => {
                 console.log("updated last read to", chapterNumber);
