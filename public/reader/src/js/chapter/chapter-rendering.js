@@ -32,7 +32,16 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
         .replace(/__chapter_domain__/g, hostname)
         .replace(/__chapter_content__/g, filterContent(chapter));
     page.appendChild(dummyDiv.firstElementChild);
+    console.log("added chapter to page", chapterNumber);
     attachObserversFor(document.getElementById("chapter-" + chapterNumber))
+}
+
+export function removeChapter(chapterNumber) {
+    if (chapterAdded[chapterNumber]) {
+        const chapterElement = document.getElementById(`chapter-${chapterNumber}`);
+        removeChild(chapterElement);
+        console.log("removed chapter from page", chapterNumber);
+    }
 }
 
 function filterContent(chapter) {
