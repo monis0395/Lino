@@ -1,84 +1,96 @@
 import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
 import { getAndRenderChapter } from "./load-chapter.js";
-import { showSnackbar } from "../components/snackbar.js";
-import { addFinToPage, removeChapter } from "./chapter-rendering.js";
+import { addFinToPage, getAllChaptersRendered, removeChapter } from "./chapter-rendering.js";
 import { updateListSelection } from "./chapter-list.js";
+import { debounce, findFirstVisibleElement, getElementXPath, getVisibilityForElement, throttle } from "../util/dom-util.js";
+import { storeChapter } from "./chapter-store.js";
 
-const thresholdSet = [];
-for (let i = 0; i <= 1.0; i += 0.01) {
-    thresholdSet.push(i);
+function onScrollDebounce() {
+    processMaxVisibleChapter("debounce");
 }
 
-let lastReadChapterObserver = new IntersectionObserver(updateLastRead, {
-    threshold: thresholdSet,
-});
-
-let halfReadObserver = new IntersectionObserver(loadNextChapter, {
-    threshold: thresholdSet,
-});
-
-
-export function attachObserversFor(element) {
-    lastReadChapterObserver.observe(element);
-    halfReadObserver.observe(element);
+function onScrollThrottle() {
+    processMaxVisibleChapter("throttle");
 }
 
-const visiblePercentageMap = {};
+function processMaxVisibleChapter(mode) {
+    const maxVisible = getMaxVisibleChapter();
+    if (maxVisible && !isNaN(maxVisible.chapterNumber)) {
+        onMaxVisibleChapter(maxVisible, mode);
+    }
+}
 
-function updateLastRead(entries) {
-    entries.forEach(entry => {
-        const {intersectionRatio, target} = entry;
-        const chapterNumber = parseInt(target.dataset.chapternumber, 10);
-        if (isNaN(chapterNumber)) {
-            return;
+function getMaxVisibleChapter() {
+    const chapters = getAllChaptersRendered();
+    let maxVisible = undefined;
+    let lastMaxVisibility = 0;
+    Object.keys(chapters).forEach((chapterNumber) => {
+        chapterNumber = parseInt(chapterNumber, 10);
+        const chapterElement = chapters[chapterNumber];
+        const visibility = getVisibilityForElement(chapterElement);
+        if (visibility > lastMaxVisibility) {
+            lastMaxVisibility = visibility;
+            maxVisible = {
+                chapterElement,
+                chapterNumber,
+            };
         }
-        const visibility = Math.floor(intersectionRatio * 100);
-        const previousVisibility = visiblePercentageMap[chapterNumber];
-        const visibilityIncreased = previousVisibility < visibility;
-        if (!visibilityIncreased || !visibility) {
-            visiblePercentageMap[chapterNumber] = visibility;
-            return;
-        }
-        lastReadChapterObserver.unobserve(target);
-        const bookTitle = window.bookReader.bookTitle;
-        removeChapter(chapterNumber - 2);
-        fetchBook(bookTitle)
-            .then((book) => {
-                console.log("updated last read to", chapterNumber);
-                updateListSelection(chapterNumber + 1);
-                storeOrUpdateBook(bookTitle, {lastRead: chapterNumber})
-            })
     });
+    return maxVisible;
 }
 
-function loadNextChapter(entries) {
-    entries.forEach(entry => {
-        const {intersectionRatio, target} = entry;
-        const chapterNumber = parseInt(target.dataset.chapternumber, 10);
-        if (isNaN(chapterNumber)) {
-            return;
-        }
-        let visiblePercentage = Math.floor(intersectionRatio * 100);
-        if (visiblePercentage === 0) {
-            return;
-        }
-        halfReadObserver.unobserve(target);
-        const nextChapterNumber = chapterNumber + 1;
-        const bookTitle = window.bookReader.bookTitle;
-        console.log("loading next chapter", nextChapterNumber);
-        // showLoader();
-        fetchBook(bookTitle)
-            .then((book) => {
-                const totalChapters = book.chapters.length;
-                if (nextChapterNumber < totalChapters) {
-                    getAndRenderChapter(bookTitle, nextChapterNumber)
-                        .catch((error) => {
-                            console.error(error);
-                            showSnackbar("Error: " + error.message);
-                        })
-                } else {
-                    addFinToPage();
-                }
+function onMaxVisibleChapter({chapterNumber, chapterElement}, mode) {
+    if (onMaxVisibleChapter.lastChapterFound !== chapterNumber) {
+        updateListSelection(chapterNumber + 1);
+        loadNextChapter(chapterNumber);
+    }
+    if (mode === "debounce") {
+        removeChapter(chapterNumber - 2);
+    }
+    updateLastRead(chapterNumber);
+    updateXpath(chapterNumber, chapterElement);
+    onMaxVisibleChapter.lastChapterFound = chapterNumber;
+}
+
+
+function updateLastRead(chapterNumber) {
+    storeOrUpdateBook(window.bookReader.bookTitle, {
+        lastRead: chapterNumber,
+        lastReadTimestamp: Date.now(),
+    });
+    console.log("updated last read to", chapterNumber);
+}
+
+function updateXpath(chapterNumber, chapterElement) {
+    const bookTitle = window.bookReader.bookTitle;
+    const firstVisibleElement = findFirstVisibleElement(chapterElement);
+
+    fetchBook(bookTitle)
+        .then((book) => {
+            const chapter = book.chapters[chapterNumber];
+            storeChapter(chapter.link, {
+                lastReadElementXpath: getElementXPath(firstVisibleElement),
             })
-    })
+        });
+}
+
+function loadNextChapter(chapterNumber) {
+    const nextChapterNumber = chapterNumber + 1;
+    const bookTitle = window.bookReader.bookTitle;
+    console.log("loading next chapter", nextChapterNumber);
+    fetchBook(bookTitle)
+        .then((book) => {
+            const totalChapters = book.chapters.length;
+            if (nextChapterNumber < totalChapters) {
+                getAndRenderChapter(bookTitle, nextChapterNumber).catch(console.error)
+            } else {
+                addFinToPage();
+            }
+        })
+}
+
+
+export function initChapterListener() {
+    window.addEventListener('scroll', debounce(onScrollDebounce, 250), {passive: true});
+    window.addEventListener('scroll', throttle(onScrollThrottle, 1000), {passive: true});
 }

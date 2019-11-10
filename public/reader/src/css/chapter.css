@@ -85,7 +85,6 @@ p {
     width: calc(100vw - calc(var(--baseline-h) * 4));
     max-width: 460px;
     max-height: 100vh;
-    padding: var(--baseline-v) var(--baseline-h) 0 var(--baseline-h);
     font-size: var(--baseline-v);
     font-weight: var(--weight-thin);
     line-height: 1.5;
@@ -93,15 +92,25 @@ p {
     border-right: 1px var(--highlight-color) solid;
 }
 
-#chapters-list .title {
-    padding-bottom: calc(var(--baseline-v) * 2);
+#chapter-list-contents {
+    color: var(--highlight-color);
+    padding: 0 var(--baseline-h);
+    margin: calc(var(--baseline-v) * 2) 0;
+    /*padding-bottom: var(--baseline-v);*/
+    /*border-bottom: 1px var(--highlight-color) solid;*/
 }
 
-#chapters-list .title:hover {
+#chapters-list li {
+    list-style: none;
+    margin: 0 var(--baseline-h);
+    margin-bottom: calc(var(--baseline-v) * 2);
+}
+
+#chapters-list li:hover {
     color: var(--highlight-color);
 }
 
-#chapters-list .title.selected {
+#chapters-list li.selected {
     color: var(--highlight-color);
     font-weight: var(--weight-bold);
 }

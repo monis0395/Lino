@@ -8,5 +8,9 @@ export async function storeChapter(url, chapter) {
     if (!chapter.url) {
         chapter.url = url
     }
-    return chapterDB.setItem(url, chapter)
+    const oldChapter = await chapterDB.getItem(url) || {};
+    return chapterDB.setItem(url, {
+        ...oldChapter,
+        ...chapter,
+    })
 }

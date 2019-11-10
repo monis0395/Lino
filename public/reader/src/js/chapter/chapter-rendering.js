@@ -1,5 +1,4 @@
 import { removeChild } from "../util/dom-util.js";
-import { attachObserversFor } from "./chapter-listener.js";
 
 const chapterTemplateBlock = `
     <div id='chapter-__chapter_number__' class='chapter' data-chapterNumber="__chapter_number__">
@@ -21,7 +20,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     if (!chapter.title || chapterAdded[chapterNumber]) {
         return
     }
-    chapterAdded[chapterNumber] = true;
+
     const page = document.getElementsByClassName('page')[0];
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;
@@ -31,17 +30,37 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
         .replace(/__chapter_title__/g, chapterTitle || chapter.title)
         .replace(/__chapter_domain__/g, hostname)
         .replace(/__chapter_content__/g, filterContent(chapter));
-    page.appendChild(dummyDiv.firstElementChild);
+    const chapterElement = dummyDiv.firstElementChild;
+
+    chapterAdded[chapterNumber] = chapterElement;
+    page.appendChild(chapterElement);
     console.log("added chapter to page", chapterNumber);
-    attachObserversFor(document.getElementById("chapter-" + chapterNumber))
+}
+
+export function getChapterElement(chapterNumber) {
+    return chapterAdded[chapterNumber];
+}
+
+export function getAllChaptersRendered() {
+    return chapterAdded;
 }
 
 export function removeChapter(chapterNumber) {
-    if (chapterAdded[chapterNumber]) {
-        const chapterElement = document.getElementById(`chapter-${chapterNumber}`);
+    const chapterElement = getChapterElement(chapterNumber);
+    if (chapterElement) {
         removeChild(chapterElement);
+        delete chapterAdded[chapterNumber];
         console.log("removed chapter from page", chapterNumber);
     }
+}
+
+export function removeChaptersExcept(chapterNumber, exceptionList) {
+    Object.keys(chapterAdded).forEach((addedChapterNumber) => {
+        addedChapterNumber = parseInt(addedChapterNumber, 10);
+        if (!exceptionList.includes(addedChapterNumber)) {
+            removeChapter(addedChapterNumber);
+        }
+    })
 }
 
 function filterContent(chapter) {
@@ -81,5 +100,13 @@ export function addFinToPage() {
     const page = document.getElementsByClassName('page')[0];
     const dummyDiv = document.createElement('div');
     dummyDiv.innerHTML = finBlock;
-    page.appendChild(dummyDiv);
+    page.appendChild(dummyDiv.firstElementChild);
+}
+
+export function removeFin() {
+    if (addFinToPage.done) {
+        const element = document.getElementById("fin-block");
+        removeChild(element);
+        addFinToPage.done = false;
+    }
 }

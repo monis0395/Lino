@@ -38,7 +38,7 @@ export function isDescendant(parent, child) {
 
 export function throttle(callback, wait = 100) {
     let timer = null;
-    return function(...args) {
+    return function (...args) {
         if (timer === null) {
             timer = setTimeout(() => {
                 callback.apply(this, args);
@@ -46,4 +46,106 @@ export function throttle(callback, wait = 100) {
             }, wait);
         }
     };
+}
+
+export function debounce(fn, wait = 1) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => fn.call(this, ...args), wait)
+    }
+}
+
+export function getVisibilityForElement(element) {
+    const pageHeight = window.innerHeight
+        , scrollTop = window.pageYOffset || document.documentElement.scrollTop
+        , elementTop = element.getBoundingClientRect().top + scrollTop
+        , elementHeight = element.offsetHeight
+        , portionHiddenBeforeVP = scrollTop - elementTop
+        , portionHiddenAfterVP = (elementTop + elementHeight) - (scrollTop + pageHeight);
+    if ((scrollTop > elementTop + elementHeight)
+        || (elementTop > scrollTop + pageHeight)
+        || window.getComputedStyle(element, null).display === "none") {
+        return 0;
+    } else {
+        let visibility = 100;
+        if (portionHiddenBeforeVP > 0) {
+            visibility -= (portionHiddenBeforeVP * 100) / elementHeight;
+        }
+        if (portionHiddenAfterVP > 0) {
+            visibility -= (portionHiddenAfterVP * 100) / elementHeight;
+        }
+        return visibility;
+    }
+}
+
+export function findFirstVisibleElement(element) {
+    let visibleElement = undefined;
+    Array.from(element.children).map((childElement) => {
+        if (visibleElement) {
+            return;
+        }
+        const visible = getVisibilityForElement(childElement);
+        if (!visible) {
+            return
+        }
+        const grandChild = childElement.children;
+        if (grandChild.length === 0 && visible === 100) {
+            visibleElement = childElement;
+            return;
+        }
+        visibleElement = findFirstVisibleElement(childElement);
+    });
+    return visibleElement;
+}
+
+export function scrollToElement(element, parentElement) {
+    const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const elementHeight = element.offsetHeight;
+    const multiplier = Math.floor(height  / 3 / elementHeight);
+    const halfHeight = elementHeight * multiplier;
+    const offset = element.offsetTop - halfHeight;
+    if (element.offsetTop > (halfHeight + halfHeight / 2)) {
+        if (parentElement) {
+            parentElement.scrollTop = offset;
+        } else {
+            window.scrollTo(0, offset)
+        }
+    }
+}
+
+export function getElementXPath(elt) {
+    let path = "";
+    for (; elt && elt.nodeType === 1; elt = elt.parentNode) {
+        const idx = getElementIdx(elt);
+        let xname = elt.tagName;
+        if (idx > 1) {
+            xname += "[" + idx + "]";
+        }
+        path = "/" + xname + path;
+    }
+    return path;
+}
+
+function getElementIdx(elt) {
+    let count = 1;
+    for (let sib = elt.previousSibling; sib; sib = sib.previousSibling) {
+        if (sib.nodeType === 1 && sib.tagName === elt.tagName) {
+            count++;
+        }
+    }
+    return count;
+}
+
+export function getElementByXpath(path) {
+    try {
+        return document.evaluate(
+            path,
+            document,
+            null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE,
+            null).singleNodeValue;
+    } catch (e) {
+        return undefined;
+    }
 }

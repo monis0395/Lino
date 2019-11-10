@@ -1,25 +1,68 @@
-import { fetchBook } from "../book/books-store.js";
+import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
 import { getChapterLink } from "../components/chapter-url.js";
-import { isDescendant } from "../util/dom-util.js";
+import { isDescendant, scrollToElement } from "../util/dom-util.js";
+import { getChapterElement, removeChaptersExcept, removeFin } from "./chapter-rendering.js";
+import { hideLoader, showLoader } from "../components/loader.js";
+import { getAndRenderChapter } from "./load-chapter.js";
+import { showSnackbar } from "../components/snackbar.js";
 
 const chaptersList = document.getElementById("chapters-list");
 const selectedClassName = "selected";
 const templateBlock = `
-<a id="chapter-index-__chapter_number__" href="__chapter_link__">
-    <div class="title">__chapter_title__</div>
-</a>
+<li id="chapter-index-__chapter_number__" onclick="window.chapterClicked(__chapter_number__)">
+    __chapter_title__
+</li>
 `;
 
+window.chapterClicked = (chapterNumber) => {
+    console.log("chapter clicked", chapterNumber);
+    hideChaptersList();
+    showLoader();
+    const bookTitle = window.bookReader.bookTitle;
+    updateLastRead(bookTitle, chapterNumber).then(() => {
+        updateListSelection(chapterNumber);
+        const chapterLink = getChapterLink(bookTitle, chapterNumber);
+        window.history.replaceState({}, bookTitle, chapterLink);
+        getAndRenderChapter(bookTitle, chapterNumber)
+            .then(() => {
+                removeChaptersExcept(chapterNumber, [chapterNumber, chapterNumber + 1]);
+                removeFin();
+                const chapterElement = getChapterElement(chapterNumber);
+                if (chapterElement) {
+                    chapterElement.scrollIntoView();
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                showSnackbar("Error: " + error.message)
+            })
+            .finally(hideLoader);
+
+    });
+};
+
+function updateLastRead(bookTitle, chapterNumber) {
+    return storeOrUpdateBook(bookTitle, {
+        lastRead: chapterNumber,
+        lastReadTimestamp: Date.now(),
+    });
+}
+
 export function updateListSelection(lastReadChapterIndex) {
-    const selected = document.querySelector('#chapters-list .title.selected');
-    if (selected) {
-        selected.classList.remove(selectedClassName);
-    }
     const targetLi = document.getElementById(`chapter-index-${lastReadChapterIndex}`);
     if (targetLi) {
-        targetLi.firstElementChild.classList.add(selectedClassName);
-        chaptersList.scrollTop = (targetLi.offsetTop - 50);
+        const selected = document.querySelector('#chapters-list li.selected');
+        if (selected) {
+            selected.classList.remove(selectedClassName);
+        }
+        targetLi.classList.add(selectedClassName);
+        console.log("update chapters index list to", lastReadChapterIndex);
+        scrollToElement(targetLi, chaptersList);
     }
+}
+
+function hideChaptersList() {
+    chaptersList.style.left = "-90vw";
 }
 
 function attachChapterListBtnListener() {
@@ -30,7 +73,7 @@ function attachChapterListBtnListener() {
         window.onclick = function (event) {
             if (event.target !== chaptersListBtn
                 && !isDescendant(chaptersList, event.target)) {
-                chaptersList.style.left = "-90vw";
+                hideChaptersList();
             }
         };
     }
@@ -40,16 +83,18 @@ export function loadChapterList() {
     const bookTitle = window.bookReader.bookTitle;
     fetchBook(bookTitle)
         .then(({chapters, lastRead}) => {
+            const chapterListUl = document.createElement("ul");
+            chaptersList.appendChild(chapterListUl);
             chapters.forEach((chapter, index) => {
                 const chapterLink = getChapterLink(bookTitle, index);
                 const dummyDiv = document.createElement("div");
                 dummyDiv.innerHTML = templateBlock
-                    .replace(/__chapter_number__/g, index + 1)
+                    .replace(/__chapter_number__/g, index)
                     .replace(/__chapter_link__/g, chapterLink)
                     .replace(/__chapter_title__/g, chapter.title);
-                chaptersList.appendChild(dummyDiv.firstElementChild);
+                chapterListUl.appendChild(dummyDiv.firstElementChild);
             });
-            updateListSelection(lastRead + 1)
+            updateListSelection(lastRead)
         });
     attachChapterListBtnListener();
 }
