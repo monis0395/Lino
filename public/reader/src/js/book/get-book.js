@@ -22,6 +22,7 @@ function storeBookAndShowSuccessMessage(book, reverse = false) {
         storeOrUpdateBook(book.title, {
             ...book,
             lastRead: 0,
+            lastReadTimestamp: Date.now(),
             chaptersInReverse: reverse,
         }).then(reloadBooks);
         showSnackbar(`Added book: ${book.title}`);

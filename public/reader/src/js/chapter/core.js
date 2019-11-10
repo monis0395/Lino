@@ -29,7 +29,10 @@ function autoHideNavBar() {
 }
 
 function updateLastRead(bookTitle, chapterNumber) {
-    return storeOrUpdateBook(bookTitle, {lastRead: chapterNumber});
+    return storeOrUpdateBook(bookTitle, {
+        lastRead: chapterNumber,
+        lastReadTimestamp: Date.now(),
+    });
 }
 
 function init() {

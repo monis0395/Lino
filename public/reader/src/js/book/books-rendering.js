@@ -36,8 +36,12 @@ function deleteAllBooks() {
     Array.from(books).forEach(removeChild)
 }
 
+function compare(aBook, bBook) {
+    return bBook.lastReadTimestamp - aBook.lastReadTimestamp;
+}
+
 export function loadBooks() {
-    return getBooks().then((books) => books.forEach(addBookToPage));
+    return getBooks().then((books) => books.sort(compare).forEach(addBookToPage));
 }
 
 export function reloadBooks() {
