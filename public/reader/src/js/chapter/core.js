@@ -18,25 +18,27 @@ function autoHideNavBar() {
     let bottomNavBar = document.getElementById("bottom-nav-bar");
     let visible = true;
 
-    function showNavBar() {
+    function hideNavBar() {
         topNavBar.style.top = `-${topNavBar.scrollHeight + 10}px`;
         bottomNavBar.style.bottom = `-${bottomNavBar.scrollHeight + 10}px`;
-        visible = true;
+        visible = false;
     }
 
-    function hideNavBar() {
+    function showNavBar() {
         topNavBar.style.top = "0";
         bottomNavBar.style.bottom = "0";
-        visible = false;
+        visible = true;
     }
 
     function handleScroll() {
         const currentScrollPosition = window.pageYOffset;
-        const scrollingUp = prevScrollPosition > currentScrollPosition;
-        if (scrollingUp) {
-            hideNavBar();
-        } else {
-            showNavBar();
+        if (Math.abs(prevScrollPosition - currentScrollPosition) > 32) {
+            const scrollingUp = prevScrollPosition > currentScrollPosition;
+            if (scrollingUp) {
+                showNavBar();
+            } else {
+                hideNavBar();
+            }
         }
         prevScrollPosition = currentScrollPosition;
     }
@@ -54,7 +56,7 @@ function autoHideNavBar() {
     }
 
     const page = document.getElementsByClassName('page')[0];
-    page.addEventListener("touchend", throttle((e) => {
+    page.onclick = (e) => {
         const element = e.target;
         if (topNavBar === element
             || bottomNavBar === element
@@ -63,7 +65,8 @@ function autoHideNavBar() {
             return
         }
         toggleNavBar();
-    }, 100), {passive: true});
+    };
+    setTimeout(hideNavBar, 1000);
     window.addEventListener('scroll', throttle(handleScroll, 100));
 }
 
