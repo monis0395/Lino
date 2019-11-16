@@ -8,7 +8,7 @@ const bookTemplateBlock = `
     <div class='book'>
         <span class="three-dot hidden">⠇</span>
         <a href="__book_link__">
-            <span class="book-title">__book_title__</span>
+            <h5 class="book-title">__book_title__</h5>
             <span class="book-domain">__book_domain__
                 <span style="float: right">__last_read__ of __total_chapter__ read</span>
             </span>

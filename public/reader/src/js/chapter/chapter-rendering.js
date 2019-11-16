@@ -4,7 +4,7 @@ import { similarity } from "../util/string-util.js";
 const chapterTemplateBlock = `
     <div id='chapter-__chapter_number__' class='chapter' data-chapterNumber="__chapter_number__">
         <div class="chapter-header">
-            <div class="chapter-title">__chapter_title__</div>
+            <h2 class="chapter-title">__chapter_title__</h2>
             <div class="chapter-domain">
                 <a href="__chapter_link__" title="Chapter's source">
                 __chapter_domain__

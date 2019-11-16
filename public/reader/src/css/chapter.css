@@ -21,10 +21,10 @@
 }
 
 .chapter-title {
-    font-size: calc(var(--baseline-v) * 2);
     font-weight: var(--weight-thin);
     color: var(--highlight-color);
     line-height: 1.5;
+    margin-bottom: 0;
     padding-bottom: var(--baseline-v);
 }
 

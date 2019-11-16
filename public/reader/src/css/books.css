@@ -18,7 +18,7 @@
 .book-title {
     display: block;
     width: calc(100% - var(--baseline-h));
-    font-size: calc(var(--baseline-v) * 1.5);
+    margin-bottom: 0;
     padding: var(--baseline-v) var(--baseline-h);
     padding-bottom: calc(var(--baseline-v) / 2);
     font-weight: var(--weight-thin);
