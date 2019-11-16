@@ -79,7 +79,7 @@ function filterContent(chapter, chapterTitle) {
     traverseAllElements(content, (element) => {
         const elementText = element.innerText;
         const textSimilarity = similarity(elementText, chapterTitle);
-        if (textSimilarity > 90) {
+        if (textSimilarity > 60) {
             removeChild(element);
         }
     });

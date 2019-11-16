@@ -20,6 +20,16 @@
     margin-bottom: calc(var(--baseline-v) * 5);
 }
 
+.reader-chapter-content h1,
+.reader-chapter-content h2,
+.reader-chapter-content h3,
+.reader-chapter-content h4,
+.reader-chapter-content h5,
+.reader-chapter-content h6 {
+    font-weight: var(--weight-thin);
+    margin-bottom: calc(var(--baseline-v) * 1.5);
+}
+
 .chapter-title {
     font-weight: var(--weight-thin);
     color: var(--highlight-color);
