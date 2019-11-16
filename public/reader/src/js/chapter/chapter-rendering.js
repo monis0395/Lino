@@ -22,7 +22,8 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
         return
     }
 
-    const chapters = document.getElementById("chapters");
+    // use page instead of a container for chapters as it affects scroll when loading new chapters
+    const page = document.getElementsByClassName('page')[0];
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;
     chapterTitle = chapterTitle || chapter.title;
@@ -37,9 +38,9 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     chapterAdded[chapterNumber] = chapterElement;
     const nextChapter = chapterAdded[chapterNumber + 1];
     if (nextChapter) {
-        chapters.insertBefore(chapterElement, nextChapter);
+        page.insertBefore(chapterElement, nextChapter);
     } else {
-        chapters.appendChild(chapterElement);
+        page.appendChild(chapterElement);
     }
     console.log("added chapter to page", chapterNumber);
 }
@@ -112,10 +113,10 @@ export function addFinToPage() {
         return;
     }
     addFinToPage.done = true;
-    const chapters = document.getElementById("chapters");
+    const page = document.getElementsByClassName('page')[0];
     const dummyDiv = document.createElement('div');
     dummyDiv.innerHTML = finBlock;
-    chapters.appendChild(dummyDiv.firstElementChild);
+    page.appendChild(dummyDiv.firstElementChild);
 }
 
 export function removeFin() {

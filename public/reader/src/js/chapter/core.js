@@ -43,6 +43,11 @@ function updateLastRead(bookTitle, chapterNumber) {
 function scrollToLastReadElement() {
     return fetchBook(bookTitle)
         .then((book) => {
+            const totalChapters = book.chapters.length;
+            const nextChapterNumber = chapterNumber + 1;
+            if (nextChapterNumber < totalChapters) {
+                getAndRenderChapter(bookTitle, chapterNumber + 1);
+            }
             const chapter = book.chapters[chapterNumber];
             return fetchChapter(chapter.link)
         })
@@ -66,7 +71,6 @@ function init() {
         loadChapterList();
         getAndRenderChapter(bookTitle, chapterNumber)
             .then(scrollToLastReadElement)
-            .then(() => getAndRenderChapter(bookTitle, chapterNumber + 1))
             .catch((error) => showSnackbar("Error: " + error.message))
             .finally(() => {
                 hideLoader();
