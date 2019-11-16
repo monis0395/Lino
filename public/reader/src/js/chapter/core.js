@@ -42,6 +42,10 @@ function autoHideNavBar() {
     }
 
     function toggleNavBar() {
+        const currentScrollPosition = window.pageYOffset;
+        if (Math.abs(prevScrollPosition - currentScrollPosition) >= 5) {
+            return;
+        }
         if (visible) {
             hideNavBar();
         } else {
@@ -50,7 +54,7 @@ function autoHideNavBar() {
     }
 
     const page = document.getElementsByClassName('page')[0];
-    page.addEventListener("touchstart", (e) => {
+    page.addEventListener("touchend", throttle((e) => {
         const element = e.target;
         if (topNavBar === element
             || bottomNavBar === element
@@ -59,8 +63,8 @@ function autoHideNavBar() {
             return
         }
         toggleNavBar();
-    }, {passive: true});
-    window.addEventListener('scroll', throttle(handleScroll, 1000));
+    }, 100), {passive: true});
+    window.addEventListener('scroll', throttle(handleScroll, 100));
 }
 
 function updateLastRead(bookTitle, chapterNumber) {
