@@ -1,7 +1,7 @@
 import { hideLoader, showLoader } from "../components/loader.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { showSnackbar } from "../components/snackbar.js";
-import { getElementByXpath, scrollToElement, throttle } from "../util/dom-util.js";
+import { getElementByXpath, isDescendant, scrollToElement, throttle } from "../util/dom-util.js";
 import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
 import { fontSettingsInit } from "./font-settings.js";
 import { loadChapterList } from "./chapter-list.js";
@@ -50,7 +50,16 @@ function autoHideNavBar() {
     }
 
     const page = document.getElementsByClassName('page')[0];
-    page.addEventListener("touchstart", toggleNavBar, {passive: true});
+    page.addEventListener("touchstart", (e) => {
+        const element = e.target;
+        if (topNavBar === element
+            || bottomNavBar === element
+            || isDescendant(topNavBar, element)
+            || isDescendant(bottomNavBar, element)) {
+            return
+        }
+        toggleNavBar();
+    }, {passive: true});
     window.addEventListener('scroll', throttle(handleScroll, 1000));
 }
 
