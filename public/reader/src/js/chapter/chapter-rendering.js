@@ -1,4 +1,5 @@
-import { removeChild } from "../util/dom-util.js";
+import { removeChild, traverseAllElements } from "../util/dom-util.js";
+import { similarity } from "../util/string-util.js";
 
 const chapterTemplateBlock = `
     <div id='chapter-__chapter_number__' class='chapter' data-chapterNumber="__chapter_number__">
@@ -24,12 +25,13 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     const chapters = document.getElementById("chapters");
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;
+    chapterTitle = chapterTitle || chapter.title;
     dummyDiv.innerHTML = chapterTemplateBlock
         .replace(/__chapter_number__/g, chapterNumber)
         .replace(/__chapter_link__/g, chapter.url)
-        .replace(/__chapter_title__/g, chapterTitle || chapter.title)
+        .replace(/__chapter_title__/g, chapterTitle)
         .replace(/__chapter_domain__/g, hostname)
-        .replace(/__chapter_content__/g, filterContent(chapter));
+        .replace(/__chapter_content__/g, filterContent(chapter, chapterTitle));
     const chapterElement = dummyDiv.firstElementChild;
 
     chapterAdded[chapterNumber] = chapterElement;
@@ -63,7 +65,7 @@ export function removeChaptersExcept(chapterNumber, exceptionList) {
     })
 }
 
-function filterContent(chapter) {
+function filterContent(chapter, chapterTitle) {
     const hostname = new URL(chapter.url).hostname;
     const content = document.createElement('div');
     content.innerHTML = chapter.content;
@@ -74,6 +76,13 @@ function filterContent(chapter) {
                 removeChild(anchorTag);
             }
         });
+    traverseAllElements(content, (element) => {
+        const elementText = element.innerText;
+        const textSimilarity = similarity(elementText, chapterTitle);
+        if (textSimilarity > 90) {
+            removeChild(element);
+        }
+    });
     return content.innerHTML;
 }
 

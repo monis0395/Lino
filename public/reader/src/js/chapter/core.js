@@ -61,7 +61,7 @@ function init() {
                 const xpath = chapter.lastReadElementXpath;
                 const element = getElementByXpath(xpath);
                 if (element) {
-                    scrollToElement(element);
+                    scrollToElement(element, null, false);
                 }
             })
             .catch((error) => showSnackbar("Error: " + error.message))

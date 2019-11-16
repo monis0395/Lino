@@ -81,7 +81,7 @@ export function getVisibilityForElement(element) {
 
 export function findFirstVisibleElement(element) {
     let visibleElement = undefined;
-    Array.from(element.children).map((childElement) => {
+    traverseAllElements(element, (childElement) => {
         if (visibleElement) {
             return;
         }
@@ -92,19 +92,27 @@ export function findFirstVisibleElement(element) {
         const grandChild = childElement.children;
         if (grandChild.length === 0 && visible === 100) {
             visibleElement = childElement;
-            return;
         }
-        visibleElement = findFirstVisibleElement(childElement);
     });
     return visibleElement;
 }
 
-export function scrollToElement(element, parentElement) {
+export function traverseAllElements(element, callback) {
+    Array.from(element.children).map((childElement) => {
+        callback(childElement);
+        traverseAllElements(childElement, callback);
+    });
+}
+
+export function scrollToElement(element, parentElement, CalculatedOffset = true) {
     const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     const elementHeight = element.offsetHeight;
     const multiplier = Math.floor(height / 3 / elementHeight);
     const halfHeight = elementHeight * multiplier;
-    const offset = element.offsetTop - halfHeight;
+    let offset = element.offsetTop;
+    if (CalculatedOffset) {
+        offset = element.offsetTop - halfHeight;
+    }
     if (element.offsetTop > (halfHeight + halfHeight / 2)) {
         if (parentElement) {
             parentElement.scrollTop = offset;
