@@ -16,21 +16,42 @@ function autoHideNavBar() {
     let prevScrollPosition = window.pageYOffset;
     let topNavBar = document.getElementById("top-nav-bar");
     let bottomNavBar = document.getElementById("bottom-nav-bar");
+    let visible = true;
 
-    function toggleNavBar() {
+    function showNavBar() {
+        topNavBar.style.top = `-${topNavBar.scrollHeight + 10}px`;
+        bottomNavBar.style.bottom = `-${bottomNavBar.scrollHeight + 10}px`;
+        visible = true;
+    }
+
+    function hideNavbar() {
+        topNavBar.style.top = "0";
+        bottomNavBar.style.bottom = "0";
+        visible = false;
+    }
+
+    function handleScroll() {
         const currentScrollPosition = window.pageYOffset;
         const scrollingUp = prevScrollPosition > currentScrollPosition;
         if (scrollingUp) {
-            topNavBar.style.top = "0";
-            bottomNavBar.style.bottom = "0";
+            hideNavbar();
         } else {
-            topNavBar.style.top = `-${topNavBar.scrollHeight + 10}px`;
-            bottomNavBar.style.bottom = `-${bottomNavBar.scrollHeight + 10}px`;
+            showNavBar();
         }
         prevScrollPosition = currentScrollPosition;
     }
 
-    window.addEventListener('scroll', throttle(toggleNavBar, 1000));
+    function toggleNavBar() {
+        if (visible) {
+            hideNavbar();
+        } else {
+            showNavBar();
+        }
+    }
+
+    const page = document.getElementsByClassName('page')[0];
+    page.addEventListener("touchstart", toggleNavBar, {passive: true});
+    window.addEventListener('scroll', throttle(handleScroll, 1000));
 }
 
 function updateLastRead(bookTitle, chapterNumber) {
