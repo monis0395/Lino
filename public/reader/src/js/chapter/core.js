@@ -40,6 +40,21 @@ function updateLastRead(bookTitle, chapterNumber) {
     });
 }
 
+function scrollToLastReadElement() {
+    return fetchBook(bookTitle)
+        .then((book) => {
+            const chapter = book.chapters[chapterNumber];
+            return fetchChapter(chapter.link)
+        })
+        .then((chapter) => {
+            const xpath = chapter.lastReadElementXpath;
+            const element = getElementByXpath(xpath);
+            if (element) {
+                scrollToElement(element, null, false);
+            }
+        })
+}
+
 function init() {
     hideLoader();
     window.bookReader = {bookTitle};
@@ -50,20 +65,8 @@ function init() {
         fontSettingsInit();
         loadChapterList();
         getAndRenderChapter(bookTitle, chapterNumber)
-            .then(() => {
-                return fetchBook(bookTitle)
-            })
-            .then((book) => {
-                const chapter = book.chapters[chapterNumber];
-                return fetchChapter(chapter.link)
-            })
-            .then((chapter) => {
-                const xpath = chapter.lastReadElementXpath;
-                const element = getElementByXpath(xpath);
-                if (element) {
-                    scrollToElement(element, null, false);
-                }
-            })
+            .then(scrollToLastReadElement)
+            .then(() => getAndRenderChapter(bookTitle, chapterNumber + 1))
             .catch((error) => showSnackbar("Error: " + error.message))
             .finally(() => {
                 hideLoader();

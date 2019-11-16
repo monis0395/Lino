@@ -62,6 +62,17 @@ a {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+a:link  {
+    color: var(--highlight-color);
+}
+
+a:visited {
+    color: var(--secondary-foreground);
+}
+
+a:active {
+    color: var(--primary-foreground);
+}
 path {
     fill: var(--primary-background);
     stroke: var(--highlight-color);

@@ -35,7 +35,12 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     const chapterElement = dummyDiv.firstElementChild;
 
     chapterAdded[chapterNumber] = chapterElement;
-    chapters.appendChild(chapterElement);
+    const nextChapter = chapterAdded[chapterNumber + 1];
+    if (nextChapter) {
+        chapters.insertBefore(chapterElement, nextChapter);
+    } else {
+        chapters.appendChild(chapterElement);
+    }
     console.log("added chapter to page", chapterNumber);
 }
 
@@ -91,7 +96,8 @@ function isSourceWebsiteUrl(anchorTag, hostname) {
 }
 
 function isIncorrectRelativeUrlFromSource(anchorTag) {
-    return anchorTag.hash === "" && anchorTag.hostname === window.location.hostname;
+    const reference = document.getElementById(anchorTag.hash);
+    return !reference;
 }
 
 const finBlock = `
@@ -106,10 +112,10 @@ export function addFinToPage() {
         return;
     }
     addFinToPage.done = true;
-    const page = document.getElementsByClassName('page')[0];
+    const chapters = document.getElementById("chapters");
     const dummyDiv = document.createElement('div');
     dummyDiv.innerHTML = finBlock;
-    page.appendChild(dummyDiv.firstElementChild);
+    chapters.appendChild(dummyDiv.firstElementChild);
 }
 
 export function removeFin() {
