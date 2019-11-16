@@ -33,10 +33,6 @@
     color: var(--secondary-foreground)
 }
 
-p {
-    margin-bottom: calc(var(--baseline-v) * 1.5);
-}
-
 #fin-block {
     padding: calc(var(--baseline-v) * 5) 0;
     text-align: center;

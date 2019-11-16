@@ -21,7 +21,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
         return
     }
 
-    const page = document.getElementsByClassName('page')[0];
+    const chapters = document.getElementById("chapters");
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;
     dummyDiv.innerHTML = chapterTemplateBlock
@@ -33,7 +33,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     const chapterElement = dummyDiv.firstElementChild;
 
     chapterAdded[chapterNumber] = chapterElement;
-    page.appendChild(chapterElement);
+    chapters.appendChild(chapterElement);
     console.log("added chapter to page", chapterNumber);
 }
 
@@ -87,7 +87,7 @@ function isIncorrectRelativeUrlFromSource(anchorTag) {
 
 const finBlock = `
 <div id="fin-block">
-    <h3>That's it folks!</h3>
+    <h6>That's it folks!</h6>
     <br>
     (You have caught up with the latest chapter!)
 </div>`;
