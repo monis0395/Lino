@@ -52,6 +52,9 @@ export function updateListSelection(lastReadChapterIndex) {
     const targetLi = document.getElementById(`chapter-index-${lastReadChapterIndex}`);
     if (targetLi) {
         const selected = document.querySelector('#chapters-list li.selected');
+        if (targetLi === selected) {
+            return;
+        }
         if (selected) {
             selected.classList.remove(selectedClassName);
         }

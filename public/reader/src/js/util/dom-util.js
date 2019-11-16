@@ -102,7 +102,7 @@ export function findFirstVisibleElement(element) {
 export function scrollToElement(element, parentElement) {
     const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     const elementHeight = element.offsetHeight;
-    const multiplier = Math.floor(height  / 3 / elementHeight);
+    const multiplier = Math.floor(height / 3 / elementHeight);
     const halfHeight = elementHeight * multiplier;
     const offset = element.offsetTop - halfHeight;
     if (element.offsetTop > (halfHeight + halfHeight / 2)) {

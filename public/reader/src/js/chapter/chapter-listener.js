@@ -41,13 +41,13 @@ function getMaxVisibleChapter() {
 
 function onMaxVisibleChapter({chapterNumber, chapterElement}, mode) {
     if (onMaxVisibleChapter.lastChapterFound !== chapterNumber) {
-        updateListSelection(chapterNumber + 1);
+        updateListSelection(chapterNumber);
+        updateLastRead(chapterNumber);
         loadNextChapter(chapterNumber);
     }
     if (mode === "debounce") {
         removeChapter(chapterNumber - 2);
     }
-    updateLastRead(chapterNumber);
     updateXpath(chapterNumber, chapterElement);
     onMaxVisibleChapter.lastChapterFound = chapterNumber;
 }
