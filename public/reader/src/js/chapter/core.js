@@ -24,7 +24,7 @@ function autoHideNavBar() {
         visible = true;
     }
 
-    function hideNavbar() {
+    function hideNavBar() {
         topNavBar.style.top = "0";
         bottomNavBar.style.bottom = "0";
         visible = false;
@@ -34,7 +34,7 @@ function autoHideNavBar() {
         const currentScrollPosition = window.pageYOffset;
         const scrollingUp = prevScrollPosition > currentScrollPosition;
         if (scrollingUp) {
-            hideNavbar();
+            hideNavBar();
         } else {
             showNavBar();
         }
@@ -43,7 +43,7 @@ function autoHideNavBar() {
 
     function toggleNavBar() {
         if (visible) {
-            hideNavbar();
+            hideNavBar();
         } else {
             showNavBar();
         }
