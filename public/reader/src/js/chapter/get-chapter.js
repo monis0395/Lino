@@ -8,7 +8,10 @@ export async function getChapter(chapterUrl) {
     if (chapter) {
         return chapter;
     }
+    return await requestNStoreChapter(chapterUrl)
+}
+
+export async function requestNStoreChapter(chapterUrl) {
     const response = await requestFor(apiGetChapter, chapterUrl);
-    chapter = await storeChapter(chapterUrl, response);
-    return chapter;
+    return await storeChapter(chapterUrl, response);
 }

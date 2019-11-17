@@ -7,13 +7,11 @@ import { hideLoader, showLoader } from "../components/loader.js";
 const apiGetBook = "https://monis0395.api.stdlib.com/getBook@dev/?url=";
 
 function requestAndUpdateBook(book) {
-    const oldTotalChapters = book.chapters.length;
     return requestFor(apiGetBook, book.url).then((updatedBook) => {
-        const newTotalChapters = updatedBook.chapters.length;
         if (book.chaptersInReverse) {
             updatedBook.chapters = updatedBook.chapters.reverse()
         }
-        if (updatedBook && updatedBook.title && newTotalChapters !== oldTotalChapters) {
+        if (updatedBook && updatedBook.title) {
             storeOrUpdateBook(updatedBook.title, updatedBook)
         }
     });

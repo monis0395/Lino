@@ -2,8 +2,6 @@ import { fetchBook } from "../book/books-store.js";
 import { getChapter } from "./get-chapter.js";
 import { addChapterToPage } from "./chapter-rendering.js";
 
-const loadedChaptersMap = {};
-
 export function getAndRenderChapter(bookTitle, chapterNumber = 0) {
     let chapterTitle = "";
     const promise = fetchBook(bookTitle)
@@ -14,7 +12,6 @@ export function getAndRenderChapter(bookTitle, chapterNumber = 0) {
         })
         .then((chapter) => {
             addChapterToPage(chapter, chapterNumber, chapterTitle);
-            loadedChaptersMap[chapterNumber] = true;
             console.log("rendered chapter", chapterNumber);
         });
     promise.catch(console.error);

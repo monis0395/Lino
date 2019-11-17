@@ -7,6 +7,8 @@ import { fontSettingsInit } from "./font-settings.js";
 import { loadChapterList } from "./chapter-list.js";
 import { initChapterListener } from "./chapter-listener.js";
 import { fetchChapter } from "./chapter-store.js";
+import { requestNStoreChapter } from "./get-chapter.js";
+import { removeChapter } from "./chapter-rendering.js";
 
 const search = new URLSearchParams(window.location.search);
 const bookTitle = search.get("book");
@@ -97,20 +99,45 @@ function scrollToLastReadElement() {
         })
 }
 
+function attachChapterReloadListener() {
+    const reloadChapterBtn = document.getElementById("reload-chapter-btn");
+    reloadChapterBtn.onclick = () => {
+        let lastReadChapter;
+        showLoader();
+        fetchBook(bookTitle)
+            .then(({chapters, lastRead}) => {
+                lastReadChapter = lastRead;
+                const chapterURL = chapters[lastRead].link;
+                return requestNStoreChapter(chapterURL);
+            })
+            .then(() => {
+                removeChapter(lastReadChapter);
+                return getAndRenderChapter(bookTitle, lastReadChapter)
+            })
+            .then(() => showSnackbar(`Updated chapter`))
+            .catch((error) => {
+                window.console.error(error);
+                showSnackbar("Error: " + error.message)
+            })
+            .finally(hideLoader)
+    }
+}
+
 function init() {
     hideLoader();
     window.bookReader = {bookTitle};
     document.title = bookTitle;
     showLoader();
     updateLastRead(bookTitle, chapterNumber).then(() => {
-        autoHideNavBar();
         fontSettingsInit();
         loadChapterList();
+        attachChapterReloadListener();
         getAndRenderChapter(bookTitle, chapterNumber)
             .then(scrollToLastReadElement)
             .catch((error) => showSnackbar("Error: " + error.message))
             .finally(() => {
                 hideLoader();
+                autoHideNavBar();
                 initChapterListener();
             });
     });
