@@ -1,3 +1,25 @@
+#info-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--primary-background);
+    z-index: 2;
+}
+
+#info-chapter-name {
+    padding: var(--baseline-v) var(--baseline-h);
+}
+
+#info-chapter-progress-container {
+    padding-bottom: calc(var(--baseline-h) / 2);
+}
+
+#info-chapter-progress-bar {
+    width: 30%;
+    height: 2px;
+    background-color: var(--highlight-color);
+}
+
 .page > .chapter {
     flex: 1;
     display: flex;
@@ -73,7 +95,7 @@
     position: absolute;
     width: 100vw;
     max-width: calc(var(--baseline-h) * 32);
-    z-index: 1;
+    z-index: 4;
     overflow-x: hidden;
     overflow-y: scroll;
     background-color: var(--secondary-background);

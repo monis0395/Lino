@@ -2,7 +2,7 @@ import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { addFinToPage, getAllChaptersRendered, removeChapter } from "./chapter-rendering.js";
 import { updateListSelection } from "./chapter-list.js";
-import { debounce, findFirstVisibleElement, getElementXPath, getVisibilityForElement, throttle } from "../util/dom-util.js";
+import { debounce, findFirstVisibleElement, getElementByXpath, getPathTo, getVisibilityForElement, throttle } from "../util/dom-util.js";
 import { storeChapter } from "./chapter-store.js";
 
 function onScrollDebounce() {
@@ -62,14 +62,26 @@ function updateLastRead(chapterNumber) {
 function updateXpath(chapterNumber, chapterElement) {
     const bookTitle = window.bookReader.bookTitle;
     const firstVisibleElement = findFirstVisibleElement(chapterElement);
+    let finalXpath;
 
-    fetchBook(bookTitle)
-        .then((book) => {
-            const chapter = book.chapters[chapterNumber];
-            storeChapter(chapter.link, {
-                lastReadElementXpath: getElementXPath(firstVisibleElement),
-            })
-        });
+    const xpath = getPathTo(firstVisibleElement);
+    const element = getElementByXpath(xpath);
+    if (element === firstVisibleElement) {
+        finalXpath = xpath;
+        console.log("xpath", finalXpath, "path 2")
+    }
+
+    if (finalXpath) {
+        fetchBook(bookTitle)
+            .then((book) => {
+                const chapter = book.chapters[chapterNumber];
+                storeChapter(chapter.link, {
+                    lastReadElementXpath: finalXpath,
+                })
+            });
+    } else {
+        console.log("no correct xpath found")
+    }
 }
 
 function loadNextChapter(chapterNumber) {
