@@ -90,7 +90,7 @@ function updateXpath(chapterNumber, firstVisibleElement) {
     const element = getElementByXpath(xpath);
     if (element === firstVisibleElement) {
         finalXpath = xpath;
-        console.log("xpath", finalXpath, "path 2")
+        // console.log("xpath", finalXpath, "path 2")
     }
 
     if (finalXpath) {
