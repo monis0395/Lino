@@ -42,3 +42,25 @@ function editDistance(s1, s2) {
     }
     return costs[s2.length];
 }
+
+export function getSanitizedChapterName(chapterName) {
+    if (chapterName.toLowerCase().includes("chapter")
+        && chapterName.length > ("chapter".length + 10)) {
+        let lowerCaseChapter = chapterName.toLowerCase();
+        const start = lowerCaseChapter.indexOf("chapter") + "chapter".length;
+        let i = start;
+        for (; i < lowerCaseChapter.length; i++) {
+            const char = lowerCaseChapter.charAt(i);
+            if (isLetter(char)) {
+                break
+            }
+        }
+        return getSanitizedChapterName(chapterName.substring(i));
+    } else {
+        return chapterName;
+    }
+}
+
+function isLetter(char) {
+    return char.toUpperCase() !== char.toLowerCase();
+}

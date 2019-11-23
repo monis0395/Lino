@@ -1,5 +1,5 @@
 import { removeChild, traverseAllElements } from "../util/dom-util.js";
-import { similarity } from "../util/string-util.js";
+import { getSanitizedChapterName, similarity } from "../util/string-util.js";
 
 const chapterTemplateBlock = `
     <div id='chapter-__chapter_number__' class='chapter' data-chapterNumber="__chapter_number__">
@@ -27,7 +27,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;
     chapterTitle = chapterTitle || chapter.title;
-    const chapterName = chapterNumber + ". " +getSanitizedChapterName(chapterTitle)
+    const chapterName = (chapterNumber + 1) + ". " + getSanitizedChapterName(chapterTitle);
     dummyDiv.innerHTML = chapterTemplateBlock
         .replace(/__chapter_number__/g, chapterNumber)
         .replace(/__chapter_link__/g, chapter.url)
@@ -44,28 +44,6 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
         page.appendChild(chapterElement);
     }
     console.log("added chapter to page", chapterNumber);
-}
-
-export function getSanitizedChapterName(chapterName) {
-    if (chapterName.toLowerCase().includes("chapter")
-        && chapterName.length > ("chapter".length + 10)) {
-        let lowerCaseChapter = chapterName.toLowerCase();
-        const start = lowerCaseChapter.indexOf("chapter") + "chapter".length;
-        let i = start;
-        for (; i < lowerCaseChapter.length; i++) {
-            const char = lowerCaseChapter.charAt(i);
-            if (isLetter(char)) {
-                break
-            }
-        }
-        return getSanitizedChapterName(chapterName.substring(i));
-    } else {
-        return chapterName;
-    }
-}
-
-function isLetter(char) {
-    return char.toUpperCase() !== char.toLowerCase();
 }
 
 export function getChapterElement(chapterNumber) {

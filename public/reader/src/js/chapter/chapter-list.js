@@ -6,12 +6,13 @@ import { hideLoader, showLoader } from "../components/loader.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { showSnackbar } from "../components/snackbar.js";
 import { updateInfoChapterName } from "../components/chapter-info-bar.js";
+import { getSanitizedChapterName } from "../util/string-util.js";
 
 const chaptersList = document.getElementById("chapters-list");
 const selectedClassName = "selected";
 const templateBlock = `
-<li id="chapter-index-__chapter_number__" onclick="window.chapterClicked(__chapter_number__)">
-    __chapter_title__
+<li id="chapter-index-__chapter_index__" onclick="window.chapterClicked(__chapter_index__)">
+    __chapter_number__. __chapter_title__
 </li>
 `;
 
@@ -92,11 +93,13 @@ export function loadChapterList() {
             chaptersList.appendChild(chapterListUl);
             chapters.forEach((chapter, index) => {
                 const chapterLink = getChapterLink(bookTitle, index);
+                const chapterTitle = getSanitizedChapterName(chapter.title);
                 const dummyDiv = document.createElement("div");
                 dummyDiv.innerHTML = templateBlock
-                    .replace(/__chapter_number__/g, index)
+                    .replace(/__chapter_number__/g, (index +1))
+                    .replace(/__chapter_index__/g, index)
                     .replace(/__chapter_link__/g, chapterLink)
-                    .replace(/__chapter_title__/g, chapter.title);
+                    .replace(/__chapter_title__/g, chapterTitle);
                 chapterListUl.appendChild(dummyDiv.firstElementChild);
             });
             updateListSelection(lastRead)
