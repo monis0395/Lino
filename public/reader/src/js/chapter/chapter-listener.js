@@ -5,6 +5,7 @@ import { updateListSelection } from "./chapter-list.js";
 import { debounce, findFirstVisibleElement, getElementByXpath, getPathTo, getVisibilityForElement, throttle } from "../util/dom-util.js";
 import { storeChapter } from "./chapter-store.js";
 import { updateInfoChapterName, updateProgressBar } from "../components/chapter-info-bar.js";
+import { updateTotalProgress } from "../components/chapter-info-bar.js";
 
 function onScrollDebounce() {
     processMaxVisibleChapter("debounce");
@@ -41,6 +42,7 @@ function getFirstVisibleChapter() {
 function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
     if (onFirstVisibleChapter.lastChapterFound !== chapterNumber) {
         updateListSelection(chapterNumber);
+        updateTotalProgress(chapterNumber);
         updateLastRead(chapterNumber);
         loadNextChapter(chapterNumber);
     }

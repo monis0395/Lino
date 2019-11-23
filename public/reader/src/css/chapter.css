@@ -8,27 +8,24 @@
 
 .progressbar {
     position: fixed;
-    top: 0;
+    bottom: 0;
     width: 100%;
     background: var(--primary-background);
     z-index: 3;
 }
 
 .info-chapter {
-    color: var(--secondary-foreground);
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary-foreground);
     font-size: calc(var(--baseline-v) * 0.75);
-    text-align: center;
     padding: calc(var(--baseline-v) * 0.5) var(--baseline-h) 0 var(--baseline-h);
-}
-
-#info-total-progress {
-    float: right;
 }
 
 #info-chapter-progress-bar {
     width: 1px;
     height: 2px;
-    background-color: var(--highlight-color);
+    background-color: var(--secondary-foreground);
     transition: width 0.4s;
 }
 
@@ -52,6 +49,7 @@
 
 .reader-chapter-content {
     margin-bottom: calc(var(--baseline-v) * 5);
+    /*text-align: justify;*/
 }
 
 .reader-chapter-content h1,
