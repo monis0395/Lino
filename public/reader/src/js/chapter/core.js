@@ -37,11 +37,11 @@ function autoHideNavBar() {
         const currentScrollPosition = window.pageYOffset;
         if (Math.abs(prevScrollPosition - currentScrollPosition) > 32) {
             const scrollingUp = prevScrollPosition > currentScrollPosition;
-            // if (scrollingUp) {
-            //     showNavBar();
-            // } else {
-            //     hideNavBar();
-            // }
+            if (scrollingUp) {
+                // showNavBar();
+            } else {
+                hideNavBar();
+            }
         }
         prevScrollPosition = currentScrollPosition;
     }

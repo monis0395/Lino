@@ -1,21 +1,32 @@
 #info-bar {
     position: fixed;
-    top: 0;
+    bottom: 0;
     width: 100%;
     background: var(--primary-background);
     z-index: 2;
 }
 
-#info-chapter-name {
-    padding: var(--baseline-v) var(--baseline-h);
+.progressbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--primary-background);
+    z-index: 3;
 }
 
-#info-chapter-progress-container {
-    padding-bottom: calc(var(--baseline-h) / 2);
+.info-chapter {
+    color: var(--secondary-foreground);
+    font-size: calc(var(--baseline-v) * 0.75);
+    text-align: center;
+    padding: calc(var(--baseline-v) * 0.5) var(--baseline-h) 0 var(--baseline-h);
+}
+
+#info-total-progress {
+    float: right;
 }
 
 #info-chapter-progress-bar {
-    width: 0;
+    width: 1px;
     height: 2px;
     background-color: var(--highlight-color);
     transition: width 0.4s;

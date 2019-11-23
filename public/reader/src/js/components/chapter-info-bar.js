@@ -1,4 +1,5 @@
-const progressElement = document.getElementById("info-chapter-progress-bar");
+const progressBarElement = document.getElementById("info-chapter-progress-bar");
+// const progressElement = document.getElementById("info-total-progress");
 
 export function updateProgressBar(value, max) {
     const percentage = Math.floor(value / max * 100);
@@ -6,7 +7,8 @@ export function updateProgressBar(value, max) {
         console.log("percentage", percentage)
     }
     const pvalue = `${percentage}%`;
-    progressElement.style.width = pvalue;
+    progressBarElement.style.width = pvalue;
+    // progressElement.innerText = `${pvalue}`;
 }
 
 const infoChapterName = document.getElementById("info-chapter-name");
