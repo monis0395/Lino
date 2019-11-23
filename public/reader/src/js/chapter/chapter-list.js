@@ -5,6 +5,7 @@ import { getChapterElement, removeChaptersExcept, removeFin } from "./chapter-re
 import { hideLoader, showLoader } from "../components/loader.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { showSnackbar } from "../components/snackbar.js";
+import { updateInfoChapterName } from "../components/chapter-info-bar.js";
 
 const chaptersList = document.getElementById("chapters-list");
 const selectedClassName = "selected";
@@ -29,6 +30,7 @@ window.chapterClicked = (chapterNumber) => {
                 removeFin();
                 const chapterElement = getChapterElement(chapterNumber);
                 if (chapterElement) {
+                    updateInfoChapterName(chapterElement);
                     chapterElement.scrollIntoView();
                 }
             })

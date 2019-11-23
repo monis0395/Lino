@@ -4,6 +4,7 @@ import { addFinToPage, getAllChaptersRendered, removeChapter } from "./chapter-r
 import { updateListSelection } from "./chapter-list.js";
 import { debounce, findFirstVisibleElement, getElementByXpath, getPathTo, getVisibilityForElement, throttle } from "../util/dom-util.js";
 import { storeChapter } from "./chapter-store.js";
+import { updateInfoChapterName, updateProgressBar } from "../components/chapter-info-bar.js";
 
 function onScrollDebounce() {
     processMaxVisibleChapter("debounce");
@@ -46,10 +47,10 @@ function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
     if (mode === "debounce") {
         removeChapter(chapterNumber - 2);
     }
-    updateXpath(chapterNumber, chapterElement);
+    updateInfoChapterName(chapterElement);
+    updateChapterProgress(chapterNumber, chapterElement);
     onFirstVisibleChapter.lastChapterFound = chapterNumber;
 }
-
 
 function updateLastRead(chapterNumber) {
     storeOrUpdateBook(window.bookReader.bookTitle, {
@@ -57,31 +58,6 @@ function updateLastRead(chapterNumber) {
         lastReadTimestamp: Date.now(),
     });
     console.log("updated last read to", chapterNumber);
-}
-
-function updateXpath(chapterNumber, chapterElement) {
-    const bookTitle = window.bookReader.bookTitle;
-    const firstVisibleElement = findFirstVisibleElement(chapterElement);
-    let finalXpath;
-
-    const xpath = getPathTo(firstVisibleElement);
-    const element = getElementByXpath(xpath);
-    if (element === firstVisibleElement) {
-        finalXpath = xpath;
-        console.log("xpath", finalXpath, "path 2")
-    }
-
-    if (finalXpath) {
-        fetchBook(bookTitle)
-            .then((book) => {
-                const chapter = book.chapters[chapterNumber];
-                storeChapter(chapter.link, {
-                    lastReadElementXpath: finalXpath,
-                })
-            });
-    } else {
-        console.log("no correct xpath found")
-    }
 }
 
 function loadNextChapter(chapterNumber) {
@@ -99,8 +75,40 @@ function loadNextChapter(chapterNumber) {
         })
 }
 
+function updateChapterProgress(chapterNumber, chapterElement) {
+    const firstVisibleElement = findFirstVisibleElement(chapterElement);
+    if (firstVisibleElement) {
+        updateXpath(chapterNumber, firstVisibleElement);
+        const value = firstVisibleElement.offsetTop - chapterElement.offsetTop;
+        updateProgressBar(value, chapterElement.scrollHeight)
+    }
+}
+
+function updateXpath(chapterNumber, firstVisibleElement) {
+    let finalXpath;
+    const xpath = getPathTo(firstVisibleElement);
+    const element = getElementByXpath(xpath);
+    if (element === firstVisibleElement) {
+        finalXpath = xpath;
+        console.log("xpath", finalXpath, "path 2")
+    }
+
+    if (finalXpath) {
+        const bookTitle = window.bookReader.bookTitle;
+        fetchBook(bookTitle)
+            .then((book) => {
+                const chapter = book.chapters[chapterNumber];
+                storeChapter(chapter.link, {
+                    lastReadElementXpath: finalXpath,
+                })
+            });
+    } else {
+        console.log("no correct xpath found")
+    }
+}
+
 
 export function initChapterListener() {
     window.addEventListener('scroll', debounce(onScrollDebounce, 250), {passive: true});
-    window.addEventListener('scroll', throttle(onScrollThrottle, 1000), {passive: true});
+    window.addEventListener('scroll', throttle(onScrollThrottle, 100), {passive: true});
 }

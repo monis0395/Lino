@@ -8,7 +8,8 @@ import { loadChapterList } from "./chapter-list.js";
 import { initChapterListener } from "./chapter-listener.js";
 import { fetchChapter } from "./chapter-store.js";
 import { requestNStoreChapter } from "./get-chapter.js";
-import { removeChapter } from "./chapter-rendering.js";
+import { getChapterElement, removeChapter } from "./chapter-rendering.js";
+import { updateInfoChapterName } from "../components/chapter-info-bar.js";
 
 const search = new URLSearchParams(window.location.search);
 const bookTitle = search.get("book");
@@ -94,10 +95,7 @@ function scrollToLastReadElement() {
             const xpath = chapter.lastReadElementXpath;
             const element = getElementByXpath(xpath);
             if (xpath) {
-                window.scrollTo({
-                    top: element.offsetTop,
-                    behavior: 'smooth'
-                });
+                scrollToElement(element, null, false);
             }
         })
 }
@@ -136,6 +134,10 @@ function init() {
         loadChapterList();
         attachChapterReloadListener();
         getAndRenderChapter(bookTitle, chapterNumber)
+            .then(() => {
+                const chapterElement = getChapterElement(chapterNumber);
+                updateInfoChapterName(chapterElement)
+            })
             .then(scrollToLastReadElement)
             .catch((error) => showSnackbar("Error: " + error.message))
             .finally(() => {

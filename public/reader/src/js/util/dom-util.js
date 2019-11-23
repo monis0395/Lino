@@ -117,7 +117,10 @@ export function scrollToElement(element, parentElement, CalculatedOffset = true)
         if (parentElement) {
             parentElement.scrollTop = offset;
         } else {
-            window.scrollTo(0, offset)
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            })
         }
     }
 }

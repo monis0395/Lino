@@ -27,10 +27,11 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;
     chapterTitle = chapterTitle || chapter.title;
+    const chapterName = chapterNumber + ". " +getSanitizedChapterName(chapterTitle)
     dummyDiv.innerHTML = chapterTemplateBlock
         .replace(/__chapter_number__/g, chapterNumber)
         .replace(/__chapter_link__/g, chapter.url)
-        .replace(/__chapter_title__/g, chapterTitle)
+        .replace(/__chapter_title__/g, chapterName)
         .replace(/__chapter_domain__/g, hostname)
         .replace(/__chapter_content__/g, filterContent(chapter, chapterTitle));
     const chapterElement = dummyDiv.firstElementChild;
@@ -43,6 +44,28 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
         page.appendChild(chapterElement);
     }
     console.log("added chapter to page", chapterNumber);
+}
+
+export function getSanitizedChapterName(chapterName) {
+    if (chapterName.toLowerCase().includes("chapter")
+        && chapterName.length > ("chapter".length + 10)) {
+        let lowerCaseChapter = chapterName.toLowerCase();
+        const start = lowerCaseChapter.indexOf("chapter") + "chapter".length;
+        let i = start;
+        for (; i < lowerCaseChapter.length; i++) {
+            const char = lowerCaseChapter.charAt(i);
+            if (isLetter(char)) {
+                break
+            }
+        }
+        return getSanitizedChapterName(chapterName.substring(i));
+    } else {
+        return chapterName;
+    }
+}
+
+function isLetter(char) {
+    return char.toUpperCase() !== char.toLowerCase();
 }
 
 export function getChapterElement(chapterNumber) {
@@ -89,6 +112,7 @@ function filterContent(chapter, chapterTitle) {
             removeChild(element);
         }
     });
+    content.firstChild.id = "";
     return content.innerHTML;
 }
 
