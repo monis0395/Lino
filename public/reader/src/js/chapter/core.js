@@ -93,8 +93,11 @@ function scrollToLastReadElement() {
         .then((chapter) => {
             const xpath = chapter.lastReadElementXpath;
             const element = getElementByXpath(xpath);
-            if (element) {
-                scrollToElement(element, null, false);
+            if (xpath) {
+                window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: 'smooth'
+                });
             }
         })
 }

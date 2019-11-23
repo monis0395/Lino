@@ -14,33 +14,31 @@ function onScrollThrottle() {
 }
 
 function processMaxVisibleChapter(mode) {
-    const maxVisible = getMaxVisibleChapter();
-    if (maxVisible && !isNaN(maxVisible.chapterNumber)) {
-        onMaxVisibleChapter(maxVisible, mode);
+    const firstVisible = getFirstVisibleChapter();
+    if (firstVisible && !isNaN(firstVisible.chapterNumber)) {
+        onFirstVisibleChapter(firstVisible, mode);
     }
 }
 
-function getMaxVisibleChapter() {
+function getFirstVisibleChapter() {
     const chapters = getAllChaptersRendered();
-    let maxVisible = undefined;
-    let lastMaxVisibility = 0;
+    let firstVisible = undefined;
     Object.keys(chapters).forEach((chapterNumber) => {
         chapterNumber = parseInt(chapterNumber, 10);
         const chapterElement = chapters[chapterNumber];
         const visibility = getVisibilityForElement(chapterElement);
-        if (visibility > lastMaxVisibility) {
-            lastMaxVisibility = visibility;
-            maxVisible = {
+        if (visibility > 0 && !firstVisible) {
+            firstVisible = {
                 chapterElement,
                 chapterNumber,
             };
         }
     });
-    return maxVisible;
+    return firstVisible;
 }
 
-function onMaxVisibleChapter({chapterNumber, chapterElement}, mode) {
-    if (onMaxVisibleChapter.lastChapterFound !== chapterNumber) {
+function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
+    if (onFirstVisibleChapter.lastChapterFound !== chapterNumber) {
         updateListSelection(chapterNumber);
         updateLastRead(chapterNumber);
         loadNextChapter(chapterNumber);
@@ -49,7 +47,7 @@ function onMaxVisibleChapter({chapterNumber, chapterElement}, mode) {
         removeChapter(chapterNumber - 2);
     }
     updateXpath(chapterNumber, chapterElement);
-    onMaxVisibleChapter.lastChapterFound = chapterNumber;
+    onFirstVisibleChapter.lastChapterFound = chapterNumber;
 }
 
 

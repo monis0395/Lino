@@ -90,7 +90,7 @@ export function findFirstVisibleElement(element) {
             return
         }
         const grandChild = childElement.children;
-        if (grandChild.length === 0 && visible === 100) {
+        if (grandChild.length === 0 && visible > 0) {
             visibleElement = childElement;
         }
     });
