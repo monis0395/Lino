@@ -9,6 +9,7 @@ import { fetchChapter } from "./chapter-store.js";
 import { requestNStoreChapter } from "./get-chapter.js";
 import { getChapterElement, removeChapter } from "./chapter-rendering.js";
 import { updateInfoChapterName } from "../components/chapter-info-bar.js";
+import { startCheckingForUpdates } from "../book/update-books.js";
 
 const search = new URLSearchParams(window.location.search);
 const bookTitle = search.get("book");
@@ -143,6 +144,7 @@ function init() {
                 hideLoader();
                 autoHideNavBar();
                 initChapterListener();
+                startCheckingForUpdates();
             });
     });
 }

@@ -4,7 +4,7 @@ import { addFinToPage, getAllChaptersRendered, removeChapter } from "./chapter-r
 import { updateListSelection } from "./chapter-list.js";
 import { debounce, findFirstVisibleElement, getElementByXpath, getPathTo, getVisibilityForElement, throttle } from "../util/dom-util.js";
 import { storeChapter } from "./chapter-store.js";
-import { updateInfoChapterName, updateProgressBar, updateTotalProgress } from "../components/chapter-info-bar.js";
+import { updateInfoChapterName, updateProgressBar } from "../components/chapter-info-bar.js";
 import { getChapterLink } from "../components/chapter-url.js";
 
 function onScrollDebounce() {
@@ -42,7 +42,6 @@ function getFirstVisibleChapter() {
 function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
     if (onFirstVisibleChapter.lastChapterFound !== chapterNumber) {
         updateListSelection(chapterNumber);
-        updateTotalProgress(chapterNumber);
         updateLastRead(chapterNumber);
         loadNextChapter(chapterNumber);
     }

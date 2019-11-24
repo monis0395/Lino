@@ -49,6 +49,8 @@ export function checkAndReloadBooks() {
         .finally(hideLoader)
 }
 
-const updateInterval = 15 * 1000 * 60; // 15 minutes
-checkForUpdates();
-setInterval(checkForUpdates, updateInterval);
+export function startCheckingForUpdates() {
+    const updateInterval = 15 * 1000 * 60; // 15 minutes
+    checkForUpdates();
+    setInterval(checkForUpdates, updateInterval);
+}

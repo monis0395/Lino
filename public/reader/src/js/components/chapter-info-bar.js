@@ -17,6 +17,15 @@ export function updateInfoChapterName(chapterElement) {
     infoChapterName.textContent = chapterName;
 }
 
+const infoTime = document.getElementById("info-time");
+function updateTime() {
+    const today = new Date();
+    const time = today.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
+    infoTime.textContent = time;
+}
+
+updateTime();
+setInterval(updateTime, 1e3 * 60);
 
 export function updateTotalProgress(chapterNumber) {
     // const bookTitle = window.bookReader.bookTitle;
