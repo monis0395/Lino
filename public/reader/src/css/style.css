@@ -137,11 +137,7 @@ path {
 }
 
 #loader-container {
-    display: flex;
-    /*height: 80px;*/
-    /*width: 80px;*/
     position: fixed;
-    padding: 30% 0;
     overflow: hidden;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.4);
