@@ -58,7 +58,7 @@ export function updateListSelection(lastReadChapterIndex) {
         }
         targetLi.classList.add(selectedClassName);
         console.log("update chapters index list to", lastReadChapterIndex);
-        setTimeout(() => scrollToElement(targetLi, chaptersList), 1000);
+        scrollToElement(targetLi, chaptersList);
     }
 }
 
@@ -85,7 +85,6 @@ export function loadChapterList() {
     fetchBook(bookTitle)
         .then(({chapters, lastRead}) => {
             const chapterListUl = document.createElement("ul");
-            chaptersList.appendChild(chapterListUl);
             chapters.forEach((chapter, index) => {
                 const chapterTitle = getSanitizedChapterName(chapter.title);
                 const li = document.createElement("li");
@@ -94,7 +93,8 @@ export function loadChapterList() {
                 li.onclick = () => chapterClicked(index);
                 chapterListUl.appendChild(li);
             });
-            updateListSelection(lastRead)
+            chaptersList.appendChild(chapterListUl);
+            updateListSelection(lastRead);
         });
     attachChapterListBtnListener();
 }
