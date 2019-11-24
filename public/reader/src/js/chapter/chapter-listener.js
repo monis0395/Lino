@@ -4,8 +4,8 @@ import { addFinToPage, getAllChaptersRendered, removeChapter } from "./chapter-r
 import { updateListSelection } from "./chapter-list.js";
 import { debounce, findFirstVisibleElement, getElementByXpath, getPathTo, getVisibilityForElement, throttle } from "../util/dom-util.js";
 import { storeChapter } from "./chapter-store.js";
-import { updateInfoChapterName, updateProgressBar } from "../components/chapter-info-bar.js";
-import { updateTotalProgress } from "../components/chapter-info-bar.js";
+import { updateInfoChapterName, updateProgressBar, updateTotalProgress } from "../components/chapter-info-bar.js";
+import { getChapterLink } from "../components/chapter-url.js";
 
 function onScrollDebounce() {
     processMaxVisibleChapter("debounce");
@@ -55,7 +55,10 @@ function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
 }
 
 function updateLastRead(chapterNumber) {
-    storeOrUpdateBook(window.bookReader.bookTitle, {
+    const bookTitle = window.bookReader.bookTitle;
+    const chapterLink = getChapterLink(bookTitle, chapterNumber);
+    window.history.replaceState({}, bookTitle, chapterLink);
+    storeOrUpdateBook(bookTitle, {
         lastRead: chapterNumber,
         lastReadTimestamp: Date.now(),
     });
