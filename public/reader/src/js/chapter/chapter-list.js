@@ -92,14 +92,13 @@ export function loadChapterList() {
             const chapterListUl = document.createElement("ul");
             chaptersList.appendChild(chapterListUl);
             chapters.forEach((chapter, index) => {
-                const chapterLink = getChapterLink(bookTitle, index);
                 const chapterTitle = getSanitizedChapterName(chapter.title);
                 const dummyDiv = document.createElement("div");
-                dummyDiv.innerHTML = templateBlock
+                const content = templateBlock
                     .replace(/__chapter_number__/g, (index + 1))
                     .replace(/__chapter_index__/g, index)
-                    .replace(/__chapter_link__/g, chapterLink)
                     .replace(/__chapter_title__/g, chapterTitle);
+                dummyDiv.innerHTML = content;
                 chapterListUl.appendChild(dummyDiv.firstElementChild);
             });
             updateListSelection(lastRead)
