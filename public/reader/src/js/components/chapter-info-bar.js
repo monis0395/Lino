@@ -7,7 +7,9 @@ export function updateProgressBar(value, max) {
         console.log("percentage", percentage)
     }
     progressBarElement.style.width = `${percentage.toFixed(2)}%`;
-    progressElement.textContent = `${percentage.toFixed(1)}%`;
+    let pvalue = percentage.toFixed(1).toString();
+    pvalue = pvalue < 10 ? '0' + pvalue : pvalue;
+    progressElement.textContent = `${pvalue}%`;
 }
 
 const infoChapterName = document.getElementById("info-chapter-name");
@@ -17,22 +19,24 @@ export function updateInfoChapterName(chapterElement) {
     infoChapterName.textContent = chapterName;
 }
 
+function formatAMPM(date) {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours %= 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    const strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
 const infoTime = document.getElementById("info-time");
+
 function updateTime() {
     const today = new Date();
-    const time = today.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
-    infoTime.textContent = time;
+    infoTime.textContent = formatAMPM(today);
 }
 
 updateTime();
 setInterval(updateTime, 1e3 * 60);
-
-export function updateTotalProgress(chapterNumber) {
-    // const bookTitle = window.bookReader.bookTitle;
-    // fetchBook(bookTitle)
-    //     .then((book) => {
-    //         const totalChapters = book.chapters.length;
-    //         const percentage = chapterNumber / totalChapters * 100;
-    //         progressElement.innerText = `${percentage.toFixed(1)}%`;
-    //     })
-}
