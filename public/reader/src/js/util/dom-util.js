@@ -56,16 +56,14 @@ export function debounce(fn, wait = 1) {
     }
 }
 
-const pageHeight = window.innerHeight
-    , scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
 export function getVisibilityForElement(element) {
-    const elementTop = element.getBoundingClientRect().top + scrollTop
-        , elementHeight = element.offsetHeight
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+        , elementTop = element.getBoundingClientRect().top + scrollTop
+        , elementHeight = element.scrollHeight
         , portionHiddenBeforeVP = scrollTop - elementTop
-        , portionHiddenAfterVP = (elementTop + elementHeight) - (scrollTop + pageHeight);
+        , portionHiddenAfterVP = (elementTop + elementHeight) - (scrollTop + clientHeight);
     if ((scrollTop > elementTop + elementHeight)
-        || (elementTop > scrollTop + pageHeight)
+        || (elementTop > scrollTop + clientHeight)
         || window.getComputedStyle(element, null).display === "none") {
         return 0;
     } else {
@@ -94,6 +92,7 @@ export function findFirstVisibleElement(element) {
         if (grandChild.length === 0 && visible > 0) {
             visibleElement = childElement;
         }
+        return !!visibleElement;
     });
     return visibleElement;
 }
@@ -112,11 +111,11 @@ export function traverseAllElements(element, callback) {
     return exit
 }
 
-const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+const clientHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 export function scrollToElement(element, parentElement, CalculatedOffset = true) {
-    const elementHeight = element.offsetHeight;
-    const multiplier = Math.floor(height / 3 / elementHeight);
+    const elementHeight = element.scrollHeight;
+    const multiplier = Math.floor(clientHeight / 3 / elementHeight);
     const halfHeight = elementHeight * multiplier;
     const elementOffsetTop = element.offsetTop;
     let offset = elementOffsetTop;
@@ -155,29 +154,6 @@ export function getPathTo(element) {
             ix++;
         }
     }
-}
-
-export function getElementXPath(elt) {
-    let path = "";
-    for (; elt && elt.nodeType === 1; elt = elt.parentNode) {
-        const idx = getElementIdx(elt);
-        let xname = elt.tagName;
-        if (idx > 1) {
-            xname += "[" + idx + "]";
-        }
-        path = "/" + xname + path;
-    }
-    return path;
-}
-
-function getElementIdx(elt) {
-    let count = 1;
-    for (let sib = elt.previousSibling; sib; sib = sib.previousSibling) {
-        if (sib.nodeType === 1 && sib.tagName === elt.tagName) {
-            count++;
-        }
-    }
-    return count;
 }
 
 export function getElementByXpath(path) {
