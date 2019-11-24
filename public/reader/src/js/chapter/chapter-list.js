@@ -58,7 +58,7 @@ export function updateListSelection(lastReadChapterIndex) {
         }
         targetLi.classList.add(selectedClassName);
         console.log("update chapters index list to", lastReadChapterIndex);
-        scrollToElement(targetLi, chaptersList);
+        setTimeout(() => scrollToElement(targetLi, chaptersList), 1000);
     }
 }
 
@@ -93,8 +93,8 @@ export function loadChapterList() {
                 li.onclick = () => chapterClicked(index);
                 chapterListUl.appendChild(li);
             });
-            updateListSelection(lastRead);
             chaptersList.appendChild(chapterListUl);
+            updateListSelection(lastRead);
         });
     attachChapterListBtnListener();
 }
