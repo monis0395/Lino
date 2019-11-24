@@ -56,10 +56,10 @@ export function debounce(fn, wait = 1) {
     }
 }
 
+const pageHeight = window.innerHeight
+    , scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 export function getVisibilityForElement(element) {
-    const pageHeight = window.innerHeight
-        , scrollTop = window.pageYOffset || document.documentElement.scrollTop
-        , elementTop = element.getBoundingClientRect().top + scrollTop
+        const elementTop = element.getBoundingClientRect().top + scrollTop
         , elementHeight = element.offsetHeight
         , portionHiddenBeforeVP = scrollTop - elementTop
         , portionHiddenAfterVP = (elementTop + elementHeight) - (scrollTop + pageHeight);

@@ -85,9 +85,11 @@ function filterContent(chapter, chapterTitle) {
         });
     traverseAllElements(content, (element) => {
         const elementText = element.innerText;
-        const textSimilarity = similarity(elementText, chapterTitle);
-        if (textSimilarity > 60) {
-            removeChild(element);
+        if (elementText.toLowerCase().includes("chapter")) {
+            const textSimilarity = similarity(elementText, chapterTitle);
+            if (textSimilarity > 60) {
+                removeChild(element);
+            }
         }
     });
     content.firstChild.id = "";

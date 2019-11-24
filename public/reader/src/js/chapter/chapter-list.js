@@ -10,13 +10,8 @@ import { getSanitizedChapterName } from "../util/string-util.js";
 
 const chaptersList = document.getElementById("chapters-list");
 const selectedClassName = "selected";
-const templateBlock = `
-<li id="chapter-index-__chapter_index__" onclick="window.chapterClicked(__chapter_index__)">
-    __chapter_number__. __chapter_title__
-</li>
-`;
 
-window.chapterClicked = (chapterNumber) => {
+function chapterClicked(chapterNumber) {
     console.log("chapter clicked", chapterNumber);
     hideChaptersList();
     showLoader();
@@ -93,13 +88,11 @@ export function loadChapterList() {
             chaptersList.appendChild(chapterListUl);
             chapters.forEach((chapter, index) => {
                 const chapterTitle = getSanitizedChapterName(chapter.title);
-                const dummyDiv = document.createElement("div");
-                const content = templateBlock
-                    .replace(/__chapter_number__/g, (index + 1))
-                    .replace(/__chapter_index__/g, index)
-                    .replace(/__chapter_title__/g, chapterTitle);
-                dummyDiv.innerHTML = content;
-                chapterListUl.appendChild(dummyDiv.firstElementChild);
+                const li = document.createElement("li");
+                li.id = `chapter-index-${index}`;
+                li.innerText = `${index + 1}. ${chapterTitle}`;
+                li.onclick = () => chapterClicked(index);
+                chapterListUl.appendChild(li);
             });
             updateListSelection(lastRead)
         });
