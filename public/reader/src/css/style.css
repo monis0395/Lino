@@ -143,10 +143,6 @@ path {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-#loader {
-    margin: auto;
-}
-
 .pointer {
     cursor: pointer;
 }
