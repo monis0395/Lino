@@ -7,14 +7,14 @@ export function updateProgressBar(value, max) {
         console.log("percentage", percentage)
     }
     progressBarElement.style.width = `${percentage.toFixed(2)}%`;
-    progressElement.innerText = `${percentage.toFixed(1)}%`;
+    progressElement.textContent = `${percentage.toFixed(1)}%`;
 }
 
 const infoChapterName = document.getElementById("info-chapter-name");
 
 export function updateInfoChapterName(chapterElement) {
     const chapterName = chapterElement.dataset["chaptertitle"];
-    infoChapterName.innerText = chapterName;
+    infoChapterName.textContent = chapterName;
 }
 
 

@@ -58,8 +58,9 @@ export function debounce(fn, wait = 1) {
 
 const pageHeight = window.innerHeight
     , scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
 export function getVisibilityForElement(element) {
-        const elementTop = element.getBoundingClientRect().top + scrollTop
+    const elementTop = element.getBoundingClientRect().top + scrollTop
         , elementHeight = element.offsetHeight
         , portionHiddenBeforeVP = scrollTop - elementTop
         , portionHiddenAfterVP = (elementTop + elementHeight) - (scrollTop + pageHeight);
@@ -98,22 +99,31 @@ export function findFirstVisibleElement(element) {
 }
 
 export function traverseAllElements(element, callback) {
+    let exit = false;
     Array.from(element.children).map((childElement) => {
-        callback(childElement);
-        traverseAllElements(childElement, callback);
+        if (exit) {
+            return
+        }
+        exit = callback(childElement);
+        if (!exit) {
+            exit = traverseAllElements(childElement, callback);
+        }
     });
+    return exit
 }
 
 const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
 export function scrollToElement(element, parentElement, CalculatedOffset = true) {
     const elementHeight = element.offsetHeight;
     const multiplier = Math.floor(height / 3 / elementHeight);
     const halfHeight = elementHeight * multiplier;
-    let offset = element.offsetTop;
+    const elementOffsetTop = element.offsetTop;
+    let offset = elementOffsetTop;
     if (CalculatedOffset) {
-        offset = element.offsetTop - halfHeight;
+        offset = elementOffsetTop - halfHeight;
     }
-    if (element.offsetTop > (halfHeight + halfHeight / 2)) {
+    if (elementOffsetTop > (halfHeight + halfHeight / 2)) {
         if (parentElement) {
             parentElement.scrollTop = offset;
         } else {

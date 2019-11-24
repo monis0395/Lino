@@ -89,12 +89,12 @@ export function loadChapterList() {
                 const chapterTitle = getSanitizedChapterName(chapter.title);
                 const li = document.createElement("li");
                 li.id = `chapter-index-${index}`;
-                li.innerText = `${index + 1}. ${chapterTitle}`;
+                li.textContent = `${index + 1}. ${chapterTitle}`;
                 li.onclick = () => chapterClicked(index);
                 chapterListUl.appendChild(li);
             });
-            chaptersList.appendChild(chapterListUl);
             updateListSelection(lastRead);
+            chaptersList.appendChild(chapterListUl);
         });
     attachChapterListBtnListener();
 }

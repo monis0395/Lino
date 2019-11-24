@@ -3,7 +3,6 @@ import { getAndRenderChapter } from "./load-chapter.js";
 import { showSnackbar } from "../components/snackbar.js";
 import { getElementByXpath, isDescendant, scrollToElement, throttle } from "../util/dom-util.js";
 import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
-import { fontSettingsInit } from "./font-settings.js";
 import { loadChapterList } from "./chapter-list.js";
 import { initChapterListener } from "./chapter-listener.js";
 import { fetchChapter } from "./chapter-store.js";
@@ -15,8 +14,8 @@ const search = new URLSearchParams(window.location.search);
 const bookTitle = search.get("book");
 const chapterNumber = parseInt(search.get("chapter"), 10) || 0;
 
+let prevScrollPosition = window.pageYOffset;
 function autoHideNavBar() {
-    let prevScrollPosition = window.pageYOffset;
     let topNavBar = document.getElementById("top-nav-bar");
     let bottomNavBar = document.getElementById("bottom-nav-bar");
     let visible = true;
@@ -130,7 +129,7 @@ function init() {
     document.title = bookTitle;
     showLoader();
     updateLastRead(bookTitle, chapterNumber).then(() => {
-        fontSettingsInit();
+        // fontSettingsInit();
         loadChapterList();
         attachChapterReloadListener();
         getAndRenderChapter(bookTitle, chapterNumber)

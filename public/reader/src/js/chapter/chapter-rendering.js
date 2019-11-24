@@ -84,13 +84,16 @@ function filterContent(chapter, chapterTitle) {
             }
         });
     traverseAllElements(content, (element) => {
-        const elementText = element.innerText;
-        if (elementText.toLowerCase().includes("chapter")) {
+        let exit = false;
+        const elementText = element.textContent;
+        if (elementText.length < (chapterTitle.length * 3)) {
             const textSimilarity = similarity(elementText, chapterTitle);
             if (textSimilarity > 60) {
+                exit = true;
                 removeChild(element);
             }
         }
+        return exit;
     });
     content.firstChild.id = "";
     return content.innerHTML;

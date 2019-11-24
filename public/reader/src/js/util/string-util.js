@@ -55,7 +55,8 @@ export function getSanitizedChapterName(chapterName) {
                 break
             }
         }
-        return getSanitizedChapterName(chapterName.substring(i));
+        const sanitizedName = getSanitizedChapterName(chapterName.substring(i));
+        return sanitizedName;
     } else {
         return chapterName;
     }
