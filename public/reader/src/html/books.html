@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='../css/style.css'/>
     <link rel='stylesheet' href='../css/checkbox.css'/>
     <link rel='stylesheet' href='../css/books.css'/>
+    <link rel="manifest" href="manifest.json">
 </head>
 <body class="gold-theme-dark">
 <div class='page'>
@@ -93,5 +94,12 @@
 
 <script src="../js/third-party/localforage.js" type="module"></script>
 <script src="../js/book/core.js" type="module"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('../js/components/service-worker.js');
+        });
+    }
+</script>
 </body>
 </html>

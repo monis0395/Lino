@@ -1,0 +1,21 @@
+{
+  "short_name": "Reader",
+  "name": "Reader",
+  "icons": [
+    {
+      "src": "../images/flip-book-loader-transparent.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "../images/flip-book-loader-transparent.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/reader/src/html/books.html",
+  "background_color": "#000000",
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#000000"
+}
