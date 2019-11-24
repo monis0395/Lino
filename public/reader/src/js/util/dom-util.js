@@ -104,8 +104,8 @@ export function traverseAllElements(element, callback) {
     });
 }
 
+const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 export function scrollToElement(element, parentElement, CalculatedOffset = true) {
-    const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     const elementHeight = element.offsetHeight;
     const multiplier = Math.floor(height / 3 / elementHeight);
     const halfHeight = elementHeight * multiplier;

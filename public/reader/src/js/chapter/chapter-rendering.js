@@ -2,7 +2,7 @@ import { removeChild, traverseAllElements } from "../util/dom-util.js";
 import { getSanitizedChapterName, similarity } from "../util/string-util.js";
 
 const chapterTemplateBlock = `
-    <div id='chapter-__chapter_number__' class='chapter' data-chapterNumber="__chapter_number__">
+    <div id='chapter-__chapter_number__' class='chapter' data-chapterNumber="__chapter_number__" data-chapterTitle="__chapter_title__">
         <div class="chapter-header">
             <h2 class="chapter-title">__chapter_title__</h2>
             <div class="chapter-domain">

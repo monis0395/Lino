@@ -63,7 +63,7 @@ export function updateListSelection(lastReadChapterIndex) {
         }
         targetLi.classList.add(selectedClassName);
         console.log("update chapters index list to", lastReadChapterIndex);
-        scrollToElement(targetLi, chaptersList);
+        setTimeout(() => scrollToElement(targetLi, chaptersList), 1000);
     }
 }
 
@@ -96,7 +96,7 @@ export function loadChapterList() {
                 const chapterTitle = getSanitizedChapterName(chapter.title);
                 const dummyDiv = document.createElement("div");
                 dummyDiv.innerHTML = templateBlock
-                    .replace(/__chapter_number__/g, (index +1))
+                    .replace(/__chapter_number__/g, (index + 1))
                     .replace(/__chapter_index__/g, index)
                     .replace(/__chapter_link__/g, chapterLink)
                     .replace(/__chapter_title__/g, chapterTitle);

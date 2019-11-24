@@ -13,7 +13,7 @@ export function updateProgressBar(value, max) {
 const infoChapterName = document.getElementById("info-chapter-name");
 
 export function updateInfoChapterName(chapterElement) {
-    const chapterName = chapterElement.querySelector(".chapter-title").innerText;
+    const chapterName = chapterElement.dataset["chaptertitle"];
     infoChapterName.innerText = chapterName;
 }
 
