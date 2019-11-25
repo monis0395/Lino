@@ -6,6 +6,7 @@ import { debounce, findFirstVisibleElement, getElementByXpath, getPathTo, getVis
 import { storeChapter } from "./chapter-store.js";
 import { updateInfoChapterName, updateProgressBar } from "../components/chapter-info-bar.js";
 import { getChapterLink } from "../components/chapter-url.js";
+import { getChapterElement } from "./chapter-rendering.js";
 
 function onScrollDebounce() {
     processMaxVisibleChapter("debounce");
@@ -43,9 +44,9 @@ function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
     if (onFirstVisibleChapter.lastChapterFound !== chapterNumber) {
         updateListSelection(chapterNumber);
         updateLastRead(chapterNumber);
-        loadNextChapter(chapterNumber);
     }
     if (mode === "debounce") {
+        loadNextChapter(chapterNumber);
         removeChapter(chapterNumber - 2);
     }
     updateInfoChapterName(chapterElement);
@@ -66,6 +67,10 @@ function updateLastRead(chapterNumber) {
 
 function loadNextChapter(chapterNumber) {
     const nextChapterNumber = chapterNumber + 1;
+    const chapterElement = getChapterElement(nextChapterNumber);
+    if (chapterElement) {
+        return;
+    }
     const bookTitle = window.bookReader.bookTitle;
     console.log("loading next chapter", nextChapterNumber);
     fetchBook(bookTitle)
@@ -113,6 +118,6 @@ function updateXpath(chapterNumber, firstVisibleElement) {
 
 
 export function initChapterListener() {
-    window.addEventListener('scroll', debounce(onScrollDebounce, 250), {passive: true});
+    window.addEventListener('scroll', debounce(onScrollDebounce, 1000), {passive: true});
     window.addEventListener('scroll', throttle(onScrollThrottle, 100), {passive: true});
 }

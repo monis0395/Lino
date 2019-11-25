@@ -18,8 +18,8 @@
     display: flex;
     justify-content: space-between;
     color: var(--primary-foreground);
-    font-size: calc(var(--baseline-v) * 0.75);
-    padding: calc(var(--baseline-v) * 0.5) var(--baseline-h) 0 var(--baseline-h);
+    font-size: 10px;
+    padding: calc(var(--baseline-v) * 0.75) var(--baseline-h) 0 var(--baseline-h);
 }
 
 #info-chapter-progress-bar {
