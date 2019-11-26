@@ -13,9 +13,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/reader/src/html/books.html",
+  "start_url": "../html/books.html",
   "background_color": "#000000",
   "display": "fullscreen",
-  "scope": "/",
   "theme_color": "#000000"
 }

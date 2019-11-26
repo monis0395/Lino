@@ -12,7 +12,26 @@
     <link rel='stylesheet' href='../css/checkbox.css'/>
     <link rel='stylesheet' href='../css/books.css'/>
     <link rel="icon" href="./../images/icon-white-192x192.png">
+
+    <!-- Progressive Web App START -->
+    <meta name="description" content="This is an web site which allows to read books without all the clutter on the source page">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="./../images/icon-white-192x192.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="./../images/icon-white-128x128.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="./../images/icon-white-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="./../images/icon-white-512x512.png">
+    <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('../service-worker.js');
+            });
+        }
+    </script>
+    <!-- Progressive Web App END -->
+
 </head>
 <body class="gold-theme-dark">
 <div class='page'>
@@ -44,12 +63,5 @@
 
 <script src="../js/third-party/localforage.js" type="module"></script>
 <script src="../js/book/core.js" type="module"></script>
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('../js/components/service-worker.js');
-        });
-    }
-</script>
 </body>
 </html>
