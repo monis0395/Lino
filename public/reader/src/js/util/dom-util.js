@@ -61,8 +61,8 @@ function getScrollTop() {
     if ((getScrollTop.time  + 100) < now) {
         return getScrollTop.value;
     }
-    getScrollTop.time =now;
     const value = window.pageYOffset || document.documentElement.scrollTop;
+    getScrollTop.time =now;
     getScrollTop.value = value;
     return value;
 }
