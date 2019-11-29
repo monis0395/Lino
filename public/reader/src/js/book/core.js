@@ -1,9 +1,9 @@
 import { addBookInit } from "./add-book.js";
-import { loadBooks } from "./books-rendering.js";
+import { reloadBooks } from "./books-rendering.js";
 import { getBook } from "./get-book.js";
 import { checkAndReloadBooks } from "./update-books.js";
 import { isTabletOrMobile } from "../util/browser-util.js";
-import { hideLoader } from "../components/loader.js";
+import { hideLoader, showLoader } from "../components/loader.js";
 
 function loadFirstBook() {
     const done = localStorage.getItem("first");
@@ -30,7 +30,12 @@ function init() {
     hideLoader();
     window.bookReader = window.bookReader || {};
     addBookInit();
-    loadBooks();
+    window.addEventListener("pageshow", () => {
+        showLoader();
+        reloadBooks()
+            .finally(hideLoader);
+        console.log("pageshow called");
+    }, false);
     loadFirstBook();
     if (isTabletOrMobile()) {
         pullToRefresh();
