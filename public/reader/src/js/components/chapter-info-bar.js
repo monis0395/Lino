@@ -2,9 +2,10 @@ const progressBarElement = document.getElementById("info-chapter-progress-bar");
 const progressElement = document.getElementById("info-total-progress");
 
 export function updateProgressBar(value, max) {
-    const percentage = value / max * 100;
+    let percentage = value / max * 100;
     if (percentage > 100 || percentage < 0) {
-        console.log("percentage", percentage)
+        console.log("percentage", percentage);
+        percentage = 0;
     }
     progressBarElement.style.width = `${percentage.toFixed(2)}%`;
     let pvalue = percentage.toFixed(1).toString();

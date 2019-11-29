@@ -56,13 +56,14 @@ export function debounce(fn, wait = 1) {
     }
 }
 
-function getScrollTop() {
+export function getScrollTop() {
     const now = Date.now();
-    if ((getScrollTop.time  + 100) < now) {
+    const diff = now - getScrollTop.time;
+    if (diff < 500) {
         return getScrollTop.value;
     }
     const value = window.pageYOffset || document.documentElement.scrollTop;
-    getScrollTop.time =now;
+    getScrollTop.time = now;
     getScrollTop.value = value;
     return value;
 }
@@ -124,7 +125,7 @@ export function traverseAllElements(element, callback) {
 
 export const clientHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-export function scrollToElement(element, options = {block : "start"}) {
+export function scrollToElement(element, options = {block: "start"}) {
     if (element.offsetTop > (clientHeight * 0.50)) {
         element.scrollIntoView(options);
     }

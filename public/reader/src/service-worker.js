@@ -41,12 +41,16 @@ self.addEventListener('activate', (event) => {
 const isLocalEnv = self.location.hostname === "localhost";
 
 self.addEventListener('fetch', (event) => {
-    if (event.request.mode === 'navigate' || (event.request.method === 'GET' && needToCacheRequest(event) && !isLocalEnv)) {
+    if (isLocalEnv) {
+        return
+    }
+    if (event.request.mode === 'navigate' || (event.request.method === 'GET' && needToCacheRequest(event))) {
         event.respondWith(
             caches
                 .match(event.request)
                 .then(cachedResponse => {
                     if (cachedResponse) {
+                        console.log("serving from cache", event.request.url);
                         return cachedResponse;
                     }
 

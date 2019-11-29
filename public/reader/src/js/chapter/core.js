@@ -1,7 +1,7 @@
 import { hideLoader, showLoader } from "../components/loader.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { showSnackbar } from "../components/snackbar.js";
-import { getElementByXpath, isDescendant, scrollToElement, throttle } from "../util/dom-util.js";
+import { getElementByXpath, getScrollTop, isDescendant, scrollToElement, throttle } from "../util/dom-util.js";
 import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
 import { loadChapterList } from "./chapter-list.js";
 import { initChapterListener } from "./chapter-listener.js";
@@ -15,15 +15,18 @@ const search = new URLSearchParams(window.location.search);
 const bookTitle = search.get("book");
 const chapterNumber = parseInt(search.get("chapter"), 10) || 0;
 
-let prevScrollPosition = window.pageYOffset;
+let prevScrollPosition = getScrollTop();
+
 function autoHideNavBar() {
     let topNavBar = document.getElementById("top-nav-bar");
     let bottomNavBar = document.getElementById("bottom-nav-bar");
+    const topNavBarHeight = topNavBar.scrollHeight;
+    const bottomNavBarHeight = bottomNavBar.scrollHeight;
     let visible = true;
 
     function hideNavBar() {
-        topNavBar.style.top = `-${topNavBar.scrollHeight + 10}px`;
-        bottomNavBar.style.bottom = `-${bottomNavBar.scrollHeight + 10}px`;
+        topNavBar.style.top = `-${topNavBarHeight + 10}px`;
+        bottomNavBar.style.bottom = `-${bottomNavBarHeight + 10}px`;
         visible = false;
     }
 
@@ -34,7 +37,7 @@ function autoHideNavBar() {
     }
 
     function handleScroll() {
-        const currentScrollPosition = window.pageYOffset;
+        const currentScrollPosition = getScrollTop();
         if (Math.abs(prevScrollPosition - currentScrollPosition) > 32) {
             const scrollingUp = prevScrollPosition > currentScrollPosition;
             if (scrollingUp) {
@@ -47,7 +50,7 @@ function autoHideNavBar() {
     }
 
     function toggleNavBar() {
-        const currentScrollPosition = window.pageYOffset;
+        const currentScrollPosition = getScrollTop();
         if (Math.abs(prevScrollPosition - currentScrollPosition) >= 5) {
             return;
         }

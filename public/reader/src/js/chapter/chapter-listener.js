@@ -8,6 +8,7 @@ import {
     findFirstVisibleElement,
     getElementByXpath,
     getPathTo,
+    getScrollTop,
     getVisibilityForElement,
     throttle
 } from "../util/dom-util.js";
@@ -100,13 +101,13 @@ function loadNextChapter(chapterNumber) {
 }
 
 function updateChapterProgress(chapterNumber, chapterElement, mode) {
-    const firstVisibleElement = findFirstVisibleElement(chapterElement);
-    if (firstVisibleElement) {
-        const value = firstVisibleElement.offsetTop - chapterElement.offsetTop;
-        if (mode === "debounce" && value > (clientHeight * 0.5)) {
+    const value = getScrollTop() - chapterElement.offsetTop;
+    updateProgressBar(value, chapterElement.scrollHeight);
+    if (mode === "debounce" && value > (clientHeight * 0.5)) {
+        const firstVisibleElement = findFirstVisibleElement(chapterElement);
+        if (firstVisibleElement) {
             updateXpath(chapterNumber, firstVisibleElement);
         }
-        updateProgressBar(value, chapterElement.scrollHeight)
     }
 }
 
