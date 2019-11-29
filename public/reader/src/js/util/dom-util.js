@@ -56,8 +56,19 @@ export function debounce(fn, wait = 1) {
     }
 }
 
+function getScrollTop() {
+    const now = Date.now();
+    if ((getScrollTop.time  + 100) < now) {
+        return getScrollTop.value;
+    }
+    getScrollTop.time =now;
+    const value = window.pageYOffset || document.documentElement.scrollTop;
+    getScrollTop.value = value;
+    return value;
+}
+
 export function getVisibilityForElement(element) {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    const scrollTop = getScrollTop()
         , elementTop = element.getBoundingClientRect().top + scrollTop
         , elementHeight = element.scrollHeight
         , portionHiddenBeforeVP = scrollTop - elementTop
@@ -111,26 +122,11 @@ export function traverseAllElements(element, callback) {
     return exit
 }
 
-const clientHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+export const clientHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-export function scrollToElement(element, parentElement, CalculatedOffset = true) {
-    const elementHeight = element.scrollHeight;
-    const multiplier = Math.floor(clientHeight / 3 / elementHeight);
-    const halfHeight = elementHeight * multiplier;
-    const elementOffsetTop = element.offsetTop;
-    let offset = elementOffsetTop;
-    if (CalculatedOffset) {
-        offset = elementOffsetTop - halfHeight;
-    }
-    if (elementOffsetTop > (halfHeight + halfHeight / 2)) {
-        if (parentElement) {
-            parentElement.scrollTop = offset;
-        } else {
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            })
-        }
+export function scrollToElement(element, options = {block : "start"}) {
+    if (element.offsetTop > (clientHeight * 0.50)) {
+        element.scrollIntoView(options);
     }
 }
 

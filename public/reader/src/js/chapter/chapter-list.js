@@ -58,7 +58,7 @@ export function updateListSelection(lastReadChapterIndex) {
         }
         targetLi.classList.add(selectedClassName);
         console.log("update chapters index list to", lastReadChapterIndex);
-        setTimeout(() => scrollToElement(targetLi, chaptersList), 1000);
+        setTimeout(() => scrollToElement(targetLi, {block: "center"}), 1000);
     }
 }
 

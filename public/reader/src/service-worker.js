@@ -38,21 +38,21 @@ self.addEventListener('activate', (event) => {
     });
 });
 
+const isLocalEnv = self.location.hostname === "localhost";
+
 self.addEventListener('fetch', (event) => {
-    if (event.request.mode === 'navigate' || (event.request.method === 'GET' && needToCacheRequest(event))) {
+    if (event.request.mode === 'navigate' || (event.request.method === 'GET' && needToCacheRequest(event) && !isLocalEnv)) {
         event.respondWith(
             caches
                 .match(event.request)
                 .then(cachedResponse => {
                     if (cachedResponse) {
-                        console.log('serving from cache for', event.request.url);
                         return cachedResponse;
                     }
 
                     const fetchPromise = fetch(event.request).catch(error => console.warn('Fetch failed; error', error));
                     fetchPromise.then((response) => {
                         if (response && response.ok && needToCacheRequest(event)) {
-                            console.log('caching request for url', event.request.url);
                             const myResponse = response.clone();
                             caches
                                 .open(CURRENT_CACHE_NAME)

@@ -95,7 +95,7 @@ function scrollToLastReadElement() {
             const xpath = chapter.lastReadElementXpath;
             const element = getElementByXpath(xpath);
             if (element) {
-                scrollToElement(element, null, false);
+                scrollToElement(element);
             }
         })
 }

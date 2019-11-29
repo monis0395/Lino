@@ -1,12 +1,19 @@
 import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
 import { getAndRenderChapter } from "./load-chapter.js";
-import { addFinToPage, getAllChaptersRendered, removeChapter } from "./chapter-rendering.js";
+import { addFinToPage, getAllChaptersRendered, getChapterElement, removeChapter } from "./chapter-rendering.js";
 import { updateListSelection } from "./chapter-list.js";
-import { debounce, findFirstVisibleElement, getElementByXpath, getPathTo, getVisibilityForElement, throttle } from "../util/dom-util.js";
+import {
+    clientHeight,
+    debounce,
+    findFirstVisibleElement,
+    getElementByXpath,
+    getPathTo,
+    getVisibilityForElement,
+    throttle
+} from "../util/dom-util.js";
 import { storeChapter } from "./chapter-store.js";
 import { updateInfoChapterName, updateProgressBar } from "../components/chapter-info-bar.js";
 import { getChapterLink } from "../components/chapter-url.js";
-import { getChapterElement } from "./chapter-rendering.js";
 
 function onScrollDebounce() {
     processMaxVisibleChapter("debounce");
@@ -42,6 +49,7 @@ function getFirstVisibleChapter() {
 
 function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
     if (onFirstVisibleChapter.lastChapterFound !== chapterNumber) {
+        updateInfoChapterName(chapterElement);
         updateListSelection(chapterNumber);
         updateLastRead(chapterNumber);
     }
@@ -49,8 +57,7 @@ function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
         loadNextChapter(chapterNumber);
         removeChapter(chapterNumber - 2);
     }
-    updateInfoChapterName(chapterElement);
-    updateChapterProgress(chapterNumber, chapterElement);
+    updateChapterProgress(chapterNumber, chapterElement, mode);
     onFirstVisibleChapter.lastChapterFound = chapterNumber;
 }
 
@@ -84,11 +91,13 @@ function loadNextChapter(chapterNumber) {
         })
 }
 
-function updateChapterProgress(chapterNumber, chapterElement) {
+function updateChapterProgress(chapterNumber, chapterElement, mode) {
     const firstVisibleElement = findFirstVisibleElement(chapterElement);
     if (firstVisibleElement) {
-        updateXpath(chapterNumber, firstVisibleElement);
         const value = firstVisibleElement.offsetTop - chapterElement.offsetTop;
+        if (mode === "debounce" && value > (clientHeight * 0.5)) {
+            updateXpath(chapterNumber, firstVisibleElement);
+        }
         updateProgressBar(value, chapterElement.scrollHeight)
     }
 }
@@ -99,7 +108,6 @@ function updateXpath(chapterNumber, firstVisibleElement) {
     const element = getElementByXpath(xpath);
     if (element === firstVisibleElement) {
         finalXpath = xpath;
-        // console.log("xpath", finalXpath, "path 2")
     }
 
     if (finalXpath) {
@@ -119,5 +127,5 @@ function updateXpath(chapterNumber, firstVisibleElement) {
 
 export function initChapterListener() {
     window.addEventListener('scroll', debounce(onScrollDebounce, 1000), {passive: true});
-    window.addEventListener('scroll', throttle(onScrollThrottle, 100), {passive: true});
+    window.addEventListener('scroll', throttle(onScrollThrottle, 250), {passive: true});
 }
