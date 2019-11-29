@@ -31,8 +31,12 @@ function chapterClicked(chapterNumber) {
                 }
             })
             .catch((error) => {
-                console.error(error);
-                showSnackbar("Error: " + error.message)
+                if (window.navigator.onLine) {
+                    console.error(error);
+                    showSnackbar("Error: " + error.message)
+                } else {
+                    showSnackbar("You are offline! Please connect to internet!")
+                }
             })
             .finally(hideLoader);
 
