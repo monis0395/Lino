@@ -100,9 +100,23 @@ function loadNextChapter(chapterNumber) {
         })
 }
 
+const map = {};
+
+function getChapterDimension(chapterNumber, chapterElement, dimension) {
+    const key = chapterNumber + dimension;
+    if (map[key]) {
+        return map[key];
+    }
+    const value = chapterElement[dimension];
+    map[key] = value;
+    return value;
+}
+
 function updateChapterProgress(chapterNumber, chapterElement, mode) {
-    const value = getScrollTop() - chapterElement.offsetTop;
-    updateProgressBar(value, chapterElement.scrollHeight);
+    const chapterOffsetTop = getChapterDimension(chapterNumber, chapterElement, "offsetTop");
+    const chapterScrollHeight = getChapterDimension(chapterNumber, chapterElement, "scrollHeight");
+    const value = getScrollTop() - chapterOffsetTop;
+    updateProgressBar(value, chapterScrollHeight);
     if (mode === "debounce" && value > (clientHeight * 0.5)) {
         const firstVisibleElement = findFirstVisibleElement(chapterElement);
         if (firstVisibleElement) {
