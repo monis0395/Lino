@@ -59,7 +59,7 @@ export function debounce(fn, wait = 1) {
 export function getScrollTop() {
     const now = Date.now();
     const diff = now - getScrollTop.time;
-    if (diff < 500) {
+    if (diff < 250) {
         return getScrollTop.value;
     }
     const value = window.pageYOffset || document.documentElement.scrollTop;

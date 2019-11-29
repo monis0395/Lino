@@ -13,7 +13,7 @@
 
 'use strict';
 
-const CACHE_VERSION = 8;
+const CACHE_VERSION = 10;
 const CACHE_NAME = "reader-cache";
 const OLD_CACHE_NAME = "offline";
 const CURRENT_CACHE_NAME = CACHE_NAME + '-v' + CACHE_VERSION;

@@ -103,12 +103,17 @@ function loadNextChapter(chapterNumber) {
 const map = {};
 
 function getChapterDimension(chapterNumber, chapterElement, dimension) {
+    const now  = Date.now();
     const key = chapterNumber + dimension;
-    if (map[key]) {
-        return map[key];
+    map[key] = map[key] || {};
+    const diff = now - map[key].now;
+    if (diff < 1000) {
+        console.log("serving from cache chapter dimension", key);
+        return map[key].value;
     }
     const value = chapterElement[dimension];
-    map[key] = value;
+    map[key] = {value, now};
+    console.log("chapter dimension", key, map[key]);
     return value;
 }
 
