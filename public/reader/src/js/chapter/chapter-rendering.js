@@ -95,8 +95,20 @@ function filterContent(chapter, chapterTitle) {
         }
         return exit;
     });
-    content.firstChild.id = "";
-    return content.innerHTML;
+    content.firstElementChild.removeAttribute("id");
+    content.firstElementChild.removeAttribute("class");
+
+    let newContent = null;
+    // removing unnecessary nested elements
+    traverseAllElements(content, (element) => {
+        let exit = true;
+        if (element.children.length === 1) {
+            newContent = element;
+            exit = false;
+        }
+        return exit
+    });
+    return newContent.innerHTML;
 }
 
 function isSourceWebsiteUrl(anchorTag, hostname) {
