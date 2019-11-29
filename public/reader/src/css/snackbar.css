@@ -9,7 +9,7 @@
     overflow: hidden;
     border: 1px var(--highlight-color) solid;
     background-color: var(--secondary-background);
-    z-index: 1;
+    z-index: 2;
 }
 
 .snackbar.show {
