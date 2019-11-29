@@ -95,8 +95,6 @@ function filterContent(chapter, chapterTitle) {
         }
         return exit;
     });
-    content.firstElementChild.removeAttribute("id");
-    content.firstElementChild.removeAttribute("class");
 
     let newContent = null;
     // removing unnecessary nested elements
@@ -104,6 +102,10 @@ function filterContent(chapter, chapterTitle) {
         let exit = true;
         if (element.children.length === 1) {
             newContent = element;
+            newContent.removeAttribute("id");
+            if (newContent.firstElementChild) {
+                newContent.firstElementChild.removeAttribute("id");
+            }
             exit = false;
         }
         return exit

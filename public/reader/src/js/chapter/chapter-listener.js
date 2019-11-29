@@ -108,12 +108,10 @@ function getChapterDimension(chapterNumber, chapterElement, dimension) {
     map[key] = map[key] || {};
     const diff = now - map[key].now;
     if (diff < 1000) {
-        console.log("serving from cache chapter dimension", key);
         return map[key].value;
     }
     const value = chapterElement[dimension];
     map[key] = {value, now};
-    console.log("chapter dimension", key, map[key]);
     return value;
 }
 
