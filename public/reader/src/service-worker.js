@@ -15,7 +15,6 @@
 
 const CACHE_VERSION = 13;
 const CACHE_NAME = "reader-cache";
-const OLD_CACHE_NAME = "offline";
 const CURRENT_CACHE_NAME = CACHE_NAME + '-v' + CACHE_VERSION;
 
 const needToCacheRequest = (event) => {
@@ -28,7 +27,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then(function (cacheNames) {
         return Promise.all(
             cacheNames.map(function (cacheName) {
-                if (cacheName.startsWith(CACHE_NAME) ||  cacheName.startsWith(OLD_CACHE_NAME) // its our cache
+                if (cacheName.startsWith(CACHE_NAME) // its our cache
                     && cacheName !== CURRENT_CACHE_NAME) { // its a has become stale
                     console.log("Deleting cache ", cacheName);
                     return caches.delete(cacheName);
