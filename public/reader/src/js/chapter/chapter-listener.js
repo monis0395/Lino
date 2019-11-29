@@ -52,9 +52,9 @@ function onFirstVisibleChapter({chapterNumber, chapterElement}, mode) {
         updateInfoChapterName(chapterElement);
         updateListSelection(chapterNumber);
         updateLastRead(chapterNumber);
+        loadNextChapter(chapterNumber);
     }
     if (mode === "debounce") {
-        loadNextChapter(chapterNumber);
         removeChapter(chapterNumber - 2);
     }
     updateChapterProgress(chapterNumber, chapterElement, mode);
@@ -84,7 +84,15 @@ function loadNextChapter(chapterNumber) {
         .then((book) => {
             const totalChapters = book.chapters.length;
             if (nextChapterNumber < totalChapters) {
-                getAndRenderChapter(bookTitle, nextChapterNumber).catch(console.error)
+                getAndRenderChapter(bookTitle, nextChapterNumber)
+                    .catch((e) => {
+                        if (!window.navigator.onLine) {
+                            console.log("offline status scheduling loading next chapter after 10 second");
+                            setTimeout(() => loadNextChapter(chapterNumber), 10 * 1e3);
+                        } else {
+                            console.error(e)
+                        }
+                    })
             } else {
                 addFinToPage();
             }
