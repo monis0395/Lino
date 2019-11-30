@@ -1,0 +1,16 @@
+{
+  "name": "firebase-nu-instapaper",
+  "domain": "https://nu-instapaper.firebaseapp.com/",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "deploy-hosting": "firebase deploy --only hosting"
+  },
+  "keywords": [],
+  "author": "monis.q",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^7.5.0"
+  }
+}
