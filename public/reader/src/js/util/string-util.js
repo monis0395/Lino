@@ -1,3 +1,5 @@
+import { getTitle } from "../components/book-title.js";
+
 export function similarity(s1, s2) {
     let longer = s1;
     let shorter = s2;
@@ -43,8 +45,12 @@ function editDistance(s1, s2) {
     return costs[s2.length];
 }
 
-export function getSanitizedChapterName(chapterName) {
-    if (chapterName.toLowerCase().includes("chapter")
+export function getSanitizedChapterName(chapterName, domain) {
+    const bookTitle = getTitle(window.bookReader.bookTitle, domain);
+    if (chapterName.startsWith(bookTitle)) {
+        chapterName = chapterName.replace(bookTitle, "").trim();
+    }
+    if (chapterName.toLowerCase().startsWith("chapter")
         && chapterName.length > ("chapter".length + 10)) {
         let lowerCaseChapter = chapterName.toLowerCase();
         const start = lowerCaseChapter.indexOf("chapter") + "chapter".length;
@@ -55,7 +61,7 @@ export function getSanitizedChapterName(chapterName) {
                 break
             }
         }
-        const sanitizedName = getSanitizedChapterName(chapterName.substring(i));
+        const sanitizedName = getSanitizedChapterName(chapterName.substring(i), domain);
         return sanitizedName;
     } else {
         return chapterName;

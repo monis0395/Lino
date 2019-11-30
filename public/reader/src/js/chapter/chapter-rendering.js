@@ -27,7 +27,7 @@ export function addChapterToPage(chapter, chapterNumber, chapterTitle) {
     const dummyDiv = document.createElement('div');
     const hostname = new URL(chapter.url).hostname;
     chapterTitle = chapterTitle || chapter.title;
-    const chapterName = (chapterNumber + 1) + ". " + getSanitizedChapterName(chapterTitle);
+    const chapterName = (chapterNumber + 1) + ". " + getSanitizedChapterName(chapterTitle, hostname);
     dummyDiv.innerHTML = chapterTemplateBlock
         .replace(/__chapter_number__/g, chapterNumber)
         .replace(/__chapter_link__/g, chapter.url)

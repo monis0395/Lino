@@ -87,10 +87,11 @@ function attachChapterListBtnListener() {
 export function loadChapterList() {
     const bookTitle = window.bookReader.bookTitle;
     fetchBook(bookTitle)
-        .then(({chapters, lastRead}) => {
+        .then(({chapters, lastRead, url}) => {
             const chapterListUl = document.createElement("ul");
+            const hostname = new URL(url).hostname;
             chapters.forEach((chapter, index) => {
-                const chapterTitle = getSanitizedChapterName(chapter.title);
+                const chapterTitle = getSanitizedChapterName(chapter.title, hostname);
                 const li = document.createElement("li");
                 li.id = `chapter-index-${index}`;
                 li.textContent = `${index + 1}. ${chapterTitle}`;
