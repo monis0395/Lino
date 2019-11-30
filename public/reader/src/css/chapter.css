@@ -122,7 +122,7 @@
     bottom: 0;
     width: calc(100vw - calc(var(--baseline-h) * 4));
     max-width: 460px;
-    max-height: 100vh;
+    height: 100vh;
     font-size: var(--baseline-v);
     font-weight: var(--weight-thin);
     line-height: 1.5;

@@ -1,7 +1,7 @@
 import { fetchChapter, storeChapter } from "./chapter-store.js";
 import { requestFor } from "../components/request-for.js";
 
-const apiGetChapter = "https://monis0395.api.stdlib.com/getBook@dev/getChapter?url=";
+const apiGetChapter = "https://monis0395.api.stdlib.com/getBook@dev/getChapter/?url=";
 
 export async function getChapter(chapterUrl) {
     let chapter = await fetchChapter(chapterUrl);
