@@ -13,7 +13,7 @@
 
 'use strict';
 
-const CACHE_VERSION = 17;
+const CACHE_VERSION = 18;
 const CACHE_NAME = "reader-cache";
 const CURRENT_CACHE_NAME = CACHE_NAME + '-v' + CACHE_VERSION;
 
