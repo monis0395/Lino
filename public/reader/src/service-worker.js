@@ -16,14 +16,15 @@
 const CACHE_VERSION = 23;
 const CACHE_NAME = "reader-cache";
 const CURRENT_CACHE_NAME = CACHE_NAME + '-v' + CACHE_VERSION;
-let cachePresentOnce = false;
+const isLocalEnv = self.location.hostname === "localhost";
+let purgePresentOnce = false;
 
-const includesPurge = (url) => {
-    if (url.includes("cache")) {
-        cachePresentOnce = true;
+const includesPurge = (url = "") => {
+    if (url.includes("purge")) {
+        purgePresentOnce = true;
         deleteCache();
     }
-    return url.includes("cache") || cachePresentOnce;
+    return purgePresentOnce || url.includes("purge");
 };
 
 const needToCacheRequest = (event) => {
@@ -33,24 +34,27 @@ const needToCacheRequest = (event) => {
 };
 
 function deleteCache() {
+    if (deleteCache.done) {
+        return;
+    }
     caches.keys().then(function (cacheNames) {
         return Promise.all(
             cacheNames.map(function (cacheName) {
                 if (cacheName.startsWith(CACHE_NAME) // its our cache
-                    && (cacheName !== CURRENT_CACHE_NAME || cachePresentOnce)) { // its a has become stale
+                    && (cacheName !== CURRENT_CACHE_NAME || purgePresentOnce)) { // its a has become stale
                     console.log("Deleting cache ", cacheName);
+                    deleteCache.done = true;
                     return caches.delete(cacheName);
                 }
             })
         );
     });
-
 }
+
 self.addEventListener('activate', (event) => {
     deleteCache();
 });
 
-const isLocalEnv = self.location.hostname === "localhost";
 
 self.addEventListener('fetch', (event) => {
     if (isLocalEnv) {
