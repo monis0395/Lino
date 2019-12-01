@@ -13,28 +13,41 @@
 
 'use strict';
 
-const CACHE_VERSION = 19;
+const CACHE_VERSION = 23;
 const CACHE_NAME = "reader-cache";
 const CURRENT_CACHE_NAME = CACHE_NAME + '-v' + CACHE_VERSION;
+let cachePresentOnce = false;
+
+const includesPurge = (url) => {
+    if (url.includes("cache")) {
+        cachePresentOnce = true;
+        deleteCache();
+    }
+    return url.includes("cache") || cachePresentOnce;
+};
 
 const needToCacheRequest = (event) => {
     const destination = event.request.destination;
     const destinationsAccepted = ["script", "style", "image", "document", "manifest", "font"];
-    return destinationsAccepted.includes(destination);
+    return destinationsAccepted.includes(destination) && !(includesPurge(event.request.url) || includesPurge(event.request.referrer));
 };
 
-self.addEventListener('activate', (event) => {
+function deleteCache() {
     caches.keys().then(function (cacheNames) {
         return Promise.all(
             cacheNames.map(function (cacheName) {
                 if (cacheName.startsWith(CACHE_NAME) // its our cache
-                    && cacheName !== CURRENT_CACHE_NAME) { // its a has become stale
+                    && (cacheName !== CURRENT_CACHE_NAME || cachePresentOnce)) { // its a has become stale
                     console.log("Deleting cache ", cacheName);
                     return caches.delete(cacheName);
                 }
             })
         );
     });
+
+}
+self.addEventListener('activate', (event) => {
+    deleteCache();
 });
 
 const isLocalEnv = self.location.hostname === "localhost";
@@ -43,7 +56,8 @@ self.addEventListener('fetch', (event) => {
     if (isLocalEnv) {
         return
     }
-    if (event.request.mode === 'navigate' || (event.request.method === 'GET' && needToCacheRequest(event))) {
+    const value = event.request.method === 'GET' && needToCacheRequest(event);
+    if (value) {
         event.respondWith(
             caches
                 .match(event.request)

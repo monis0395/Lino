@@ -55,6 +55,22 @@
     --highlight-color: #C48919; /* base */
 }
 
+.coffee-theme-dark {
+    --primary-background: #000000; /* black base */
+    --secondary-background: #191919; /* black tint 1 of base from left */
+    --primary-foreground: #dfdbd8; /* shade 2 from left of tint 1 from right */
+    --secondary-foreground: #949290; /* shade 5 of primary from left */
+    --highlight-color: #BC9378; /* base */
+}
+
+.pink-gold-theme-dark {
+    --primary-background: #000000; /* black base */
+    --secondary-background: #191919; /* black tint 1 of base from left */
+    --primary-foreground: #e1dbd3; /* shade 2 from left of tint 1 from right */
+    --secondary-foreground: #96928d; /* shade 5 of primary from left */
+    --highlight-color: #DB933E; /* base */
+}
+
 .gold-theme-light {
     --primary-background: #FEFDFC;
     --secondary-background: #e0dad0;
