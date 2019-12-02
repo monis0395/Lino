@@ -6,7 +6,7 @@ export function getTitle(title, domain) {
             if (title.toLowerCase().startsWith("read")) {
                 title = title.replace(/read/i, "").trim();
             }
-            const re = new RegExp(part, 'i');
+            const re = new RegExp(`\\b${part}\\b`, 'i');
             title = title.replace(re, "").trim();
         }
     });

@@ -73,16 +73,18 @@ export function removeChaptersExcept(chapterNumber, exceptionList) {
 }
 
 function filterContent(chapter, chapterTitle) {
-    const hostname = new URL(chapter.url).hostname;
     const content = document.createElement('div');
     content.innerHTML = chapter.content;
+
+    const hostname = new URL(chapter.url).hostname;
     Array.from(content.getElementsByTagName('a'))
         .forEach((anchorTag) => {
-            if (isSourceWebsiteUrl(anchorTag, hostname) ||
-                isIncorrectRelativeUrlFromSource(anchorTag)) {
+            // if (isSourceWebsiteUrl(anchorTag, hostname) ||
+            if (isIncorrectRelativeUrlFromSource(anchorTag)) {
                 removeChild(anchorTag);
             }
         });
+
     traverseAllElements(content, (element) => {
         let exit = false;
         const elementText = element.textContent;
@@ -110,6 +112,14 @@ function filterContent(chapter, chapterTitle) {
         }
         return exit
     });
+
+    // removing elements which have read from source url
+    traverseAllElements(newContent, (element) => {
+        if (element.children.length === 0 && element.textContent.includes(hostname)) {
+            removeChild(element);
+        }
+    });
+
     return newContent.innerHTML;
 }
 

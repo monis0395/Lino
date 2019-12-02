@@ -13,7 +13,7 @@
 
 'use strict';
 
-const CACHE_VERSION = 23;
+const CACHE_VERSION = 24;
 const CACHE_NAME = "reader-cache";
 const CURRENT_CACHE_NAME = CACHE_NAME + '-v' + CACHE_VERSION;
 const isLocalEnv = self.location.hostname === "localhost";
