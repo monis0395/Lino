@@ -1,20 +1,20 @@
 import { getBooks, storeOrUpdateBook } from "./books-store.js";
 import { requestFor } from "../components/request-for.js";
-import { reloadBooks } from "./books-rendering.js";
 import { showSnackbar } from "../components/snackbar.js";
-import { hideLoader, showLoader } from "../components/loader.js";
+import { addBookToPage } from "./books-rendering.js";
 
 const apiGetBook = "https://monis0395.api.stdlib.com/getBook@dev/?url=";
 
 function requestAndUpdateBook(book) {
-    return requestFor(apiGetBook, book.url).then((updatedBook) => {
-        if (book.chaptersInReverse) {
-            updatedBook.chapters = updatedBook.chapters.reverse()
-        }
-        if (updatedBook && updatedBook.title) {
-            storeOrUpdateBook(updatedBook.title, updatedBook)
-        }
-    });
+    return requestFor(apiGetBook, book.url)
+        .then((updatedBook) => {
+            if (updatedBook && updatedBook.title) {
+                if (book.chaptersInReverse) {
+                    updatedBook.chapters = updatedBook.chapters.reverse()
+                }
+                return storeOrUpdateBook(updatedBook.title, updatedBook)
+            }
+        });
 }
 
 function requestAndUpdateAllBooks(books) {
@@ -31,13 +31,12 @@ function checkForUpdates() {
 }
 
 export function checkAndReloadBooks() {
-    showLoader();
-    checkForUpdates()
-        .then(() => {
-            showLoader();
-            reloadBooks()
-                .finally(hideLoader)
-                .finally(() => showSnackbar(`Updated books!`));
+    getBooks()
+        .then((books) => {
+            return Promise.all(books.map((book) => {
+                return requestAndUpdateBook(book)
+                    .then((updatedBook) => addBookToPage(updatedBook))
+            }))
         })
         .catch((error) => {
             if (error && error.error) {
@@ -46,7 +45,7 @@ export function checkAndReloadBooks() {
                 showSnackbar(`Update Error: ` + error);
             }
         })
-        .finally(hideLoader)
+        .finally(() => showSnackbar(`Updated books!`))
 }
 
 export function startCheckingForUpdates() {

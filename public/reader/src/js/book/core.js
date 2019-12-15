@@ -4,21 +4,25 @@ import { getBook } from "./get-book.js";
 import { checkAndReloadBooks } from "./update-books.js";
 import { isTabletOrMobile } from "../util/browser-util.js";
 import { hideLoader, showLoader } from "../components/loader.js";
+import { getBooks } from "./books-store.js";
 
 function loadFirstBook() {
-    const done = localStorage.getItem("first");
-    if (done) {
-        return;
-    }
-    const THE_NOVELS_EXTRA = "https://www.wuxiaworld.com/novel/the-novels-extra";
-    getBook(THE_NOVELS_EXTRA);
-    localStorage.setItem("first", "done");
+    getBooks()
+        .then((books) => {
+            if (books.length > 0) {
+                return;
+            }
+            const THE_NOVELS_EXTRA = "https://www.wuxiaworld.com/novel/the-novels-extra";
+            getBook(THE_NOVELS_EXTRA);
+        });
 }
 
 function pullToRefresh() {
     const pullToRefreshScript = document.createElement("script");
     pullToRefreshScript.src = "../js/third-party/pulltorefreshjs.js";
     pullToRefreshScript.onload = () => {
+        const image = new Image();
+        image.src = "https://monis0395.api.stdlib.com/getbook@dev/blank/";
         window.PullToRefresh.init({
             onRefresh: checkAndReloadBooks,
         });

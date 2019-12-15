@@ -16,19 +16,26 @@ const bookTemplateBlock = `
     </div>`;
 
 export function addBookToPage(book) {
-    if (!book.title) {
+    if (!book || !book.title) {
         return
     }
     const page = document.getElementsByClassName('page')[0];
-    const dummyDiv = document.createElement('div');
+
+    const bookElement = document.createElement('div');
     const hostname = new URL(book.url).hostname;
-    dummyDiv.innerHTML = bookTemplateBlock
+    bookElement.innerHTML = bookTemplateBlock
         .replace(/__book_title__/g, getTitle(book.title, hostname))
         .replace(/__book_domain__/g, hostname)
         .replace(/__last_read__/g, (book.lastRead || 0) + 1)
         .replace(/__total_chapter__/g, book.chapters.length)
         .replace(/__book_link__/g, getChapterLink(book.title, book.lastRead));
-    page.appendChild(dummyDiv.firstElementChild);
+    let oldBookElement = document.getElementById(book.url);
+    bookElement.firstElementChild.id = book.url;
+    if (oldBookElement) {
+        oldBookElement.parentElement.replaceChild(bookElement.firstElementChild, oldBookElement)
+    } else {
+        page.appendChild(bookElement.firstElementChild);
+    }
 }
 
 function deleteAllBooks() {
