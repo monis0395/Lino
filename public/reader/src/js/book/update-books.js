@@ -32,6 +32,8 @@ function checkForUpdates() {
 
 export function checkAndReloadBooks() {
     showSnackbar(`Update started...`);
+    const image = new Image();
+    image.src = "https://monis0395.api.stdlib.com/getbook@dev/blank/";
     getBooks()
         .then((books) => {
             return Promise.all(books.map((book) => {

@@ -21,8 +21,6 @@ function pullToRefresh() {
     const pullToRefreshScript = document.createElement("script");
     pullToRefreshScript.src = "../js/third-party/pulltorefreshjs.js";
     pullToRefreshScript.onload = () => {
-        const image = new Image();
-        image.src = "https://monis0395.api.stdlib.com/getbook@dev/blank/";
         window.PullToRefresh.init({
             onRefresh: checkAndReloadBooks,
         });
