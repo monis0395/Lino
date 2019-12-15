@@ -31,6 +31,7 @@ function checkForUpdates() {
 }
 
 export function checkAndReloadBooks() {
+    showSnackbar(`Update started...`);
     getBooks()
         .then((books) => {
             return Promise.all(books.map((book) => {
