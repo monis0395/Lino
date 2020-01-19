@@ -5,8 +5,8 @@ import { getTitle } from "../components/book-title.js";
 
 // three dots https://codepen.io/ryanmorr/pen/vLKvqe
 const bookTemplateBlock = `
-    <div class='book' id="__book_id__">
-        <a href="__book_link__">
+    <div class='book' data-title="__book_title__">
+<!--        <a href="__book_link__">-->
             <div class="book-title">
                 <h5>__book_title__</h5>
                 <div class="book-menu">
@@ -15,14 +15,14 @@ const bookTemplateBlock = `
                     <li>
                         <a href="__book_link__">Open</a>
                     </li>
-                    <li onclick="deleteBook('__book_id__', '__book_title__')">Delete</li>
+                    <li onclick="deleteBook('__book_id__')">Delete</li>
                     </div>
                 </div>
             </div>
             <div class="book-domain">__book_domain__
                 <span style="float: right">__last_read__ of __total_chapter__ read</span>
             </div>
-        </a>
+<!--        </a>-->
     </div>`;
 
 const bookElementMap = {};
@@ -37,7 +37,7 @@ export function addBookToPage(book) {
     const hostname = new URL(book.url).hostname;
     const bookID = book.title;
     dummyElement.innerHTML = bookTemplateBlock
-        .replace(/__book_id__/g, bookID)
+        .replace(/__book_id__/g, escape(bookID))
         .replace(/__book_title__/g, getTitle(book.title, hostname))
         .replace(/__book_domain__/g, hostname)
         .replace(/__last_read__/g, (book.lastRead || 0) + 1)
@@ -46,6 +46,7 @@ export function addBookToPage(book) {
 
     let oldBookElement = document.getElementById(bookID);
     const bookElement = dummyElement.firstElementChild;
+    bookElement.id = bookID;
     if (oldBookElement) {
         oldBookElement.parentElement.replaceChild(bookElement, oldBookElement);
     } else {
@@ -54,7 +55,7 @@ export function addBookToPage(book) {
     bookElementMap[bookID] = bookElement;
 }
 
-function getBookElement(bookID) {
+export function getBookElement(bookID) {
     return bookElementMap[bookID];
 }
 

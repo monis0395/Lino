@@ -1,10 +1,12 @@
-import { fetchBook } from "./books-store.js";
+import { fetchBook, removeBook } from "./books-store.js";
 import { showSnackbar } from "../components/snackbar.js";
-import { deleteBookElement } from "./books-rendering.js";
+import { deleteBookElement, getBookElement } from "./books-rendering.js";
 import { removeChapter } from "../chapter/chapter-store.js";
-import { removeBook } from "./books-store.js";
 
-window.deleteBook = function deleteBook(bookID, bookTitle) {
+window.deleteBook = function deleteBook(bookID) {
+    bookID = unescape(bookID);
+    const bookElement = getBookElement(bookID);
+    const title = bookElement.dataset.title;
     fetchBook(bookID)
         .then((book) => {
             const chapters = book.chapters;
@@ -17,11 +19,12 @@ window.deleteBook = function deleteBook(bookID, bookTitle) {
             return Promise.all(promises);
         })
         .catch(showErrorMessage)
-        .finally(() => showSnackbar(`Deleted Book ${bookTitle}`))
+        .finally(() => showSnackbar(`Deleted Book ${title}`))
 };
 
 
 function showErrorMessage(error) {
+    console.error("error", error);
     if (error && error.error) {
         showSnackbar(`Error: ` + error.error.message);
     } else {
