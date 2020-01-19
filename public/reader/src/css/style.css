@@ -67,7 +67,7 @@ a:link  {
 }
 
 a:visited {
-    color: var(--secondary-foreground);
+    color: inherit;
 }
 
 a:active {

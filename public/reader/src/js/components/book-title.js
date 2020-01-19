@@ -1,5 +1,10 @@
+const explicitWords = ["sex"];
 export function getTitle(title, domain) {
     let hadDomainInTitle = false;
+    explicitWords.forEach((word) => {
+        const re = new RegExp(`\\b${word}\\b`, 'i');
+        title = title.replace(re, "").trim();
+    });
     domain.split(".").forEach((part) => {
         if (title.toLowerCase().includes(part)) {
             hadDomainInTitle = true;

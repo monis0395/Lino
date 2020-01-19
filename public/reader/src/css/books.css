@@ -60,7 +60,7 @@
     top: calc(var(--baseline-v) * 2);
     right: calc(var(--baseline-h) * 0.5);
     background-color: var(--secondary-background);
-    color: var(--secondary-foreground);
+    color: var(--primary-foreground);
     min-width: calc(var(--baseline-h) * 8);;
     border: 1px var(--highlight-color) solid;
 }
