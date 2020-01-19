@@ -2,7 +2,6 @@ import { getBooks } from "./books-store.js";
 import { removeChild } from "../util/dom-util.js";
 import { getChapterLink } from "../components/chapter-url.js";
 import { getTitle } from "../components/book-title.js";
-import "./book-menu.js";
 
 // three dots https://codepen.io/ryanmorr/pen/vLKvqe
 const bookTemplateBlock = `
@@ -16,7 +15,7 @@ const bookTemplateBlock = `
                     <li>
                         <a href="__book_link__">Open</a>
                     </li>
-                    <li onclick="deleteBook('__book_id__')">Delete</li>
+                    <li onclick="deleteBook('__book_id__', '__book_title__')">Delete</li>
                     </div>
                 </div>
             </div>
@@ -26,28 +25,44 @@ const bookTemplateBlock = `
         </a>
     </div>`;
 
+const bookElementMap = {};
+
 export function addBookToPage(book) {
     if (!book || !book.title) {
         return
     }
     const page = document.getElementsByClassName('page')[0];
 
-    const bookElement = document.createElement('div');
+    const dummyElement = document.createElement('div');
     const hostname = new URL(book.url).hostname;
-    bookElement.innerHTML = bookTemplateBlock
-        .replace(/__book_id__/g, book.title)
+    const bookID = book.title;
+    dummyElement.innerHTML = bookTemplateBlock
+        .replace(/__book_id__/g, bookID)
         .replace(/__book_title__/g, getTitle(book.title, hostname))
         .replace(/__book_domain__/g, hostname)
         .replace(/__last_read__/g, (book.lastRead || 0) + 1)
         .replace(/__total_chapter__/g, book.chapters.length)
         .replace(/__book_link__/g, getChapterLink(book.title, book.lastRead));
 
-    let oldBookElement = document.getElementById(book.title);
+    let oldBookElement = document.getElementById(bookID);
+    const bookElement = dummyElement.firstElementChild;
     if (oldBookElement) {
-        oldBookElement.parentElement.replaceChild(bookElement.firstElementChild, oldBookElement)
+        oldBookElement.parentElement.replaceChild(bookElement, oldBookElement);
     } else {
-        page.appendChild(bookElement.firstElementChild);
+        page.appendChild(bookElement);
     }
+    bookElementMap[bookID] = bookElement;
+}
+
+function getBookElement(bookID) {
+    return bookElementMap[bookID];
+}
+
+export function deleteBookElement(bookID) {
+    const bookElement = getBookElement(bookID);
+    removeChild(bookElement);
+    delete bookElementMap[bookID];
+    console.log("removed book from page", bookID);
 }
 
 function deleteAllBooks() {

@@ -12,6 +12,10 @@ export async function fetchBook(title) {
     return booksDB.getItem(title);
 }
 
+export async function removeBook(title) {
+    return booksDB.removeItem(title)
+}
+
 export async function storeOrUpdateBook(title, book) {
     const oldBook = await booksDB.getItem(title) || {};
     return booksDB.setItem(title, {

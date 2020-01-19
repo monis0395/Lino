@@ -140,20 +140,19 @@ const finBlock = `
 </div>`;
 
 export function addFinToPage() {
-    if (addFinToPage.done) {
+    let finElement = document.getElementById("fin-block");
+    if (finElement) {
         return;
     }
     addFinToPage.done = true;
     const page = document.getElementsByClassName('page')[0];
     const dummyDiv = document.createElement('div');
     dummyDiv.innerHTML = finBlock;
-    page.appendChild(dummyDiv.firstElementChild);
+    finElement = dummyDiv.firstElementChild;
+    page.appendChild(finElement);
 }
 
 export function removeFin() {
-    if (addFinToPage.done) {
-        const element = document.getElementById("fin-block");
-        removeChild(element);
-        addFinToPage.done = false;
-    }
+    const element = document.getElementById("fin-block");
+    removeChild(element);
 }
