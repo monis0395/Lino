@@ -1,5 +1,5 @@
 import { addBookInit } from "./add-book.js";
-import { reloadBooks } from "./books-rendering.js";
+import { loadBooks } from "./books-rendering.js";
 import { getBook } from "./get-book.js";
 import { checkAndReloadBooks } from "./update-books.js";
 import { isTabletOrMobile } from "../util/browser-util.js";
@@ -34,7 +34,7 @@ function init() {
     addBookInit();
     window.addEventListener("pageshow", () => {
         showLoader();
-        reloadBooks()
+        loadBooks()
             .finally(hideLoader);
         console.log("pageshow called");
     }, false);

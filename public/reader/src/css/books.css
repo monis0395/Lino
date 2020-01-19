@@ -15,7 +15,7 @@
     text-decoration: none;
 }
 
-.book-title {
+.book-title h5 {
     display: block;
     width: calc(100% - var(--baseline-h));
     margin-bottom: 0;
@@ -25,29 +25,70 @@
     color: var(--highlight-color);
 }
 
+/* The book-menu drop down container */
+.book-menu {
+    float: right;
+    overflow: hidden;
+}
+
+.book-menu-btn {
+    position: absolute;
+    top: calc(var(--baseline-v) * 1.5);
+    right: calc(var(--baseline-h) * 0.5);
+    width: calc(var(--baseline-h) * 2);
+    color: var(--secondary-foreground);
+    background-color: inherit;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-align: right;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+.book-menu-btn:hover {
+    -webkit-filter: brightness(150%);
+    filter: brightness(150%);
+}
+
+/* book-menu drop down  content (hidden by default) */
+.book-menu-content {
+    z-index: 1;
+    display: none;
+    position: absolute;
+    top: calc(var(--baseline-v) * 2);
+    right: calc(var(--baseline-h) * 0.5);
+    background-color: var(--secondary-background);
+    color: var(--secondary-foreground);
+    min-width: calc(var(--baseline-h) * 8);;
+    border: 1px var(--highlight-color) solid;
+}
+
+/* Links inside the book-menu drop down  */
+.book-menu-content li {
+    padding: calc(var(--baseline-h) * 0.75) var(--baseline-v);
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    border-bottom: 1px var(--highlight-color) solid;
+}
+
+.book-menu-content li:last-of-type{
+    border-bottom-width: 0;
+}
+
+/* Show the book-menu drop down  menu on hover */
+.book-menu:hover .book-menu-content {
+    display: block;
+}
+
 .book-domain {
     display: block;
     font-weight: var(--weight-regular);
     color: var(--secondary-foreground);
     padding: 0 var(--baseline-h);
     padding-bottom: var(--baseline-v);
-}
-
-.three-dot {
-    position: absolute;
-    top: var(--baseline-v);
-    right: calc(var(--baseline-h) * 0.5);
-    width: calc(var(--baseline-h) * 2);
-    padding-left: var(--baseline-h);
-    color: var(--secondary-foreground);
-    font-size: 24px;
-    cursor: pointer;
-    text-align: right;
-}
-
-.three-dot:hover {
-    -webkit-filter: brightness(150%);
-    filter: brightness(150%);
 }
 
 /* add book modal */
