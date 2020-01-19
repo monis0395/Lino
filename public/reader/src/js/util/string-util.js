@@ -45,11 +45,16 @@ function editDistance(s1, s2) {
     return costs[s2.length];
 }
 
+const explicitWords = ["sex"];
 export function getSanitizedChapterName(chapterName, domain) {
     const bookTitle = getTitle(window.bookReader.bookTitle, domain);
     if (chapterName.startsWith(bookTitle)) {
         chapterName = chapterName.replace(bookTitle, "").trim();
     }
+    explicitWords.forEach((word) => {
+        const re = new RegExp(`\\b${word}\\b`, 'i');
+        chapterName = chapterName.replace(re, "").trim();
+    });
     if (chapterName.toLowerCase().startsWith("chapter")
         && chapterName.length > ("chapter".length + 10)) {
         let lowerCaseChapter = chapterName.toLowerCase();
