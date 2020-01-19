@@ -71,3 +71,19 @@ export function getSanitizedChapterName(chapterName, domain) {
 function isLetter(char) {
     return char.toUpperCase() !== char.toLowerCase();
 }
+
+export function encodeString(str) {
+    try {
+        return btoa(encodeURIComponent(str));
+    } catch (e) {
+        return str;
+    }
+}
+
+export function decodeString(str) {
+    try {
+        return decodeURIComponent(atob(str));
+    } catch (e) {
+        return str;
+    }
+}

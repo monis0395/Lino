@@ -4,7 +4,7 @@ import { deleteBookElement, getBookElement } from "./books-rendering.js";
 import { removeChapter } from "../chapter/chapter-store.js";
 
 window.deleteBook = function deleteBook(bookID) {
-    bookID = unescape(bookID);
+    bookID = decodeURIComponent(bookID);
     const bookElement = getBookElement(bookID);
     const title = bookElement.dataset.title;
     fetchBook(bookID)

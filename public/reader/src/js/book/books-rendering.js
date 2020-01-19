@@ -37,7 +37,7 @@ export function addBookToPage(book) {
     const hostname = new URL(book.url).hostname;
     const bookID = book.title;
     dummyElement.innerHTML = bookTemplateBlock
-        .replace(/__book_id__/g, escape(bookID))
+        .replace(/__book_id__/g, encodeURIComponent(bookID))
         .replace(/__book_title__/g, getTitle(book.title, hostname))
         .replace(/__book_domain__/g, hostname)
         .replace(/__last_read__/g, (book.lastRead || 0) + 1)
