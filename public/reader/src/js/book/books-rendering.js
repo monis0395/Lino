@@ -2,6 +2,7 @@ import { getBooks } from "./books-store.js";
 import { removeChild } from "../util/dom-util.js";
 import { getChapterLink } from "../components/chapter-url.js";
 import { getTitle } from "../components/book-title.js";
+import { encodeString } from "../util/string-util.js";
 
 // three dots https://codepen.io/ryanmorr/pen/vLKvqe
 const bookTemplateBlock = `
@@ -37,7 +38,7 @@ export function addBookToPage(book) {
     const hostname = new URL(book.url).hostname;
     const bookID = book.title;
     dummyElement.innerHTML = bookTemplateBlock
-        .replace(/__book_id__/g, encodeURIComponent(bookID))
+        .replace(/__book_id__/g, encodeString(bookID))
         .replace(/__book_title__/g, getTitle(book.title, hostname))
         .replace(/__book_domain__/g, hostname)
         .replace(/__last_read__/g, (book.lastRead || 0) + 1)

@@ -2,9 +2,10 @@ import { fetchBook, removeBook } from "./books-store.js";
 import { showSnackbar } from "../components/snackbar.js";
 import { deleteBookElement, getBookElement } from "./books-rendering.js";
 import { removeChapter } from "../chapter/chapter-store.js";
+import { decodeString } from "../util/string-util.js";
 
 window.deleteBook = function deleteBook(bookID) {
-    bookID = decodeURIComponent(bookID);
+    bookID = decodeString(bookID);
     const bookElement = getBookElement(bookID);
     const title = bookElement.dataset.title;
     fetchBook(bookID)
