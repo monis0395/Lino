@@ -6,7 +6,7 @@ import { getTitle } from "../components/book-title.js";
 // three dots https://codepen.io/ryanmorr/pen/vLKvqe
 const bookTemplateBlock = `
     <div class='book' data-title="__book_title__">
-<!--        <a href="__book_link__">-->
+        <a href="__book_link__">
             <div class="book-title">
                 <h5>__book_title__</h5>
                 <div class="book-menu">
@@ -22,7 +22,7 @@ const bookTemplateBlock = `
             <div class="book-domain">__book_domain__
                 <span style="float: right">__last_read__ of __total_chapter__ read</span>
             </div>
-<!--        </a>-->
+        </a>
     </div>`;
 
 const bookElementMap = {};
