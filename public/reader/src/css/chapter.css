@@ -1,3 +1,41 @@
+#info-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--primary-background);
+    z-index: 2;
+}
+
+.progressbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--primary-background);
+    z-index: 3;
+}
+
+.info-chapter {
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary-foreground);
+    font-size: 10px;
+    padding: calc(var(--baseline-v) * 0.75) var(--baseline-h) 0 var(--baseline-h);
+}
+
+#info-chapter-name {
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#info-chapter-progress-bar {
+    width: 1px;
+    height: 2px;
+    background-color: var(--secondary-foreground);
+    transition: width 0.4s;
+}
+
 .page > .chapter {
     flex: 1;
     display: flex;
@@ -7,45 +45,48 @@
 
 .chapter {
     width: 100%;
-    padding: var(--padding-min);
-    border-bottom: 1px solid var(--dull-color);
-    box-sizing: border-box;
+    padding: 0 var(--baseline-h);
+    border-bottom: 1px solid var(--highlight-color);
+}
+
+.chapter-header {
+    margin-top: calc(var(--baseline-v) * 5);
+    padding-bottom: calc(var(--baseline-v) * 1.5);
+}
+
+.reader-chapter-content {
+    margin-bottom: calc(var(--baseline-v) * 5);
+    word-break: break-word;
+    /*text-align: justify;*/
+}
+
+.reader-chapter-content h1,
+.reader-chapter-content h2,
+.reader-chapter-content h3,
+.reader-chapter-content h4,
+.reader-chapter-content h5,
+.reader-chapter-content h6 {
+    font-weight: var(--weight-thin);
+    margin-bottom: calc(var(--baseline-v) * 1.5);
 }
 
 .chapter-title {
-    padding-bottom: var(--padding-min-half);
-    display: block;
-    font-size: 1.5em;
-    font-weight: var(--weight-light);
-    color: var(--bright-color)
+    font-weight: var(--weight-thin);
+    color: var(--highlight-color);
+    line-height: 1.5;
+    margin-bottom: 0;
+    padding-bottom: var(--baseline-v);
 }
 
 .chapter-domain a {
     font-weight: var(--weight-regular);
-    color: var(--dull-color)
+    color: var(--secondary-foreground)
 }
 
-.chapter-content {
-    color: var(--bright-color);
-    font-size: 1.2em;
-    line-height: 1.4em;
-}
-
-.chapter-content p {
-    padding-top: var(--padding-min);
-    padding-bottom: var(--padding-min);
-    line-height: 2.2em;
-}
-
-#fin {
-    padding: 12.5vh 0;
+#fin-block {
+    padding: calc(var(--baseline-v) * 5) 0;
     text-align: center;
-
-    font-family: Times, "Times New Roman", "serif";
-    font-size: 1.2em;
     font-style: italic;
-
-    color: var(--bright-color);
 }
 
 #top-nav-bar {
@@ -57,46 +98,267 @@
 #bottom-nav-bar {
     position: fixed;
     bottom: 0;
-    width: 100%;
     transition: bottom 0.5s;
+    justify-content: flex-start;
 }
 
 
 /* The container <div> - needed to position the dropup content */
 .dropup {
-    position: relative;
-    display: inline-block;
 }
 
 /* Dropup content (Hidden by Default) */
 .dropup-content {
     display: none;
     position: absolute;
-    bottom: 50px;
-    background-color: var(--bright-color);
     width: 100vw;
-    max-width: 640px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    color: var(--dark-color);
-    z-index: 1;
-    max-height: 300px;
+    max-width: calc(var(--baseline-h) * 32);
+    z-index: 4;
     overflow-x: hidden;
     overflow-y: scroll;
+    overscroll-behavior-y: contain;
+    background-color: var(--secondary-background);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease-in-out;
 }
 
-/* Links inside the dropup */
-.dropup-content a {
+/* ============== Chapters list ============== */
+
+#chapters-list {
     display: block;
-    padding: var(--padding-min);
-    color: black;
-    text-decoration: none;
+    position: fixed;
+    left: -100vw;
+    bottom: 0;
+    width: calc(100vw - calc(var(--baseline-h) * 4));
+    max-width: 460px;
+    height: 100vh;
+    font-size: var(--baseline-v);
+    font-weight: var(--weight-thin);
+    line-height: 1.5;
+    background-color: var(--primary-background);
+    border-right: 1px var(--highlight-color) solid;
 }
 
-.dropup-content a:hover {
-    background-color: var(--dull-color)
+#chapter-list-contents {
+    color: var(--highlight-color);
+    padding: 0 var(--baseline-h);
+    margin: calc(var(--baseline-v) * 2) 0;
+    /*padding-bottom: var(--baseline-v);*/
+    /*border-bottom: 1px var(--highlight-color) solid;*/
 }
 
-/* Show the dropup menu on hover */
-.dropup:hover .dropup-content {
+#chapters-list li {
+    list-style: none;
+    margin: 0 var(--baseline-h);
+    margin-bottom: calc(var(--baseline-v) * 2);
+}
+
+#chapters-list li:hover {
+    color: var(--highlight-color);
+}
+
+#chapters-list li.selected {
+    color: var(--highlight-color);
+    font-weight: var(--weight-bold);
+}
+
+/* ============== Font settings ============== */
+
+#font-settings {
     display: block;
+    position: fixed;
+    bottom: -100vh;
+    left: initial !important;
+    max-width: 360px;
+    max-height: 400px;
+
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Mobile Styles*/
+@media (min-width: 320px) and (max-width: 767px) {
+    .dropup-content {
+        bottom: 0;
+    }
+
+    .dropup:hover .dropup-content {
+        bottom: 0 !important;
+    }
+
+    #font-settings {
+        left: 0 !important;
+        max-width: 100%;
+    }
+}
+
+button {
+    fill: var(--secondary-background);
+}
+
+.font-type-buttons,
+.font-size-buttons,
+.color-scheme-buttons,
+.content-width-buttons,
+.line-height-buttons,
+.content-align-buttons {
+    display: flex;
+    flex-direction: row;
+    border-color: var(--highlight-color);
+}
+
+.font-type-buttons > button,
+.font-size-buttons > button,
+.color-scheme-buttons > button,
+.content-width-buttons > button,
+.line-height-buttons > button,
+.content-align-buttons > button {
+    text-align: center;
+    border: 0;
+    border-radius: 0;
+}
+
+.font-type-buttons > button,
+.font-size-buttons > button,
+.content-width-buttons > button,
+.line-height-buttons > button,
+.content-align-buttons > button {
+    width: 50%;
+    background-color: var(--secondary-background);
+    border-left: 1px solid var(--highlight-color);
+    border-bottom: 1px solid var(--highlight-color);
+}
+
+.font-type-buttons > button:first-child,
+.font-size-buttons > button:first-child,
+.content-width-buttons > button:first-child,
+.line-height-buttons > button:first-child,
+.content-align-buttons > button:first-child {
+    border-left: 0;
+}
+
+.font-type-buttons > button {
+    display: inline-block;
+    font-size: calc(var(--baseline-v) * 4);
+    height: 100px;
+}
+
+.font-size-buttons > button,
+.color-scheme-buttons > button,
+.content-width-buttons > button,
+.line-height-buttons > button,
+.content-align-buttons > button {
+    height: calc(var(--baseline-v) * 3);
+}
+
+/* Make the serif button content the same size as the sans-serif button content. */
+.font-type-buttons > button > .description {
+    font-size: calc(var(--baseline-v) * 0.75);
+    margin-top: calc(var(--baseline-v) / -4);
+}
+
+/* Font sizes are different per-platform, so we need custom CSS to line them up. */
+.font-type-buttons > .sans-serif-button > .name {
+    margin-top: calc(var(--baseline-v) / 8);
+}
+
+.font-type-buttons > .sans-serif-button > .description {
+    margin-top: calc(var(--baseline-v) / -4);
+}
+
+.font-type-buttons > .serif-button > .name {
+    font-size: calc(var(--baseline-v) * 4);
+}
+
+.button:hover,
+.font-size-buttons > button:hover,
+.font-type-buttons > button:hover,
+.content-width-buttons > button:hover,
+.line-height-buttons > button:hover,
+.content-align-buttons > button:hover {
+    background-color: var(--highlight-color);
+}
+
+.minus-button,
+.plus-button,
+.content-width-minus-button,
+.content-width-plus-button,
+.line-height-minus-button,
+.line-height-plus-button,
+.content-left-align-button,
+.content-justify-align-button {
+    background-color: transparent;
+    border: 0;
+    background-size: var(--baseline-v) var(--baseline-h);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* font settings icons */
+.minus-button {
+    background-image: url("./../images/minus.svg");
+}
+
+.plus-button {
+    background-image: url("./../images/plus.svg");
+}
+
+.content-width-minus-button {
+    background-size: 42px 16px;
+    background-image: url("./../images/content-width-minus.svg");
+}
+
+.content-width-plus-button {
+    background-size: 44px 16px;
+    background-image: url("./../images/content-width-plus.svg");
+}
+
+.line-height-minus-button {
+    background-size: 34px 14px;
+    background-image: url("./../images/line-height-minus.svg");
+}
+
+.line-height-plus-button {
+    background-size: 34px 24px;
+    background-image: url("./../images/line-height-plus.svg");
+}
+
+.content-left-align-button {
+    background-size: 34px 24px;
+    background-image: url("./../images/content-align-left.svg");
+}
+
+.content-justify-align-button {
+    background-size: 34px 24px;
+    background-image: url("./../images/content-align-justify.svg");
+}
+
+/* font family buttons */
+.sans-serif-button {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.serif-button {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.color-scheme-buttons > button {
+    width: 33.33%;
+}
+
+/* color button */
+.light-button {
+    color: #333333;
+    background-color: #ffffff;
+}
+
+.dark-button {
+    color: #eeeeee;
+    background-color: #333333;
+}
+
+.sepia-button {
+    color: #5b4636;
+    background-color: #f4ecd8;
 }

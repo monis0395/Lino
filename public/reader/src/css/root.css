@@ -1,23 +1,112 @@
 :root {
-    --page-background: #202137;
+    /*--primary-background: #FFFFFF;*/
+    /*--secondary-background: #E5E5E5;*/
+    /*--primary-foreground: #191919;*/
+    /*--secondary-foreground: #757575;*/
+    /*--highlight-color: #2f2f2f;*/
 
-    --nav-background: #1a1a2c;
-    --nav-focused: #eff0f2;
-    --nav-unfocused: #5e5e6c;
+    /* have made dark as default because in fire fox mobile when we scroll, a white patch is visible*/
+    --primary-background: #000000; /* base */
+    --secondary-background: #191919; /* tint 1 of base from left */
+    --primary-foreground: #E5E5E5; /* tint 2 of base from right */
+    --secondary-foreground: #898989; /* shade 5 of primary from left */
+    --highlight-color: #B7B7B7; /* shade 3 of primary from left */
 
-    --bright-color: #ffffff;
-    --dark-color: #000000;
-    --dull-color: #aaaaaa;
+    --baseline-h: 18px;
+    --baseline-v: 16px;
 
-    --padding-min: 1em;
-    --padding-min-half: 0.5em;
-
-    --weight-thin: 200;
-    --weight-light: 300;
+    --weight-thin: 300;
     --weight-regular: 400;
     --weight-bold: 600;
-    --weight-extrabold: 700;
-    --weight-black: 800;
-    --weight-extrablack: 900;
 }
 
+.frozen-elsa-light {
+    --primary-background: #CCDEED;
+    --secondary-background: #EBF2F8;
+    --primary-foreground: #0F2537;
+    --secondary-foreground: #1F496E;
+    --highlight-color: #377385;
+}
+
+/*ref: https://loading.io/color/feature/Disney-Frozen-Elsa*/
+.frozen-elsa-dark {
+    --primary-background: #191d3a;
+    --secondary-background: #3b4368;
+    --primary-foreground: #d9dbee;
+    --secondary-foreground: #ADAFBE;
+    --highlight-color: #689CC5;
+}
+
+/* color ref: https://www.color-hex.com/color/000000 */
+/* dark style*/
+.dark-theme {
+    --primary-background: #000000; /* base */
+    --secondary-background: #191919; /* tint 1 of base from left */
+    --primary-foreground: #E5E5E5; /* tint 2 of base from right */
+    --secondary-foreground: #898989; /* shade 5 of primary from left */
+    --highlight-color: #B7B7B7; /* shade 3 of primary from left */
+}
+
+.gold-theme-dark {
+    --primary-background: #000000; /* black base */
+    --secondary-background: #191919; /* black tint 1 of base from left */
+    --primary-foreground: #e0dad0; /* shade 2 from left of tint 1 from right */
+    --secondary-foreground: #95918B; /* shade 5 of primary from left */
+    --highlight-color: #C48919; /* base */
+}
+
+.coffee-theme-dark {
+    --primary-background: #000000; /* black base */
+    --secondary-background: #191919; /* black tint 1 of base from left */
+    --primary-foreground: #dfdbd8; /* shade 2 from left of tint 1 from right */
+    --secondary-foreground: #949290; /* shade 5 of primary from left */
+    --highlight-color: #BC9378; /* base */
+}
+
+.pink-gold-theme-dark {
+    --primary-background: #000000; /* black base */
+    --secondary-background: #191919; /* black tint 1 of base from left */
+    --primary-foreground: #e1dbd3; /* shade 2 from left of tint 1 from right */
+    --secondary-foreground: #96928d; /* shade 5 of primary from left */
+    --highlight-color: #DB933E; /* base */
+}
+
+.gold-theme-light {
+    --primary-background: #FEFDFC;
+    --secondary-background: #e0dad0;
+    --primary-foreground: #191919;
+    --secondary-foreground: #95918B;
+    --highlight-color: #C48919; /* base */
+}
+
+.pink-theme-dark {
+    --primary-background: #000000; /* base */
+    --secondary-background: #191919; /* tint 1 of base from left */
+    --primary-foreground: #FFEAEf; /* tint 2 of base from right */
+    --secondary-foreground: #998C8F; /* shade 5 of primary from left */
+    --highlight-color: #FF3066;
+}
+
+.pink-theme-light {
+    --primary-background: #FFFCFD;
+    --secondary-background: #E5D2D7;
+    --primary-foreground: #332E2F;
+    --secondary-foreground: #998C8F;
+    --highlight-color: #FF3066; /* base */
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 767px) and (max-width: 960px) {
+    :root {
+        --baseline-h: 20px;
+        --baseline-v: 16px;
+    }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+    :root {
+        --baseline-h: 20px;
+        --baseline-v: 16px;
+    }
+}

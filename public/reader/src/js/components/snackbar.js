@@ -4,7 +4,7 @@ export function showSnackbar(message) {
     }
     const snackbar = document.createElement("div");
     snackbar.classList.add("show", "snackbar");
-    snackbar.innerText = message;
+    snackbar.textContent = message;
     document.body.appendChild(snackbar);
     setTimeout(function () {
         document.body.removeChild(snackbar)

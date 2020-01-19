@@ -3,23 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
-    <title>Books</title>
+    <title>Reader</title>
+    <link rel='stylesheet' href='../css/fonts.googleapis.css'/>
     <link rel='stylesheet' href='../css/root.css'/>
     <link rel='stylesheet' href='../css/modal.css'/>
     <link rel='stylesheet' href='../css/snackbar.css'/>
     <link rel='stylesheet' href='../css/style.css'/>
+    <link rel='stylesheet' href='../css/checkbox.css'/>
     <link rel='stylesheet' href='../css/books.css'/>
+    <link rel="icon" href="./../images/icon-white-192x192.png">
+
+    <!-- Progressive Web App START -->
+    <meta name="description" content="This is an web site which allows to read books without all the clutter on the source page">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="./../images/icon-white-192x192.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="./../images/icon-white-128x128.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="./../images/icon-white-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="./../images/icon-white-512x512.png">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('../service-worker.js');
+            });
+        }
+    </script>
+    <!-- Progressive Web App END -->
+
 </head>
-<body>
+<body class="pink-gold-theme-dark">
 <div class='page'>
     <div class='menu'>
-        <h3 class="menu-text logo pointer"><a href="./books.html">READER</a></h3>
-        <h3 id="add-book-modal-btn" class="menu-text pointer">Add Book</h3>
+        <a href="./books.html"><h6 class="menu-text logo pointer">READER</h6></a>
+        <h6 id="add-book-modal-btn" class="menu-text pointer">Add Book</h6>
     </div>
 </div>
 
-<div id="loader-container">
-    <img src="../images/flip-book-loader.svg" id="loader" alt="">
+<div id="loader-container" class="center">
+    <img src="../images/flip-book-loader.svg" id="loader" alt="" class="center">
 </div>
 
 <div id="add-book-modal" class="modal hidden">
@@ -27,13 +50,18 @@
         <div id="add-book-modal-title">Add Book</div>
         <span class="close pointer">&times;</span>
         <form>
-            <input id="add-book-modal-input" type="text" placeholder="www.example.com/book-table-of-contents.html">
+            <input id="add-book-modal-input" type="text" name="book-url" autocomplete="off"
+                   placeholder="www.example.com/book-table-of-contents.html">
+            <label class="container">
+                <input id="chapter-order-reverse" type="checkbox">
+                <span class="checkmark"></span>Load chapters in reverse order
+            </label>
             <input id="add-book-modal-submit" type="submit" value="Add Book">
         </form>
     </div>
 </div>
 
-<script src="https://unpkg.com/localforage@latest/dist/localforage.js"></script>
+<script src="../js/third-party/localforage.js" type="module"></script>
 <script src="../js/book/core.js" type="module"></script>
 </body>
 </html>

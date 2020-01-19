@@ -12,10 +12,11 @@ export async function fetchBook(title) {
     return booksDB.getItem(title);
 }
 
+export async function removeBook(title) {
+    return booksDB.removeItem(title)
+}
+
 export async function storeOrUpdateBook(title, book) {
-    if (!book.hasOwnProperty("lastRead")) {
-        book.lastRead = 0
-    }
     const oldBook = await booksDB.getItem(title) || {};
     return booksDB.setItem(title, {
         ...oldBook,

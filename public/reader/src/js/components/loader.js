@@ -1,14 +1,14 @@
 import { hideElement, showElement } from "../util/dom-util.js";
 
-const loaderTemplate = `
-<div id="loader-container">
-    <img src="../images/flip-book-loader.svg" id="loader" alt="">
-</div>`;
+// const loaderTemplate = `
+// <div id="loader-container">
+//     <img src="../images/flip-book-loader.svg" id="loader" alt="">
+// </div>`;
 
 function addLoaderToBody() {
     const div = document.createElement('div');
     div.innerHTML = loaderTemplate;
-    document.body.appendChild(div);
+    document.body.appendChild(div.firstElementChild);
 }
 
 export function showLoader() {
@@ -16,7 +16,7 @@ export function showLoader() {
     if (loader) {
         showElement(loader);
     } else {
-        addLoaderToBody();
+        // addLoaderToBody();
     }
 }
 

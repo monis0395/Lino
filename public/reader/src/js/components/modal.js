@@ -11,7 +11,9 @@ function attachModalTrigger(modal, modalBtn) {
 
 function attachModalClose(modal) {
     const close = modal.getElementsByClassName("close")[0];
-    close.onclick = () => hideElement(modal);
+    if (close) {
+        close.onclick = () => hideElement(modal);
+    }
     window.onclick = function (event) {
         if (event.target === modal) {
             hideElement(modal);

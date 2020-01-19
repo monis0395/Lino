@@ -4,35 +4,121 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
     <title>Books</title>
+    <link rel='stylesheet' href='../css/fonts.googleapis.css'/>
     <link rel='stylesheet' href='../css/root.css'/>
     <link rel='stylesheet' href='../css/modal.css'/>
     <link rel='stylesheet' href='../css/snackbar.css'/>
     <link rel='stylesheet' href='../css/style.css'/>
     <link rel='stylesheet' href='../css/chapter.css'/>
+    <link rel="icon" href="./../images/icon-white-192x192.png">
+
+    <!-- Progressive Web App START -->
+    <meta name="description" content="This is an web site which allows to read books without all the clutter on the source page">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="./../images/icon-white-192x192.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="./../images/icon-white-128x128.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="./../images/icon-white-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="./../images/icon-white-512x512.png">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('../service-worker.js');
+            });
+        }
+    </script>
+    <!-- Progressive Web App END -->
+
 </head>
-<body>
+<body class="pink-gold-theme-dark">
 <div class='page'>
-    <div class='menu' id="top-nav-bar">
-        <h3 class="menu-text logo pointer"><a href="./books.html">READER</a></h3>
+    <div id="info-chapter-progress-container" class="progressbar hidden">
+        <div id="info-chapter-progress-bar"></div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div id="info-bar">
+        <div class="info-chapter">
+            <span id="info-time" class=""></span>
+            <span id="info-chapter-name" class=""></span>
+            <span id="info-total-progress" class="">00.0%</span>
+        </div>
+    </div>
+    <div id="top-nav-bar" class='menu'>
+        <a href="./books.html"><h6 class="menu-text logo pointer">READER</h6></a>
+    </div>
     <div id="bottom-nav-bar" class="menu">
         <div class="dropup">
-            <h3 id="chapters-list-btn" class="menu-text pointer">Chapters List</h3>
-            <div class="dropup-content" id="chapters-list"></div>
+            <h6 id="chapters-list-btn" class="menu-text pointer">Chapters List</h6>
+            <div id="chapters-list" class="dropup-content hide-scroll-bar">
+                <h6 id="chapter-list-contents">Contents</h6>
+            </div>
         </div>
-        <h3 id="font-settings-btn" class="menu-text pointer">Font Settings</h3>
+        <div class="dropup">
+            <h6 id="reload-chapter-btn" class="menu-text pointer">Reload Chapter</h6>
+        </div>
+
+        <div class="dropup hidden">
+            <h3 id="font-settings-btn" class="menu-text pointer">Font Settings</h3>
+            <div id="font-settings" class="dropup-content">
+                <div class="font-type-buttons">
+                    <button class="sans-serif-button">
+                        <div class="name">Aa</div>
+                        <div class="description">Sans-serif</div>
+                    </button>
+                    <button class="serif-button">
+                        <div class="name">Aa</div>
+                        <div class="description">Serif</div>
+                    </button>
+                </div>
+                <div class="font-size-buttons">
+                    <button class="minus-button" title="Decrease Font Size">
+                    </button>
+                    <button class="plus-button" title="Increase Font Size">
+                    </button>
+                </div>
+                <div class="content-align-buttons">
+                    <button class="content-left-align-button" title="Left Align Content">
+                    </button>
+                    <button class="content-justify-align-button" title="Justify Align Content">
+                    </button>
+                </div>
+                <div class="content-width-buttons">
+                    <button class="content-width-minus-button" title="Decrease Content Width">
+                    </button>
+                    <button class="content-width-plus-button" title="Increase Content Width">
+                    </button>
+                </div>
+                <div class="line-height-buttons">
+                    <button class="line-height-minus-button" title="Decrease Line Height">
+                    </button>
+                    <button class="line-height-plus-button" title="Increase Line Height">
+                    </button>
+                </div>
+                <div class="color-scheme-buttons">
+                    <button class="light-button" title="Color Scheme Light">
+                        <div class="name">Light</div>
+                    </button>
+                    <button class="dark-button" title="Color Scheme Dark">
+                        <div class="name">Dark</div>
+                    </button>
+                    <button class="sepia-button" title="Color Scheme Sepia">
+                        <div class="name">Sepia</div>
+                    </button>
+                </div>
+                <div class="dropdown-arrow">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="loader-container">
-    <img src="../images/flip-book-loader.svg" id="loader" alt="">
+<div id="loader-container" class="center">
+    <img src="../images/flip-book-loader.svg" id="loader" alt="" class="center">
 </div>
 
-<script src="https://unpkg.com/localforage@latest/dist/localforage.js"></script>
+<script src="../js/third-party/localforage.js" type="module"></script>
+<script src="../js/third-party/pulltorefreshjs.js" type="module"></script>
 <script src="../js/chapter/core.js" type="module"></script>
 </body>
 </html>

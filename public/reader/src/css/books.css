@@ -6,64 +6,134 @@
 }
 
 .book {
+    position: relative;
     width: 100%;
-    padding: var(--padding-min);
-    border-bottom: 1px solid var(--dull-color);
-    box-sizing: border-box;
+    border-bottom: 1px solid var(--highlight-color);
 }
 
 .book a {
     text-decoration: none;
 }
 
-.book-title {
-    padding-bottom: var(--padding-min-half);
+.book-title h5 {
     display: block;
-    font-size: 1.5em;
-    font-weight: var(--weight-light);
-    color: var(--bright-color)
+    width: calc(100% - var(--baseline-h));
+    margin-bottom: 0;
+    padding: var(--baseline-v) var(--baseline-h);
+    padding-bottom: calc(var(--baseline-v) / 2);
+    font-weight: var(--weight-thin);
+    color: var(--highlight-color);
+}
+
+/* The book-menu drop down container */
+.book-menu {
+    float: right;
+    overflow: hidden;
+}
+
+.book-menu-btn {
+    position: absolute;
+    top: calc(var(--baseline-v) * 1.5);
+    right: calc(var(--baseline-h) * 0.5);
+    width: calc(var(--baseline-h) * 2);
+    color: var(--secondary-foreground);
+    background-color: inherit;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-align: right;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+.book-menu-btn:hover {
+    -webkit-filter: brightness(150%);
+    filter: brightness(150%);
+}
+
+/* book-menu drop down  content (hidden by default) */
+.book-menu-content {
+    z-index: 1;
+    display: none;
+    position: absolute;
+    top: calc(var(--baseline-v) * 2);
+    right: calc(var(--baseline-h) * 0.5);
+    background-color: var(--secondary-background);
+    color: var(--primary-foreground);
+    min-width: calc(var(--baseline-h) * 8);;
+    border: 1px var(--highlight-color) solid;
+}
+
+/* Links inside the book-menu drop down  */
+.book-menu-content li {
+    padding: calc(var(--baseline-h) * 0.75) var(--baseline-v);
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    border-bottom: 1px var(--highlight-color) solid;
+}
+
+.book-menu-content li:last-of-type{
+    border-bottom-width: 0;
+}
+
+/* Show the book-menu drop down  menu on hover */
+.book-menu:hover .book-menu-content {
+    display: block;
 }
 
 .book-domain {
     display: block;
     font-weight: var(--weight-regular);
-    color: var(--dull-color)
+    color: var(--secondary-foreground);
+    padding: 0 var(--baseline-h);
+    padding-bottom: var(--baseline-v);
 }
 
 /* add book modal */
 #add-book-modal-btn {
     cursor: pointer;
-    color: var(--bright-color);
     font-weight: var(--weight-thin);
 }
 
 #add-book-modal-title {
-    color: var(--dark-color);
-    line-height: 1.4em;
-    font-size: 1.4em;
-    width: 80%;
     display: inline-block;
-    margin-bottom: var(--padding-min-half);
+    font-size: calc(var(--baseline-v) * 1.5);
+    width: 80%;
+    margin-bottom: calc(var(--baseline-v) / 2);
 }
 
 #add-book-modal-input {
-    padding: var(--padding-min);
     width: 100%;
+    font-size: 14px; /* breaking the rule here as its not readable */
+    padding: var(--baseline-v) 0;
+    margin-bottom: var(--baseline-v);
+    border-width: 0 0 2px 0;
+    background-color: inherit;
+    color: var(--primary-foreground);
+    caret-color: var(--primary-foreground);
+    border-color: var(--secondary-foreground);
+}
 
-    margin-bottom: var(--padding-min);
-    border-width: 0 0 1px 0;
-    border-color: var(--dark-color);
+#add-book-modal-input::placeholder {
+    color: var(--secondary-foreground);
+}
+
+#add-book-modal-input:focus {
+    outline: none;
+    border-color: var(--highlight-color);
 }
 
 #add-book-modal-submit {
     width: 100%;
-    padding: 1em;
-    color: var(--bright-color);
-    background-color: #222;
-    border: 1px solid var(--bright-color);
-    border-radius: 5px;
+    padding: var(--baseline-v) var(--baseline-h);
+    color: var(--secondary-background);
+    background-color: var(--highlight-color);
+    border: 1px solid var(--primary-background);
+    border-radius: 4px;
 }
 
 [class^="ptr--"] {
-    color: var(--bright-color) !important;
+    color: var(--primary-foreground) !important;
 }

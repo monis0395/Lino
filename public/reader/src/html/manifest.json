@@ -1,0 +1,20 @@
+{
+  "short_name": "Reader",
+  "name": "Reader",
+  "icons": [
+    {
+      "src": "../images/icon-white-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "../images/public/reader/src/images/icon-white-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "../html/books.html",
+  "background_color": "#000000",
+  "display": "fullscreen",
+  "theme_color": "#000000"
+}

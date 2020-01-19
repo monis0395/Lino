@@ -1,67 +1,154 @@
 import { hideLoader, showLoader } from "../components/loader.js";
 import { getAndRenderChapter } from "./load-chapter.js";
 import { showSnackbar } from "../components/snackbar.js";
-import { throttle } from "../util/dom-util.js";
-import { fetchBook } from "../book/books-store.js";
-import { getChapterLink } from "../components/chapter-url.js";
+import { getElementByXpath, isDescendant, scrollToElement, throttle } from "../util/dom-util.js";
+import { fetchBook, storeOrUpdateBook } from "../book/books-store.js";
+import { loadChapterList } from "./chapter-list.js";
+import { initChapterListener } from "./chapter-listener.js";
+import { fetchChapter } from "./chapter-store.js";
+import { requestNStoreChapter } from "./get-chapter.js";
+import { getChapterElement, removeChapter } from "./chapter-rendering.js";
+import { updateInfoChapterName } from "../components/chapter-info-bar.js";
+import { startCheckingForUpdates } from "../book/update-books.js";
 
-function getBookTitle() {
-    const search = new URLSearchParams(window.location.search);
-    return search.get("book");
-}
+const search = new URLSearchParams(window.location.search);
+const bookTitle = search.get("book");
+const chapterNumber = parseInt(search.get("chapter"), 10) || 0;
 
-function getChapterNumber() {
-    const search = new URLSearchParams(window.location.search);
-    return parseInt(search.get("chapter"), 10);
-}
-
+let prevScrollPosition = window.pageYOffset;
 function autoHideNavBar() {
-    let prevScrollPosition = window.pageYOffset;
     let topNavBar = document.getElementById("top-nav-bar");
     let bottomNavBar = document.getElementById("bottom-nav-bar");
-    window.onscroll = throttle(function() {
+    const topNavBarHeight = topNavBar.scrollHeight;
+    const bottomNavBarHeight = bottomNavBar.scrollHeight;
+    let visible = true;
+
+    function hideNavBar() {
+        topNavBar.style.top = `-${topNavBarHeight + 10}px`;
+        bottomNavBar.style.bottom = `-${bottomNavBarHeight + 10}px`;
+        visible = false;
+    }
+
+    function showNavBar() {
+        topNavBar.style.top = "0";
+        bottomNavBar.style.bottom = "0";
+        visible = true;
+    }
+
+    function handleScroll() {
         const currentScrollPosition = window.pageYOffset;
-        const scrollingUp = prevScrollPosition > currentScrollPosition;
-        if (scrollingUp) {
-            topNavBar.style.top = "0";
-            bottomNavBar.style.bottom = "0";
-        } else {
-            topNavBar.style.top = "-100px";
-            bottomNavBar.style.bottom = "-50px";
+        if (Math.abs(prevScrollPosition - currentScrollPosition) > 32) {
+            const scrollingUp = prevScrollPosition > currentScrollPosition;
+            if (scrollingUp) {
+                // showNavBar();
+            } else {
+                hideNavBar();
+            }
         }
         prevScrollPosition = currentScrollPosition;
-    }, 100);
+    }
+
+    function toggleNavBar() {
+        const currentScrollPosition = window.pageYOffset;
+        if (Math.abs(prevScrollPosition - currentScrollPosition) >= 5) {
+            return;
+        }
+        if (visible) {
+            hideNavBar();
+        } else {
+            showNavBar();
+        }
+    }
+
+    const page = document.getElementsByClassName('page')[0];
+    page.onclick = (e) => {
+        const element = e.target;
+        if (topNavBar === element
+            || bottomNavBar === element
+            || isDescendant(topNavBar, element)
+            || isDescendant(bottomNavBar, element)) {
+            return
+        }
+        toggleNavBar();
+    };
+    setTimeout(hideNavBar, 1000);
+    window.addEventListener('scroll', throttle(handleScroll, 100));
 }
 
-function loadChapterList() {
-    const chaptersList = document.getElementById("chapters-list");
-    const bookTitle = window.bookReader.bookTitle;
-    fetchBook(bookTitle)
-        .then(({chapters}) => {
-            chapters.forEach((chapter, index) => {
-                const chapterLink = getChapterLink(bookTitle, index);
-                const chapterAnchorTag = document.createElement("a");
-                chapterAnchorTag.href = chapterLink;
-                chapterAnchorTag.innerText = chapter.title;
-                chaptersList.appendChild(chapterAnchorTag);
-            })
+function updateLastRead(bookTitle, chapterNumber) {
+    return storeOrUpdateBook(bookTitle, {
+        lastRead: chapterNumber,
+        lastReadTimestamp: Date.now(),
+    });
+}
+
+function scrollToLastReadElement() {
+    return fetchBook(bookTitle)
+        .then((book) => {
+            const totalChapters = book.chapters.length;
+            const nextChapterNumber = chapterNumber + 1;
+            if (nextChapterNumber < totalChapters) {
+                getAndRenderChapter(bookTitle, chapterNumber + 1);
+            }
+            const chapter = book.chapters[chapterNumber];
+            return fetchChapter(chapter.link)
         })
+        .then((chapter) => {
+            const xpath = chapter.lastReadElementXpath;
+            const element = getElementByXpath(xpath);
+            if (element) {
+                scrollToElement(element);
+            }
+        })
+}
+
+function attachChapterReloadListener() {
+    const reloadChapterBtn = document.getElementById("reload-chapter-btn");
+    reloadChapterBtn.onclick = () => {
+        let lastReadChapter;
+        showLoader();
+        fetchBook(bookTitle)
+            .then(({chapters, lastRead}) => {
+                lastReadChapter = lastRead;
+                const chapterURL = chapters[lastRead].link;
+                return requestNStoreChapter(chapterURL);
+            })
+            .then(() => {
+                removeChapter(lastReadChapter);
+                return getAndRenderChapter(bookTitle, lastReadChapter)
+            })
+            .then(() => showSnackbar(`Updated chapter`))
+            .catch((error) => {
+                window.console.error(error);
+                showSnackbar("Error: " + error.message)
+            })
+            .finally(hideLoader)
+    }
 }
 
 function init() {
     hideLoader();
-    autoHideNavBar();
-    const bookTitle = getBookTitle();
     window.bookReader = {bookTitle};
     document.title = bookTitle;
     showLoader();
-    loadChapterList();
-    getAndRenderChapter(bookTitle, getChapterNumber())
-        .catch((error) => {
-            console.error(error);
-            showSnackbar("Error: " + error.message);
-        })
-        .finally(hideLoader);
+    updateLastRead(bookTitle, chapterNumber).then(() => {
+        // fontSettingsInit();
+        loadChapterList();
+        attachChapterReloadListener();
+        getAndRenderChapter(bookTitle, chapterNumber)
+            .then(() => {
+                const chapterElement = getChapterElement(chapterNumber);
+                updateInfoChapterName(chapterElement)
+            })
+            .then(scrollToLastReadElement)
+            .catch((error) => showSnackbar("Error: " + error.message))
+            .finally(() => {
+                hideLoader();
+                autoHideNavBar();
+                initChapterListener();
+                startCheckingForUpdates();
+            });
+    });
 }
 
 init();

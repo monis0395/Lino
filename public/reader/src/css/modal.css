@@ -2,7 +2,7 @@
 .modal {
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: calc(var(--baseline-v) * 7); /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -14,25 +14,25 @@
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
-    width: 80%;
-    max-width: 500px;
+    width: calc(100vw - calc(var(--baseline-h) * 2));
+    max-width: calc(var(--baseline-h) * 25);
     height: fit-content;
     margin: 15% auto 0 auto; /* 15% from the top and centered */
-    padding: 1em;
+    padding: var(--baseline-v) var(--baseline-h);
+    border: 1px var(--highlight-color) solid;
+    background-color: var(--secondary-background);
 }
 
 /* The Close Button */
 .close {
-    color: var(--dull-color);
     float: right;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: calc(var(--baseline-v) * 1.5);
+    font-weight: var(--weight-bold);
 }
 
 .close:hover,
 .close:focus {
-    color: var(--dark-color);
+    color: var(--highlight-color);
     text-decoration: none;
     cursor: pointer;
 }

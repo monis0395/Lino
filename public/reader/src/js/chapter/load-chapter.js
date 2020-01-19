@@ -2,17 +2,18 @@ import { fetchBook } from "../book/books-store.js";
 import { getChapter } from "./get-chapter.js";
 import { addChapterToPage } from "./chapter-rendering.js";
 
-const loadedChaptersMap = {};
-
-export function getAndRenderChapter(bookTitle, chapterNumber) {
-    if (loadedChaptersMap[chapterNumber]) {
-        return Promise.resolve(true);
-    }
-    return fetchBook(bookTitle)
-        .then(({chapters}) => getChapter(chapters[chapterNumber].link))
+export function getAndRenderChapter(bookTitle, chapterNumber = 0) {
+    let chapterTitle = "";
+    const promise = fetchBook(bookTitle)
+        .then(({chapters}) => {
+            const chapter = chapters[chapterNumber];
+            chapterTitle = chapter.title;
+            return getChapter(chapter.link)
+        })
         .then((chapter) => {
-            addChapterToPage(chapter, chapterNumber);
-            loadedChaptersMap[chapterNumber] = true;
+            addChapterToPage(chapter, chapterNumber, chapterTitle);
             console.log("rendered chapter", chapterNumber);
         });
+    promise.catch(console.error);
+    return promise;
 }

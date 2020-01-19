@@ -1,26 +1,28 @@
+import "./book-menu.js";
 import { addBookInit } from "./add-book.js";
 import { loadBooks } from "./books-rendering.js";
 import { getBook } from "./get-book.js";
 import { checkAndReloadBooks } from "./update-books.js";
 import { isTabletOrMobile } from "../util/browser-util.js";
-import { hideLoader } from "../components/loader.js";
+import { hideLoader, showLoader } from "../components/loader.js";
+import { getBooks } from "./books-store.js";
 
 function loadFirstBook() {
-    const done = localStorage.getItem("first");
-    if (done) {
-        return;
-    }
-    const THE_NOVELS_EXTRA = "https://www.wuxiaworld.com/novel/the-novels-extra";
-    getBook(THE_NOVELS_EXTRA);
-    localStorage.setItem("first", "done");
+    getBooks()
+        .then((books) => {
+            if (books.length > 0) {
+                return;
+            }
+            const THE_NOVELS_EXTRA = "https://www.wuxiaworld.com/novel/the-novels-extra";
+            getBook(THE_NOVELS_EXTRA);
+        });
 }
 
 function pullToRefresh() {
     const pullToRefreshScript = document.createElement("script");
-    pullToRefreshScript.src = "https://unpkg.com/pulltorefreshjs@latest/dist/index.umd.min.js";
+    pullToRefreshScript.src = "../js/third-party/pulltorefreshjs.js";
     pullToRefreshScript.onload = () => {
         window.PullToRefresh.init({
-            mainElement: 'body',
             onRefresh: checkAndReloadBooks,
         });
     };
@@ -31,7 +33,12 @@ function init() {
     hideLoader();
     window.bookReader = window.bookReader || {};
     addBookInit();
-    loadBooks();
+    window.addEventListener("pageshow", () => {
+        showLoader();
+        loadBooks()
+            .finally(hideLoader);
+        console.log("pageshow called");
+    }, false);
     loadFirstBook();
     if (isTabletOrMobile()) {
         pullToRefresh();
