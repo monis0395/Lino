@@ -74,8 +74,12 @@
     border-bottom: 1px var(--highlight-color) solid;
 }
 
-.book-menu-content li:last-of-type{
+.book-menu-content li:last-of-type {
     border-bottom-width: 0;
+}
+
+.book-menu-content a {
+    color: var(--primary-foreground);
 }
 
 /* Show the book-menu drop down  menu on hover */
